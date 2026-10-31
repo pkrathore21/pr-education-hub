@@ -33,6 +33,47 @@ footer a{color:#ffcb70}
 .small{font-size:13px;opacity:.9}
 @media(min-width:700px){header h1{font-size:36px}.hero h2{font-size:36px}}
 </style>
+.teacher-profile {
+    text-align: center;
+    padding: 25px 15px;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.teacher-profile .profile-photo {
+    display: block;
+    width: 140px;
+    height: 140px;
+    max-width: 140px;
+    object-fit: cover;
+    object-position: center 25%;
+    border-radius: 12px;
+    border: 3px solid #ffffff;
+    margin: 0 auto 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+}
+
+.teacher-profile h2 {
+    margin: 10px 0 5px;
+}
+
+.teacher-profile h3 {
+    margin: 5px 0;
+}
+
+.teacher-profile .profile-brand {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+@media (max-width: 600px) {
+    .teacher-profile .profile-photo {
+        width: 115px;
+        height: 115px;
+        max-width: 115px;
+    }
+}
+
 </head>
 <body>
 <header>
@@ -49,42 +90,34 @@ footer a{color:#ffcb70}
   <a href="#career">Career / करियर</a>
 </nav>
 <main>
-<div class="hero" id="home"><div class="teacher-profile">
-    <<img src="IMG_20240815_080452.jpg"
-     alt="Pawan Rathore"
-     class="profile-photo">.teacher-profile {
-    text-align: center;
-    padding: 20px;
-}
-
-.teacher-profile img.profile-photo {
-    width: 150px !important;
-    height: 150px !important;
-    max-width: 150px !important;
-    object-fit: cover;
-    object-position: center 25%;
-    border-radius: 10px;
-    border: 3px solid #ffffff;
-    display: block;
-    margin: 15px auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-@media (max-width: 600px) {
-    .teacher-profile img.profile-photo {
-        width: 120px !important;
-        height: 120px !important;
-        max-width: 120px !important;
-    }
-}
-
+<div class="hero" id="home"><
+<section class="teacher-profile">
+    <img
+        src="IMG_20240815_080452.jpg"
+        alt="Pawan Rathore - Teacher"
+        class="profile-photo"
+    >
 
     <h2>पवन राठौर</h2>
-    <h3>Founder – PR Education Hub</h3>
+    <h3>Founder & Educator</h3>
+    <p class="profile-brand">PR Education Hub</p>
 
     <p>माध्यमिक शिक्षक | गणित शिक्षक</p>
-    <p>Qualification: ITI, B.E. Mechanical, B.Ed.</p>
-    <p>Teaching Experience: Since 2022</p>
+
+    <p><strong>Qualification:</strong>
+       ITI, B.E. Mechanical, B.Ed.</p>
+
+    <p><strong>Teaching Experience:</strong>
+       Since 2022</p>
+
+    <p>
+       Welcome to PR Education Hub!
+       यहाँ कक्षा 6 से 12 तक MP Board और CBSE
+       के विद्यार्थियों के लिए गणित एवं अन्य विषयों
+       की अध्ययन सामग्री उपलब्ध है।
+    </p>
+</section>
+
 
     <p>
       आपका स्वागत है PR Education Hub पर।
