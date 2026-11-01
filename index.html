@@ -40,7 +40,7 @@ header p {
     color: #dbeafe;
 }
 
-nav <a href="#online-test">Online MCQ Test</a> {
+nav {
     background: #174b87;
     display: flex;
     justify-content: center;
@@ -390,15 +390,25 @@ footer a {
 </section>
 
 <section id="tests">
-    <div class="container">
-        <h2 class="section-title">Online Test Zone</h2>
+  <div class="container">
+    <h2 class="section-title">Online Test Zone</h2>
 
-        <div class="card">
-            <h3>Practice MCQ Questions</h3>
-            <p>अपनी तैयारी जाँचें और अपना ज्ञान बढ़ाएँ।</p>
-            <p><strong>Online tests coming soon!</strong></p>
-        </div>
+    <div class="card" style="border:2px solid #16834a;">
+      <h3>🎯 Free Motivational Demo Test</h3>
+      <h2 style="color:#16834a;">FREE – बिल्कुल निःशुल्क</h2>
+      <p>10 Questions | 15 Minutes | 10 Marks</p>
+      <p>सभी विद्यार्थियों के लिए निःशुल्क।</p>
+      <a href="#online-test" class="btn" style="background:#16834a;">
+        Start Free Demo Test
+      </a>
     </div>
+
+    <h2 class="section-title" style="margin-top:30px;">
+      Premium Chapter-wise Tests
+    </h2>
+
+    <div class="grid" id="chapterList"></div>
+  </div>
 </section>
 
 <section id="videos">
@@ -486,11 +496,11 @@ footer a {
   </div>
 </section>
 
-<section id="online-test" style="padding:35px 12px;background:#f4f7fb;">
+section id="online-test" style="padding:35px 12px;background:#f4f7fb;">
 <div style="max-width:900px;margin:auto;">
 
 <h2 style="text-align:center;color:#123d70;">Class 10 Mathematics Online Test</h2>
-<p style="text-align:center;">MP Board | CBSE | गणित अभ्यास परीक्षा</p>
+<p sty<le="text-align:center;">MP Board | CBSE | गणित अभ्यास परीक्षा</p>
 
 <div style="background:white;padding:18px;border-radius:12px;margin:20px 0;text-align:center;">
   <h3>Test Instructions</h3>
@@ -890,6 +900,216 @@ function showDemoQuestion(){
 
 function demoNext(){
   if(demoIndex<9){demoIndex++;showDemoQuestion();}
+
+<section id="online-test" style="padding:35px 12px;background:#f4f7fb;">
+<div style="max-width:900px;margin:auto;">
+
+<h2 style="text-align:center;color:#123d70;">
+Free Motivational Demo Test
+</h2>
+<p style="text-align:center;">Class 10 Mathematics | PR Education Hub</p>
+
+<div class="card" id="demoIntro">
+  <h3>आपकी सफलता की पहली सीढ़ी!</h3>
+  <p>यह टेस्ट सभी विद्यार्थियों के लिए बिल्कुल निःशुल्क है।</p>
+  <p>कुल प्रश्न: 10 | समय: 15 मिनट | अंक: 10</p>
+
+  <label for="demoLanguage"><strong>Choose Medium / माध्यम चुनें</strong></label>
+  <select id="demoLanguage" style="padding:10px;margin:12px;width:90%;">
+    <option value="hi">हिंदी माध्यम</option>
+    <option value="en">English Medium</option>
+  </select>
+
+  <br>
+  <button onclick="startDemo()" class="btn">Start Free Test</button>
+</div>
+
+<div id="demoQuiz" style="display:none;">
+  <div style="background:#123d70;color:white;padding:12px;border-radius:8px;display:flex;justify-content:space-between;">
+    <span id="demoProgress">Question 1/10</span>
+    <strong id="demoTimer">15:00</strong>
+  </div>
+
+  <div id="demoQuestionArea"></div>
+
+  <div style="display:flex;justify-content:space-between;gap:10px;margin-top:15px;">
+    <button class="btn" onclick="demoPrevious()">Previous</button>
+    <button class="btn" onclick="demoNext()">Next</button>
+  </div>
+
+  <button onclick="submitDemo(false)" class="btn" style="background:#16834a;width:100%;">
+    Submit Test
+  </button>
+</div>
+
+<div id="demoResult" class="card" style="display:none;margin-top:20px;"></div>
+
+</div>
+</section>
+
+<script>
+const chapters = [
+"वास्तविक संख्याएँ",
+"बहुपद",
+"दो चर वाले रैखिक समीकरण युग्म",
+"द्विघात समीकरण",
+"समांतर श्रेढ़ियाँ",
+"त्रिभुज",
+"निर्देशांक ज्यामिति",
+"त्रिकोणमिति का परिचय",
+"त्रिकोणमिति के कुछ अनुप्रयोग",
+"वृत्त",
+"वृत्तों से संबंधित क्षेत्रफल",
+"पृष्ठीय क्षेत्रफल और आयतन",
+"सांख्यिकी",
+"प्रायिकता"
+];
+
+document.getElementById("chapterList").innerHTML =
+chapters.map((chapter,i) => `
+  <div class="card">
+    <h3>Chapter ${i+1}</h3>
+    <p>${chapter}</p>
+    <p><strong>30 MCQ | 30 Minutes</strong></p>
+    <p style="color:#b7791f;">🔒 Premium Test</p>
+    <p style="font-size:13px;">Premium content coming soon</p>
+  </div>
+`).join("");
+
+const demoQuestions = [
+{
+hi:"यदि 2x + 4 = 10, तो x का मान क्या है?",
+en:"If 2x + 4 = 10, what is the value of x?",
+o:["2","3","4","5"],a:1,
+ex:"2x = 10 - 4 = 6, इसलिए x = 3।",
+exen:"2x = 10 - 4 = 6, therefore x = 3."
+},
+{
+hi:"sin 30° का मान क्या है?",
+en:"What is the value of sin 30°?",
+o:["0","1/2","√3/2","1"],a:1,
+ex:"sin 30° = 1/2",
+exen:"sin 30° = 1/2."
+},
+{
+hi:"√169 का मान क्या है?",
+en:"What is the square root of 169?",
+o:["11","12","13","14"],a:2,
+ex:"13 × 13 = 169।",
+exen:"13 × 13 = 169."
+},
+{
+hi:"त्रिभुज के तीनों कोणों का योग कितना होता है?",
+en:"What is the sum of the three angles of a triangle?",
+o:["90°","180°","270°","360°"],a:1,
+ex:"त्रिभुज के आंतरिक कोणों का योग 180° होता है।",
+exen:"The sum of interior angles of a triangle is 180°."
+},
+{
+hi:"AP: 2, 5, 8, 11 में सार्व अंतर क्या है?",
+en:"What is the common difference of AP: 2, 5, 8, 11?",
+o:["2","3","5","8"],a:1,
+ex:"सार्व अंतर = 5 - 2 = 3।",
+exen:"Common difference = 5 - 2 = 3."
+},
+{
+hi:"वृत्त का क्षेत्रफल क्या है?",
+en:"What is the area of a circle?",
+o:["2πr","πr²","πd","r²"],a:1,
+ex:"वृत्त का क्षेत्रफल = πr²।",
+exen:"Area of a circle = πr²."
+},
+{
+hi:"यदि x² = 49, तो x के मान क्या होंगे?",
+en:"If x² = 49, what are the values of x?",
+o:["7","-7","±7","49"],a:2,
+ex:"x² = 49 से x = ±7।",
+exen:"From x² = 49, x = ±7."
+},
+{
+hi:"एक सिक्का उछालने पर चित आने की प्रायिकता क्या है?",
+en:"What is the probability of getting heads when tossing a coin?",
+o:["0","1/4","1/2","1"],a:2,
+ex:"दो समान संभावित परिणामों में एक चित है। प्रायिकता = 1/2।",
+exen:"There are two equally likely outcomes. Probability of heads = 1/2."
+},
+{
+hi:"बिंदु (3,4) की मूल बिंदु से दूरी कितनी है?",
+en:"What is the distance of point (3,4) from the origin?",
+o:["3","4","5","7"],a:2,
+ex:"दूरी = √(3² + 4²) = √25 = 5।",
+exen:"Distance = √(3² + 4²) = √25 = 5."
+},
+{
+hi:"बहुपद x² - 5x + 6 के शून्यक कौन से हैं?",
+en:"What are the zeroes of polynomial x² - 5x + 6?",
+o:["1, 6","2, 3","-2, -3","0, 6"],a:1,
+ex:"x² - 5x + 6 = (x-2)(x-3), इसलिए शून्यक 2 और 3 हैं।",
+exen:"x² - 5x + 6 = (x-2)(x-3), so the zeroes are 2 and 3."
+}
+];
+
+let demoIndex = 0;
+let demoAnswers = Array(10).fill(null);
+let demoTime = 900;
+let demoInterval = null;
+let demoLanguage = "hi";
+let demoFinished = false;
+
+function startDemo(){
+  demoLanguage = document.getElementById("demoLanguage").value;
+  demoIndex = 0;
+  demoAnswers = Array(10).fill(null);
+  demoTime = 900;
+  demoFinished = false;
+
+  document.getElementById("demoIntro").style.display = "none";
+  document.getElementById("demoResult").style.display = "none";
+  document.getElementById("demoQuiz").style.display = "block";
+
+  showDemoQuestion();
+  clearInterval(demoInterval);
+  updateDemoTimer();
+
+  demoInterval = setInterval(()=>{
+    demoTime--;
+    updateDemoTimer();
+    if(demoTime <= 0) submitDemo(true);
+  },1000);
+}
+
+function updateDemoTimer(){
+  let m = Math.floor(demoTime/60);
+  let s = demoTime%60;
+  document.getElementById("demoTimer").textContent =
+    String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function showDemoQuestion(){
+  const q = demoQuestions[demoIndex];
+  const question = demoLanguage==="hi" ? q.hi : q.en;
+
+  document.getElementById("demoProgress").textContent =
+    "Question "+(demoIndex+1)+"/10";
+
+  let html = `<div class="card" style="margin-top:15px;text-align:left;">
+    <h3>Q${demoIndex+1}. ${question}</h3>`;
+
+  q.o.forEach((option,i)=>{
+    html += `<label style="display:block;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:7px;">
+      <input type="radio" name="demoOption" value="${i}"
+      ${demoAnswers[demoIndex]===i?"checked":""}
+      onchange="demoAnswers[demoIndex]=${i}">
+      ${String.fromCharCode(65+i)}. ${option}
+    </label>`;
+  });
+
+  html += `</div>`;
+  document.getElementById("demoQuestionArea").innerHTML = html;
+}
+
+function demoNext(){
+  if(demoIndex<9){demoIndex++;showDemoQuestion();}
 }
 
 function demoPrevious(){
@@ -951,6 +1171,7 @@ function submitDemo(auto){
   if(auto) alert("Time is over! Your test has been submitted.");
 }
 </script>
+
 
 
 </main>
