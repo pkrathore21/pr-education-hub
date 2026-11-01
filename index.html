@@ -375,7 +375,70 @@
                 font-size: 24px;
             }
         }
-    </style>
+ /* PR Education Hub - Responsive Profile Photo */
+
+/* Standard profile photo for all devices */
+img.profile-photo {
+    display: block !important;
+
+    width: clamp(90px, 12vw, 150px) !important;
+    height: clamp(90px, 12vw, 150px) !important;
+
+    min-width: 0 !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+
+    border-radius: 50% !important;
+    margin: 15px auto !important;
+    padding: 0 !important;
+
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+}
+
+/* Mobile phones */
+@media screen and (max-width: 480px) {
+    img.profile-photo {
+        width: 90px !important;
+        height: 90px !important;
+        max-width: 90px !important;
+        max-height: 90px !important;
+        margin: 10px auto !important;
+    }
+}
+
+/* Tablets */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+    img.profile-photo {
+        width: 110px !important;
+        height: 110px !important;
+        max-width: 110px !important;
+        max-height: 110px !important;
+    }
+}
+
+/* Laptops and desktop computers */
+@media screen and (min-width: 1025px) and (max-width: 1920px) {
+    img.profile-photo {
+        width: 130px !important;
+        height: 130px !important;
+        max-width: 130px !important;
+        max-height: 130px !important;
+    }
+}
+
+/* Large TV and extra-large screens */
+@media screen and (min-width: 1921px) {
+    img.profile-photo {
+        width: 150px !important;
+        height: 150px !important;
+        max-width: 150px !important;
+        max-height: 150px !important;
+    }
+}   </style>
 </head>
 
 <body>
