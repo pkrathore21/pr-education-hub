@@ -40,7 +40,7 @@ header p {
     color: #dbeafe;
 }
 
-nav {
+nav <a href="#online-test">Online MCQ Test</a> {
     background: #174b87;
     display: flex;
     justify-content: center;
@@ -485,6 +485,222 @@ footer a {
     </div>
   </div>
 </section>
+
+<section id="online-test" style="padding:35px 12px;background:#f4f7fb;">
+<div style="max-width:900px;margin:auto;">
+
+<h2 style="text-align:center;color:#123d70;">Class 10 Mathematics Online Test</h2>
+<p style="text-align:center;">MP Board | CBSE | गणित अभ्यास परीक्षा</p>
+
+<div style="background:white;padding:18px;border-radius:12px;margin:20px 0;text-align:center;">
+  <h3>Test Instructions</h3>
+  <p>Total Questions: 30 | Total Marks: 30</p>
+  <p>Time: 60 Minutes | Each Question: 1 Mark</p>
+  <p>सभी प्रश्नों के चार विकल्प हैं। सही विकल्प चुनें।</p>
+  <button id="startMathTest" onclick="startMathTest()" style="background:#174b87;color:white;padding:12px 25px;border:0;border-radius:7px;font-size:16px;cursor:pointer;">
+    Start Test
+  </button>
+</div>
+
+<div id="mathQuiz" style="display:none;">
+  <div style="position:sticky;top:0;background:#123d70;color:white;padding:12px;border-radius:8px;display:flex;justify-content:space-between;gap:10px;z-index:5;">
+    <span id="questionProgress">Question 1/30</span>
+    <strong id="mathTimer">60:00</strong>
+  </div>
+
+  <div id="mathQuestionArea"></div>
+
+  <div style="display:flex;justify-content:space-between;gap:10px;margin-top:20px;">
+    <button onclick="previousMathQuestion()" style="padding:10px;background:#555;color:white;border:0;border-radius:6px;">Previous</button>
+    <button onclick="nextMathQuestion()" style="padding:10px;background:#174b87;color:white;border:0;border-radius:6px;">Next</button>
+  </div>
+
+  <button onclick="submitMathTest(false)" style="width:100%;padding:13px;background:#16834a;color:white;border:0;border-radius:7px;margin-top:20px;font-size:16px;">
+    Submit Test
+  </button>
+</div>
+
+<div id="mathResult" style="display:none;background:white;padding:20px;border-radius:12px;margin-top:20px;">
+</div>
+
+</div>
+</section>
+
+<script>
+const mathQuestions = [
+["यदि x + 2 = 5, तो x का मान क्या है?",["1","2","3","4"],2,"x = 5 - 2 = 3"],
+["sin 30° का मान है?",["1","1/2","√3/2","0"],1,"sin 30° = 1/2"],
+["cos 60° का मान है?",["0","1","1/2","√3/2"],2,"cos 60° = 1/2"],
+["tan 45° का मान है?",["0","1","√3","1/2"],1,"tan 45° = 1"],
+["2, 4, 6, 8 का माध्य क्या है?",["4","5","6","8"],1,"माध्य = 20/4 = 5"],
+["वृत्त की परिधि का सूत्र है?",["πr²","2πr","πd²","r²"],1,"परिधि = 2πr"],
+["दो संख्याओं का HCF 6 और LCM 36 है। उनका गुणनफल?",["108","216","36","72"],1,"संख्याओं का गुणनफल = HCF × LCM"],
+["x² - 9 का गुणनखंड है?",["(x-3)(x+3)","(x-9)(x+1)","(x-3)²","(x+9)(x-1)"],0,"x² - 9 = (x-3)(x+3)"],
+["एक पासे पर सम संख्या आने की प्रायिकता?",["1/6","1/3","1/2","2/3"],2,"सम संख्याएँ 2, 4, 6 हैं। प्रायिकता = 3/6"],
+["त्रिभुज के तीनों कोणों का योग?",["90°","180°","270°","360°"],1,"त्रिभुज के कोणों का योग 180° होता है।"],
+["यदि AP का प्रथम पद 3 और सार्व अंतर 2 है, तो पाँचवाँ पद?",["9","10","11","12"],2,"a₅ = 3 + 4×2 = 11"],
+["√144 का मान?",["10","11","12","14"],2,"12 × 12 = 144"],
+["यदि x = 2, तो 3x + 4 का मान?",["8","9","10","12"],2,"3×2 + 4 = 10"],
+["बिंदु (0,0) को क्या कहते हैं?",["मूल बिंदु","अक्ष","शीर्ष","मध्य बिंदु"],0,"(0,0) मूल बिंदु है।"],
+["एक समकोण का माप?",["45°","60°","90°","180°"],2,"समकोण = 90°"],
+["sin²θ + cos²θ बराबर है?",["0","1","2","tan θ"],1,"यह त्रिकोणमितीय सर्वसमिका है।"],
+["वृत्त का क्षेत्रफल?",["2πr","πr²","πd","r²"],1,"क्षेत्रफल = πr²"],
+["घन का आयतन?",["a²","4a²","a³","6a²"],2,"घन का आयतन = a³"],
+["बहुपद x² - 5x + 6 के शून्यक?",["1,6","2,3","-2,-3","0,6"],1,"x² - 5x + 6 = (x-2)(x-3)"],
+["यदि दो रेखाएँ समानांतर हैं, तो उनकी ढाल?",["अलग","समान","शून्य","अनंत"],1,"समानांतर रेखाओं की ढाल समान होती है।"],
+["7 का वर्ग?",["14","21","49","77"],2,"7² = 49"],
+["13 और 17 का माध्य?",["14","15","16","17"],1,"(13+17)/2 = 15"],
+["यदि वृत्त की त्रिज्या 7 cm है, व्यास?",["7 cm","14 cm","21 cm","49 cm"],1,"व्यास = 2 × त्रिज्या"],
+["x² = 25 के हल?",["5","-5","±5","25"],2,"x = ±5"],
+["एक सिक्का उछालने पर चित आने की प्रायिकता?",["0","1/4","1/2","1"],2,"दो समान संभावित परिणामों में एक चित है।"],
+["समान्तर श्रेणी 2,5,8,11 का सार्व अंतर?",["2","3","5","8"],1,"d = 5 - 2 = 3"],
+["यदि sin θ = 3/5 और θ न्यून कोण है, तो cos θ?",["3/5","4/5","5/3","1/5"],1,"समकोण त्रिभुज में cos θ = 4/5"],
+["बिंदु (3,4) की मूल बिंदु से दूरी?",["3","4","5","7"],2,"दूरी = √(3²+4²) = 5"],
+["दो संख्याओं का योग 10 और अंतर 2 है। बड़ी संख्या?",["4","5","6","8"],2,"संख्याएँ 6 और 4 हैं।"],
+["एक बेलन का वक्र पृष्ठीय क्षेत्रफल?",["πr²h","2πrh","2πr²","πrh"],1,"वक्र पृष्ठीय क्षेत्रफल = 2πrh"]
+];
+
+let currentMathQuestion = 0;
+let mathAnswers = Array(30).fill(null);
+let mathTimeLeft = 3600;
+let mathTimerInterval = null;
+let mathSubmitted = false;
+
+function startMathTest() {
+  currentMathQuestion = 0;
+  mathAnswers = Array(30).fill(null);
+  mathTimeLeft = 3600;
+  mathSubmitted = false;
+
+  document.getElementById("startMathTest").style.display = "none";
+  document.getElementById("mathResult").style.display = "none";
+  document.getElementById("mathQuiz").style.display = "block";
+
+  showMathQuestion();
+  clearInterval(mathTimerInterval);
+  updateMathTimer();
+
+  mathTimerInterval = setInterval(function() {
+    mathTimeLeft--;
+    updateMathTimer();
+
+    if (mathTimeLeft <= 0) {
+      submitMathTest(true);
+    }
+  }, 1000);
+}
+
+function updateMathTimer() {
+  let minutes = Math.floor(mathTimeLeft / 60);
+  let seconds = mathTimeLeft % 60;
+
+  document.getElementById("mathTimer").textContent =
+    String(minutes).padStart(2,"0") + ":" +
+    String(seconds).padStart(2,"0");
+}
+
+function showMathQuestion() {
+  const q = mathQuestions[currentMathQuestion];
+
+  document.getElementById("questionProgress").textContent =
+    "Question " + (currentMathQuestion + 1) + "/30";
+
+  let html = `
+    <div style="background:white;padding:20px;margin-top:15px;border-radius:10px;">
+      <h3>Q${currentMathQuestion + 1}. ${q[0]}</h3>
+      <div style="margin-top:15px;">
+  `;
+
+  q[1].forEach(function(option,index) {
+    html += `
+      <label style="display:block;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:7px;cursor:pointer;">
+        <input type="radio" name="mathOption" value="${index}"
+          ${mathAnswers[currentMathQuestion] === index ? "checked" : ""}
+          onchange="saveMathAnswer(${index})">
+        <strong> ${String.fromCharCode(65+index)}.</strong> ${option}
+      </label>
+    `;
+  });
+
+  html += `</div></div>`;
+
+  document.getElementById("mathQuestionArea").innerHTML = html;
+}
+
+function saveMathAnswer(index) {
+  mathAnswers[currentMathQuestion] = index;
+}
+
+function nextMathQuestion() {
+  if (currentMathQuestion < 29) {
+    currentMathQuestion++;
+    showMathQuestion();
+  }
+}
+
+function previousMathQuestion() {
+  if (currentMathQuestion > 0) {
+    currentMathQuestion--;
+    showMathQuestion();
+  }
+}
+
+function submitMathTest(autoSubmit) {
+  if (mathSubmitted) return;
+
+  if (!autoSubmit && !confirm("क्या आप टेस्ट जमा करना चाहते हैं?")) return;
+
+  mathSubmitted = true;
+  clearInterval(mathTimerInterval);
+
+  let score = 0;
+  let attempted = 0;
+
+  mathQuestions.forEach(function(q,index) {
+    if (mathAnswers[index] !== null) attempted++;
+    if (mathAnswers[index] === q[2]) score++;
+  });
+
+  let wrong = attempted - score;
+  let unanswered = 30 - attempted;
+
+  let result = `
+    <h2 style="color:#174b87;text-align:center;">Test Result</h2>
+    <h1 style="text-align:center;color:#16834a;font-size:40px;">${score}/30</h1>
+    <p style="text-align:center;">आपका स्कोर</p>
+    <p>Attempted: ${attempted} | Correct: ${score}</p>
+    <p>Wrong: ${wrong} | Unanswered: ${unanswered}</p>
+    <hr style="margin:15px 0;">
+    <h3>Answer Key & Solutions</h3>
+  `;
+
+  mathQuestions.forEach(function(q,index) {
+    const userAnswer = mathAnswers[index];
+    result += `
+      <div style="padding:12px;border-bottom:1px solid #ddd;">
+        <strong>Q${index+1}. ${q[0]}</strong>
+        <p>Your Answer: ${userAnswer === null ? "Not Attempted" : q[1][userAnswer]}</p>
+        <p style="color:green;">Correct Answer: ${q[1][q[2]]}</p>
+        <p style="color:#555;">Explanation: ${q[3]}</p>
+      </div>
+    `;
+  });
+
+  result += `
+    <button onclick="location.reload()" style="background:#174b87;color:white;padding:12px 20px;border:0;border-radius:6px;margin-top:15px;">
+      Restart Test
+    </button>
+  `;
+
+  document.getElementById("mathQuiz").style.display = "none";
+  document.getElementById("mathResult").innerHTML = result;
+  document.getElementById("mathResult").style.display = "block";
+  document.getElementById("startMathTest").style.display = "inline-block";
+  document.getElementById("startMathTest").textContent = "Take Test Again";
+
+  if (autoSubmit) alert("समय समाप्त! आपका टेस्ट जमा हो गया है।");
+}
+</script>
 
 </main>
 
