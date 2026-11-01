@@ -1,870 +1,468 @@
+
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PR Education Hub by Pawan Rathore - Study Materials, Maths, Science, MP Board, CBSE and Government Job Updates.">
+<title>PR Education Hub | By Pawan Rathore</title>
 
-    <title>PR Education Hub | By Pawan Rathore</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <meta name="description"
-          content="PR Education Hub - कक्षा 6 से 12 तक MP Board और CBSE के विद्यार्थियों के लिए अध्ययन सामग्री, गणित, नोट्स और ऑनलाइन टेस्ट।">
+html {
+    scroll-behavior: smooth;
+}
 
-    <style>
-        :root {
-            --primary: #173b75;
-            --secondary: #2563eb;
-            --accent: #fbbf24;
-            --background: #f4f7fc;
-            --text: #1f2937;
-            --white: #ffffff;
-            --muted: #64748b;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+    line-height: 1.6;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+header {
+    background: #102b55;
+    color: white;
+    padding: 18px 5%;
+    text-align: center;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+header h1 {
+    font-size: clamp(23px, 4vw, 36px);
+}
 
-        body {
-            font-family: Arial, "Noto Sans Devanagari",
-                         "Mangal", sans-serif;
-            background: var(--background);
-            color: var(--text);
-            line-height: 1.7;
-        }
+header p {
+    color: #dbeafe;
+}
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+nav {
+    background: #174b87;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+}
 
-        .container {
-            width: 92%;
-            max-width: 1150px;
-            margin: auto;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 13px;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
-        /* HEADER */
+nav a:hover {
+    background: #2868ae;
+}
 
-        header {
-            background: var(--primary);
-            color: var(--white);
-            padding: 14px 0;
-        }
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
+}
 
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
+.hero {
+    background: linear-gradient(120deg, #dceeff, #ffffff);
+    padding: 35px 15px;
+    text-align: center;
+}
 
-        .brand h1 {
-            font-size: 25px;
-            line-height: 1.3;
-        }
+.profile-card {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.09);
+}
 
-        .brand p {
-            font-size: 13px;
-            color: #dbeafe;
-        }
-
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        nav a {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        /* HERO */
-
-        .hero {
-            background: linear-gradient(135deg, #173b75, #2563eb);
-            color: white;
-            padding: 55px 0;
-        }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: 1.4fr 0.8fr;
-            align-items: center;
-            gap: 35px;
-        }
-
-        .hero h2 {
-            font-size: clamp(27px, 4vw, 42px);
-            line-height: 1.3;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            margin-bottom: 18px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 19px;
-            border-radius: 8px;
-            font-weight: bold;
-            margin: 5px 5px 5px 0;
-        }
-
-        .btn-light {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-outline {
-            border: 1px solid white;
-            color: white;
-        }
-
-        /* PROFILE */
-
-        .teacher-profile /* PR Education Hub - Responsive Profile Photo */
-
-/* Standard profile photo for all devices */
-img.profile-photo {
+/* PROFILE PHOTO - FIXED RESPONSIVE SIZE */
+.profile-photo-wrap {
+    width: 120px !important;
+    height: 120px !important;
+    min-width: 120px !important;
+    min-height: 120px !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
+    margin: 0 auto 15px !important;
+    overflow: hidden !important;
+    border-radius: 50% !important;
     display: block !important;
+    flex: 0 0 120px !important;
+}
 
-    width: clamp(90px, 12vw, 150px) !important;
-    height: clamp(90px, 12vw, 150px) !important;
-
+.profile-card .profile-photo-wrap img.profile-photo {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
     min-width: 0 !important;
-    max-width: 150px !important;
-    max-height: 150px !important;
-
+    min-height: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
     object-fit: cover !important;
     object-position: center !important;
-
+    border: 3px solid #174b87 !important;
     border-radius: 50% !important;
-    margin: 15px auto !important;
+    margin: 0 !important;
     padding: 0 !important;
-
-    box-sizing: border-box !important;
-    flex-shrink: 0 !important;
 }
 
-/* Mobile phones */
-@media screen and (max-width: 480px) {
-    img.profile-photo {
-        width: 90px !important;
-        height: 90px !important;
-        max-width: 90px !important;
-        max-height: 90px !important;
-        margin: 10px auto !important;
+.profile-card h2 {
+    color: #123d70;
+    font-size: 27px;
+}
+
+.profile-card h3 {
+    color: #2868ae;
+    font-size: 17px;
+}
+
+.profile-card p {
+    margin-top: 7px;
+}
+
+.hero-text {
+    margin-top: 22px;
+}
+
+.hero-text h2 {
+    color: #123d70;
+    font-size: clamp(22px, 4vw, 32px);
+}
+
+.btn {
+    display: inline-block;
+    background: #174b87;
+    color: white;
+    padding: 10px 20px;
+    margin: 12px 5px 0;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #102b55;
+}
+
+section {
+    padding: 35px 0;
+}
+
+.section-title {
+    text-align: center;
+    color: #123d70;
+    font-size: 27px;
+    margin-bottom: 22px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    text-align: center;
+}
+
+.card h3 {
+    color: #174b87;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #555;
+}
+
+.card a {
+    color: #174b87;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.about {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+footer {
+    background: #102b55;
+    color: white;
+    text-align: center;
+    padding: 25px 12px;
+}
+
+footer a {
+    color: #ffdf80;
+    text-decoration: none;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+    .profile-photo-wrap {
+        width: 85px !important;
+        height: 85px !important;
+        min-width: 85px !important;
+        min-height: 85px !important;
+        max-width: 85px !important;
+        max-height: 85px !important;
+        flex-basis: 85px !important;
+    }
+
+    .profile-card {
+        padding: 15px;
+    }
+
+    .profile-card h2 {
+        font-size: 22px;
+    }
+
+    nav a {
+        font-size: 13px;
+        padding: 6px 9px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
     }
 }
 
-/* Tablets */
-@media screen and (min-width: 481px) and (max-width: 1024px) {
-    img.profile-photo {
-        width: 110px !important;
-        height: 110px !important;
-        max-width: 110px !important;
-        max-height: 110px !important;
+/* TABLET */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .profile-photo-wrap {
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        max-width: 105px !important;
+        max-height: 105px !important;
+        flex-basis: 105px !important;
     }
 }
 
-/* Laptops and desktop computers */
-@media screen and (min-width: 1025px) and (max-width: 1920px) {
-    img.profile-photo {
+/* LAPTOP AND DESKTOP */
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .profile-photo-wrap {
+        width: 120px !important;
+        height: 120px !important;
+        min-width: 120px !important;
+        min-height: 120px !important;
+        max-width: 120px !important;
+        max-height: 120px !important;
+        flex-basis: 120px !important;
+    }
+}
+
+/* LARGE TV */
+@media (min-width: 1921px) {
+    .container {
+        max-width: 1500px;
+    }
+
+    .profile-photo-wrap {
         width: 130px !important;
         height: 130px !important;
+        min-width: 130px !important;
+        min-height: 130px !important;
         max-width: 130px !important;
         max-height: 130px !important;
+        flex-basis: 130px !important;
     }
 }
-
-/* Large TV and extra-large screens */
-@media screen and (min-width: 1921px) {
-    img.profile-photo {
-        width: 150px !important;
-        height: 150px !important;
-        max-width: 150px !important;
-        max-height: 150px !important;
-    }
-}
-        {
-            background: white;
-            color: var(--text);
-            border-radius: 18px;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-            width: 100%;
-            max-width: 330px;
-            margin: auto;
-        }
-
-        .teacher-profile .profile-photo {
-            display: block;
-            width: 140px;
-            height: 140px;
-            max-width: 100%;
-            object-fit: cover;
-            object-position: center 25%;
-            border-radius: 10px;
-            border: 3px solid #e5e7eb;
-            margin: 0 auto 14px;
-        }
-
-        .teacher-profile h2 {
-            color: var(--primary);
-            font-size: 23px;
-            margin-bottom: 2px;
-        }
-
-        .teacher-profile h3 {
-            color: var(--secondary);
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-
-        .teacher-profile p {
-            font-size: 14px;
-            margin: 5px 0;
-        }
-
-        .profile-label {
-            display: inline-block;
-            background: #eff6ff;
-            color: var(--primary);
-            border-radius: 6px;
-            padding: 4px 10px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
-
-        /* SECTIONS */
-
-        section.content-section {
-            padding: 45px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .section-title h2 {
-            color: var(--primary);
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-
-        .section-title p {
-            color: var(--muted);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
-        }
-
-        .card {
-            background: white;
-            padding: 22px;
-            border-radius: 13px;
-            border: 1px solid #e5eaf2;
-            box-shadow: 0 4px 12px rgba(15,23,42,0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(15,23,42,0.09);
-        }
-
-        .card h3 {
-            color: var(--primary);
-            font-size: 19px;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: var(--muted);
-            margin-bottom: 12px;
-        }
-
-        .card-link {
-            color: var(--secondary);
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .class-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 13px;
-        }
-
-        .class-card {
-            text-align: center;
-            background: white;
-            border: 1px solid #dbeafe;
-            border-radius: 12px;
-            padding: 18px 8px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .class-card span {
-            display: block;
-            font-size: 24px;
-            color: var(--secondary);
-        }
-
-        /* ABOUT */
-
-        .about-box {
-            background: white;
-            padding: 25px;
-            border-radius: 14px;
-            max-width: 850px;
-            margin: auto;
-            border: 1px solid #e5eaf2;
-        }
-
-        .about-box h3 {
-            color: var(--primary);
-            margin: 15px 0 5px;
-        }
-
-        .about-box ul {
-            padding-left: 22px;
-        }
-
-        /* FOOTER */
-
-        footer {
-            background: #10284e;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-        }
-
-        footer p {
-            margin: 4px 0;
-            font-size: 14px;
-        }
-
-        /* MOBILE RESPONSIVE */
-
-        @media (max-width: 800px) {
-            .header-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav {
-                justify-content: center;
-            }
-
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .teacher-profile {
-                max-width: 150px;
-            }
-
-            .grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .class-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .brand h1 {
-                font-size: 22px;
-            }
-
-            nav {
-                gap: 10px;
-            }
-
-            nav a {
-                font-size: 12px;
-            }
-
-            .hero {
-                padding: 35px 0;
-            }
-
-            .teacher-profile .profile-photo {
-                width: 115px;
-                height: 115px;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .class-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .section-title h2 {
-                font-size: 24px;
-            }
-        }
- /* PR Education Hub - Responsive Profile Photo */
-
-/* Standard profile photo for all devices */
-img.profile-photo {
-    display: block !important;
-
-    width: clamp(90px, 12vw, 150px) !important;
-    height: clamp(90px, 12vw, 150px) !important;
-
-    min-width: 0 !important;
-    max-width: 150px !important;
-    max-height: 150px !important;
-
-    object-fit: cover !important;
-    object-position: center !important;
-
-    border-radius: 50% !important;
-    margin: 15px auto !important;
-    padding: 0 !important;
-
-    box-sizing: border-box !important;
-    flex-shrink: 0 !important;
-}
-
-/* Mobile phones */
-@media screen and (max-width: 480px) {
-    img.profile-photo {
-        width: 90px !important;
-        height: 90px !important;
-        max-width: 90px !important;
-        max-height: 90px !important;
-        margin: 10px auto !important;
-    }
-}
-
-/* Tablets */
-@media screen and (min-width: 481px) and (max-width: 1024px) {
-    img.profile-photo {
-        width: 110px !important;
-        height: 110px !important;
-        max-width: 110px !important;
-        max-height: 110px !important;
-    }
-}
-
-/* Laptops and desktop computers */
-@media screen and (min-width: 1025px) and (max-width: 1920px) {
-    img.profile-photo {
-        width: 130px !important;
-        height: 130px !important;
-        max-width: 130px !important;
-        max-height: 130px !important;
-    }
-}
-
-/* Large TV and extra-large screens */
-@media screen and (min-width: 1921px) {
-    img.profile-photo {
-        width: 150px !important;
-        height: 150px !important;
-        max-width: 150px !important;
-        max-height: 150px !important;
-    }
-}   </style>
+</style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <div class="container header-inner">
+<header>
+    <h1>PR EDUCATION HUB</h1>
+    <p>Learn Today • Lead Tomorrow</p>
+    <p>By Pawan Rathore</p>
+</header>
 
-            <div class="brand">
-                <h1>PR Education Hub</h1>
-                <p>By Pawan Rathore | Learn • Practice • Succeed</p>
-            </div>
+<nav>
+    <a href="#home">Home</a>
+    <a href="#classes">Classes</a>
+    <a href="#study">Study Material</a>
+    <a href="#tests">Online Tests</a>
+    <a href="#videos">Videos</a>
+    <a href="#jobs">Govt Jobs</a>
+    <a href="#about">About</a>
+</nav>
 
-            <nav aria-label="Main navigation">
-                <a href="#home">Home</a>
-                <a href="#classes">Classes</a>
-                <a href="#tests">Online Tests</a>
-                <a href="#study">Study Material</a>
-                <a href="#teacher">Teacher Profile</a>
-            </nav>
+<main>
 
+<div class="hero" id="home">
+    <div class="profile-card">
+
+        <div class="profile-photo-wrap">
+            <img
+                src="IMG_20240815_080452.jpg"
+                alt="Pawan Rathore"
+                class="profile-photo"
+            >
         </div>
-    </header>
 
-    <main>
+        <h2>पवन राठौर</h2>
+        <h3>Founder & Educator</h3>
+        <p><strong>PR Education Hub</strong></p>
+        <p>माध्यमिक शिक्षक | गणित शिक्षक</p>
+        <p>Qualification: ITI, B.E. Mechanical, B.Ed.</p>
+        <p>Teaching Experience: Since 2022</p>
+    </div>
 
-        <!-- HERO SECTION -->
-        <section class="hero" id="home">
-            <div class="container hero-inner">
+    <div class="hero-text">
+        <h2>Welcome to PR Education Hub</h2>
+        <p>आपकी शिक्षा और सफलता की डिजिटल पाठशाला</p>
+        <p>MP Board | CBSE | Mathematics | Science</p>
+        <a class="btn" href="#study">Explore Study Material</a>
+        <a class="btn" href="#videos">Watch Lectures</a>
+    </div>
+</div>
 
-                <div>
-                    <span class="hero-badge">
-                        MP Board & CBSE | Classes 6–12
-                    </span>
+<section id="classes">
+    <div class="container">
+        <h2 class="section-title">Our Classes / हमारी कक्षाएँ</h2>
 
-                    <h2>
-                        आपकी पढ़ाई,<br>
-                        आपकी सफलता!
-                    </h2>
-
-                    <p>
-                        PR Education Hub पर आपका स्वागत है।
-                        यहाँ विद्यार्थियों के लिए गणित,
-                        अध्ययन सामग्री, परीक्षा अभ्यास
-                        और शैक्षणिक जानकारी एक ही स्थान पर मिलेगी।
-                    </p>
-
-                    <a href="#classes" class="btn btn-light">
-                        कक्षा चुनें
-                    </a>
-
-                    <a href="#study" class="btn btn-outline">
-                        Study Material
-                    </a>
-                </div>
-
-                <!-- TEACHER PROFILE -->
-                <div class="teacher-profile" id="teacher">
-
-                    <img
-                        src="IMG_20240815_080452.jpg"
-                        alt="Pawan Rathore - Teacher"
-                        class="profile-photo"
-                        width="140"
-                        height="140"
-                    >
-
-                    <h2>पवन राठौर</h2>
-
-                    <h3>Founder & Educator</h3>
-
-                    <p><strong>PR Education Hub</strong></p>
-
-                    <p>माध्यमिक शिक्षक | गणित शिक्षक</p>
-
-                    <p>
-                        <strong>Qualification:</strong><br>
-                        ITI, B.E. Mechanical, B.Ed.
-                    </p>
-
-                    <p>
-                        <strong>Teaching Experience:</strong><br>
-                        Since 2022
-                    </p>
-
-                    <span class="profile-label">
-                        Education • Knowledge • Success
-                    </span>
-
-                </div>
-
+        <div class="grid">
+            <div class="card">
+                <h3>Class 6 to 8</h3>
+                <p>Maths, Science and General Subjects</p>
             </div>
-        </section>
 
-        <!-- CLASSES -->
-        <section class="content-section" id="classes">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>अपनी कक्षा चुनें</h2>
-                    <p>Choose Your Class — MP Board & CBSE</p>
-                </div>
-
-                <div class="class-grid">
-                    <a class="class-card" href="#study">
-                        <span>6</span>Class 6
-                    </a>
-
-                    <a class="class-card" href="#study">
-                        <span>7</span>Class 7
-                    </a>
-
-                    <a class="class-card" href="#study">
-                        <span>8</span>Class 8
-                    </a>
-
-                    <a class="class-card" href="#study">
-                        <span>9</span>Class 9
-                    </a>
-
-                    <a class="class-card" href="#tests">
-                        <span>10</span>Class 10
-                    </a>
-
-                    <a class="class-card" href="#study">
-                        <span>11</span>Class 11
-                    </a>
-
-                    <a class="class-card" href="#study">
-                        <span>12</span>Class 12
-                    </a>
-                </div>
-
+            <div class="card">
+                <h3>Class 9 & 10</h3>
+                <p>MP Board and CBSE Study Material</p>
             </div>
-        </section>
 
-        <!-- LEARNING RESOURCES -->
-        <section class="content-section" id="study">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Learning Resources</h2>
-                    <p>आपकी पढ़ाई को आसान बनाने के लिए</p>
-                </div>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>📚 Study Material</h3>
-                        <p>
-                            कक्षा 6 से 12 तक के नोट्स,
-                            अध्यायवार अध्ययन सामग्री और
-                            PDF के लिए यह सेक्शन है।
-                        </p>
-                        <a class="card-link" href="#classes">
-                            कक्षाएँ देखें →
-                        </a>
-                    </article>
-
-                    <article class="card">
-                        <h3>📝 Online MCQ Tests</h3>
-                        <p>
-                            बहुविकल्पीय प्रश्नों के माध्यम से
-                            अपनी तैयारी का अभ्यास करें।
-                            ऑनलाइन टेस्ट जल्द उपलब्ध होंगे।
-                        </p>
-                        <a class="card-link" href="#tests">
-                            टेस्ट सेक्शन देखें →
-                        </a>
-                    </article>
-
-                    <article class="card">
-                        <h3>🎥 Video Lectures</h3>
-                        <p>
-                            गणित और अन्य विषयों की
-                            वीडियो कक्षाओं के लिए यह
-                            सेक्शन तैयार किया गया है।
-                        </p>
-                        <a class="card-link" href="#videos">
-                            वीडियो सेक्शन देखें →
-                        </a>
-                    </article>
-
-                    <article class="card">
-                        <h3>📐 Mathematics</h3>
-                        <p>
-                            गणित के सूत्र, उदाहरण,
-                            त्रिकोणमिति और परीक्षा उपयोगी
-                            प्रश्नों का अभ्यास करें।
-                        </p>
-                        <a class="card-link" href="#tests">
-                            अभ्यास सेक्शन देखें →
-                        </a>
-                    </article>
-
-                    <article class="card">
-                        <h3>📢 Government Job Updates</h3>
-                        <p>
-                            सरकारी नौकरी, भर्ती,
-                            पात्रता, परीक्षा पैटर्न और
-                            सिलेबस से जुड़ी जानकारी।
-                        </p>
-                        <a class="card-link" href="#career">
-                            Career Section देखें →
-                        </a>
-                    </article>
-
-                    <article class="card">
-                        <h3>📖 Exam Preparation</h3>
-                        <p>
-                            परीक्षा की तैयारी, रिवीजन
-                            और अभ्यास के लिए उपयोगी
-                            शैक्षणिक संसाधन।
-                        </p>
-                        <a class="card-link" href="#classes">
-                            पढ़ाई शुरू करें →
-                        </a>
-                    </article>
-
-                </div>
-
+            <div class="card">
+                <h3>Class 11 & 12</h3>
+                <p>Mathematics, Physics and Chemistry</p>
             </div>
-        </section>
 
-        <!-- ONLINE TESTS -->
-        <section class="content-section" id="tests">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Online Test Zone</h2>
-                    <p>Practice regularly to improve your score.</p>
-                </div>
-
-                <div class="grid">
-
-                    <article class="card">
-                        <h3>Class 10 Mathematics</h3>
-                        <p>
-                            MP Board और CBSE के गणित
-                            प्रश्नों के अभ्यास के लिए।
-                        </p>
-                        <p><strong>Status:</strong> Coming Soon</p>
-                    </article>
-
-                    <article class="card">
-                        <h3>MCQ Practice</h3>
-                        <p>
-                            चार विकल्पों वाले प्रश्नों
-                            से अपनी तैयारी जाँचें।
-                        </p>
-                        <p><strong>Status:</strong> Coming Soon</p>
-                    </article>
-
-                    <article class="card">
-                        <h3>Answer & Solutions</h3>
-                        <p>
-                            प्रश्नों के सही उत्तर और
-                            विस्तृत हल इस सेक्शन में
-                            जोड़े जा सकते हैं।
-                        </p>
-                        <p><strong>Status:</strong> Coming Soon</p>
-                    </article>
-
-                </div>
-
+            <div class="card">
+                <h3>Competitive Exams</h3>
+                <p>General Knowledge, Reasoning and Maths</p>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- VIDEO SECTION -->
-        <section class="content-section" id="videos">
-            <div class="container">
+<section id="study">
+    <div class="container">
+        <h2 class="section-title">Study Material / अध्ययन सामग्री</h2>
 
-                <div class="section-title">
-                    <h2>Video Lectures</h2>
-                    <p>Watch lessons and learn at your own pace.</p>
-                </div>
-
-                <div class="about-box">
-                    <p>
-                        यहाँ आपके शैक्षणिक वीडियो और YouTube
-                        लेक्चर जोड़े जा सकते हैं। अभी कोई
-                        वीडियो लिंक उपलब्ध नहीं कराया गया है।
-                    </p>
-                </div>
-
+        <div class="grid">
+            <div class="card">
+                <h3>Mathematics</h3>
+                <p>Chapter-wise notes, formulas and questions.</p>
+                <p>गणित के नोट्स और महत्वपूर्ण प्रश्न</p>
             </div>
-        </section>
 
-        <!-- CAREER SECTION -->
-        <section class="content-section" id="career">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>Career & Government Jobs</h2>
-                    <p>सरकारी नौकरी की तैयारी के लिए जानकारी</p>
-                </div>
-
-                <div class="about-box">
-                    <p>
-                        इस सेक्शन में भर्ती की जानकारी,
-                        योग्यता, आवेदन की तिथियाँ, फीस,
-                        सिलेबस और परीक्षा पैटर्न के लेख
-                        प्रकाशित किए जा सकते हैं।
-                    </p>
-                    <p>
-                        आवेदन करने से पहले संबंधित विभाग
-                        की आधिकारिक अधिसूचना अवश्य देखें।
-                    </p>
-                </div>
-
+            <div class="card">
+                <h3>Science</h3>
+                <p>Physics, Chemistry and Biology notes.</p>
             </div>
-        </section>
 
-        <!-- ABOUT -->
-        <section class="content-section" id="about">
-            <div class="container">
-
-                <div class="section-title">
-                    <h2>About PR Education Hub</h2>
-                    <p>हमारा उद्देश्य — गुणवत्तापूर्ण शिक्षा</p>
-                </div>
-
-                <div class="about-box">
-
-                    <h3>हमारे बारे में</h3>
-
-                    <p>
-                        PR Education Hub विद्यार्थियों के लिए
-                        बनाया गया एक शैक्षणिक प्लेटफॉर्म है।
-                        इसका उद्देश्य पढ़ाई को सरल, व्यवस्थित
-                        और अधिक उपयोगी बनाना है।
-                    </p>
-
-                    <h3>हमारी मुख्य सुविधाएँ</h3>
-
-                    <ul>
-                        <li>कक्षा 6 से 12 तक शैक्षणिक संसाधन।</li>
-                        <li>MP Board और CBSE के लिए सामग्री।</li>
-                        <li>गणित के सूत्र और अभ्यास प्रश्न।</li>
-                        <li>नोट्स, PDF और परीक्षा तैयारी सामग्री।</li>
-                        <li>ऑनलाइन MCQ टेस्ट की सुविधा विकसित करने की योजना।</li>
-                        <li>सरकारी नौकरी से संबंधित जानकारी।</li>
-                    </ul>
-
-                </div>
-
+            <div class="card">
+                <h3>PDF Notes</h3>
+                <p>Downloadable study resources.</p>
             </div>
-        </section>
 
-    </main>
+            <div class="card">
+                <h3>Important Questions</h3>
+                <p>Board exam preparation material.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p><strong>PR Education Hub – By Pawan Rathore</strong></p>
-        <p>Learn • Practice • Succeed</p>
-        <p>© <span id="year"></span> PR Education Hub. All rights reserved.</p>
-    </footer>
+<section id="tests">
+    <div class="container">
+        <h2 class="section-title">Online Test Zone</h2>
 
-    <script>
-        document.getElementById("year").textContent =
-            new Date().getFullYear();
-    </script>
+        <div class="card">
+            <h3>Practice MCQ Questions</h3>
+            <p>अपनी तैयारी जाँचें और अपना ज्ञान बढ़ाएँ।</p>
+            <p><strong>Online tests coming soon!</strong></p>
+        </div>
+    </div>
+</section>
+
+<section id="videos">
+    <div class="container">
+        <h2 class="section-title">Video Lectures</h2>
+
+        <div class="card">
+            <h3>Learn with Pawan Rathore</h3>
+            <p>Mathematics, Science and Educational Videos.</p>
+            <p>YouTube video links will be added here.</p>
+        </div>
+    </div>
+</section>
+
+<section id="jobs">
+    <div class="container">
+        <h2 class="section-title">Government Job Updates</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Latest Vacancies</h3>
+                <p>सरकारी नौकरी की नई जानकारी।</p>
+            </div>
+
+            <div class="card">
+                <h3>Exam Syllabus</h3>
+                <p>परीक्षा पैटर्न और पाठ्यक्रम।</p>
+            </div>
+
+            <div class="card">
+                <h3>Exam Preparation</h3>
+                <p>महत्वपूर्ण प्रश्न और तैयारी सामग्री।</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="container">
+        <h2 class="section-title">About PR Education Hub</h2>
+
+        <div class="about">
+            <p>
+                PR Education Hub is an educational platform created by
+                Pawan Rathore to provide useful learning resources
+                for students.
+            </p>
+            <p>
+                हमारा उद्देश्य विद्यार्थियों को सरल भाषा में
+                गुणवत्तापूर्ण शिक्षा, नोट्स, वीडियो लेक्चर और
+                परीक्षा संबंधी जानकारी उपलब्ध कराना है।
+            </p>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <h3>PR EDUCATION HUB</h3>
+    <p>By Pawan Rathore</p>
+    <p>Learn Today • Lead Tomorrow</p>
+    <p>© 2026 PR Education Hub. All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>
