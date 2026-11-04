@@ -1,0 +1,64 @@
+<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Class 12 MP Board Science Demo | PR Education Hub</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6fb;color:#17243a;font-family:system-ui,"Noto Sans Devanagari",sans-serif}header{background:#123b70;color:white;padding:22px 16px}main{max-width:800px;margin:18px auto;padding:0 12px}.card{background:white;padding:16px;border-radius:14px;margin:12px 0;box-shadow:0 3px 14px #14294a0d}h1{font-size:22px;margin:0 0 6px}p{line-height:1.55}.muted{color:#66758a;font-size:13px}select,button{font:inherit;padding:12px;border-radius:9px;border:1px solid #ccd5e1}select{width:100%;margin:8px 0 14px;background:white}button{background:#1d5ca8;color:white;border:0;font-weight:bold;cursor:pointer}.option{display:flex;gap:10px;border:1px solid #dbe3ee;border-radius:9px;padding:11px;margin:8px 0}.option:has(input:checked){background:#eef5ff;border-color:#1d5ca8}.timer{font-weight:800;color:#c0392b;font-size:20px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.hidden{display:none}.correct{color:#16834a;font-weight:bold}.wrong{color:#c0392b;font-weight:bold}.review{border-top:1px solid #e5eaf1;padding:12px 0}.score{font-size:34px;color:#16834a;font-weight:850}
+</style></head><body>
+<header><h1>PR Education Hub – कक्षा 12वीं विज्ञान</h1><div>MP Board • हिंदी माध्यम • Free Demo MCQ Test</div></header>
+<main>
+<section class="card" id="setup"><h2>अपना विषय चुनें</h2><p class="muted">PCM के विद्यार्थी गणित और PCB के विद्यार्थी जीवविज्ञान चुनें। भौतिकी और रसायन विज्ञान दोनों के लिए उपलब्ध हैं। प्रत्येक विषय का अलग 10 प्रश्नों वाला डेमो है।</p>
+<label>विषय चुनें</label><select id="subject"><option value="physics">भौतिकी (Physics)</option><option value="chemistry">रसायन विज्ञान (Chemistry)</option><option value="maths">गणित (PCM)</option><option value="biology">जीवविज्ञान (PCB)</option></select>
+<p class="muted">10 प्रश्न • 15 मिनट • तत्काल परिणाम और व्याख्या • बिना Login</p><button id="start">टेस्ट शुरू करें</button></section>
+<section id="test" class="hidden"><div class="card row"><div><b id="heading"></b><div id="progress" class="muted"></div></div><div id="timer" class="timer">15:00</div></div><div id="question"></div><div class="row"><button id="prev">पिछला</button><button id="next">अगला</button><button id="submit" class="hidden">टेस्ट जमा करें</button></div></section>
+<section class="card hidden" id="result"><h2>आपका परिणाम</h2><div class="score" id="score"></div><p id="summary"></p><h3>उत्तर और व्याख्या</h3><div id="review"></div><button id="again">दूसरा विषय चुनें</button></section>
+</main><script>
+const bank={
+physics:[
+["विद्युत धारा का SI मात्रक क्या है?",["वोल्ट","ऐम्पियर","ओम","कूलॉम"],1,"विद्युत धारा का SI मात्रक ऐम्पियर (A) है।"],
+["ओम का नियम है—",["V = IR","P = VI²","R = VI","I = VR"],0,"स्थिर ताप पर विभवांतर V = IR होता है।"],
+["विद्युत प्रतिरोध का SI मात्रक है—",["वाट","जूल","ओम","टेस्ला"],2,"प्रतिरोध का SI मात्रक ओम (Ω) है।"],
+["निर्वात में प्रकाश का वेग लगभग है—",["3×10⁶ m/s","3×10⁸ m/s","3×10⁵ m/s","3×10¹⁰ m/s"],1,"प्रकाश का वेग लगभग 3×10⁸ m/s है।"],
+["लेंस की शक्ति का मात्रक है—",["डायोप्टर","मीटर","न्यूटन","पास्कल"],0,"लेंस की शक्ति का मात्रक डायोप्टर है।"],
+["चुंबकीय फ्लक्स का SI मात्रक है—",["वेबर","टेस्ला","हेनरी","ऐम्पियर"],0,"चुंबकीय फ्लक्स का SI मात्रक वेबर है।"],
+["ट्रांसफॉर्मर किस सिद्धांत पर कार्य करता है?",["स्व-प्रेरण","अन्योन्य प्रेरण","जूल प्रभाव","प्रकाश विद्युत प्रभाव"],1,"ट्रांसफॉर्मर अन्योन्य विद्युत चुंबकीय प्रेरण पर कार्य करता है।"],
+["फोटोइलेक्ट्रिक प्रभाव में उत्सर्जित कण है—",["प्रोटॉन","न्यूट्रॉन","इलेक्ट्रॉन","फोटॉन"],2,"धातु से इलेक्ट्रॉन उत्सर्जित होते हैं।"],
+["अर्धचालक का उदाहरण है—",["तांबा","सिलिकॉन","चाँदी","एल्यूमिनियम"],1,"सिलिकॉन एक अर्धचालक है।"],
+["विद्युत शक्ति का SI मात्रक है—",["जूल","कूलॉम","वाट","ओम"],2,"विद्युत शक्ति का SI मात्रक वाट है।"]],
+chemistry:[
+["एक मोल में कणों की संख्या लगभग है—",["6.022×10²³","3×10⁸","9.8","1.6×10⁻¹⁹"],0,"एक मोल में एवोगैड्रो संख्या कण होते हैं।"],
+["25°C पर pH 7 वाला विलयन होता है—",["अम्लीय","क्षारीय","उदासीन","प्रबल अम्लीय"],2,"25°C पर pH 7 उदासीनता दर्शाता है।"],
+["KMnO₄ में Mn की ऑक्सीकरण संख्या है—",["+2","+4","+7","+6"],2,"K = +1 और O = −2 से Mn = +7।"],
+["प्रथम कोटि अभिक्रिया के वेग स्थिरांक की इकाई है—",["mol L⁻¹ s⁻¹","s⁻¹","L mol⁻¹ s⁻¹","mol² L⁻²"],1,"प्रथम कोटि के लिए k की इकाई s⁻¹ है।"],
+["एथेनॉल का क्रियात्मक समूह है—",["–CHO","–COOH","–OH","–CO–"],2,"एथेनॉल में हाइड्रॉक्सिल समूह होता है।"],
+["ग्लूकोज का आणविक सूत्र है—",["C₆H₁₂O₆","C₁₂H₂₂O₁₁","CH₄","C₂H₅OH"],0,"ग्लूकोज का सूत्र C₆H₁₂O₆ है।"],
+["निम्न में से उत्कृष्ट गैस है—",["नाइट्रोजन","ऑक्सीजन","आर्गन","हाइड्रोजन"],2,"आर्गन समूह 18 की उत्कृष्ट गैस है।"],
+["फैराडे स्थिरांक लगभग है—",["96500 C mol⁻¹","9.8 C","6.02 C","3×10⁸ C"],0,"एक मोल इलेक्ट्रॉनों का आवेश लगभग 96500 C है।"],
+["प्रोटीन की मूल इकाई है—",["न्यूक्लियोटाइड","अमीनो अम्ल","ग्लूकोज","फैटी अम्ल"],1,"प्रोटीन अमीनो अम्लों के बहुलक हैं।"],
+["बेंजीन का सूत्र है—",["C₆H₆","C₆H₁₂","C₂H₆","C₆H₁₄"],0,"बेंजीन का आणविक सूत्र C₆H₆ है।"]],
+maths:[
+["sin²θ + cos²θ का मान है—",["0","1","2","tan θ"],1,"मूल सर्वसमिका के अनुसार मान 1 है।"],
+["d/dx (x²) बराबर है—",["x","2x","x³","2"],1,"घात नियम से अवकलज 2x है।"],
+["∫1 dx का मान है—",["1 + C","x + C","x² + C","0"],1,"1 का अनिश्चित समाकलन x + C है।"],
+["2×2 इकाई आव्यूह का सारणिक है—",["0","1","2","4"],1,"इकाई आव्यूह का सारणिक 1 होता है।"],
+["स्वतंत्र घटनाओं A और B के लिए P(A∩B) है—",["P(A)+P(B)","P(A)P(B)","P(A)/P(B)","0"],1,"स्वतंत्र घटनाओं की संयुक्त प्रायिकता गुणनफल है।"],
+["(0,0) से (3,4) की दूरी है—",["3","4","5","7"],2,"दूरी √(3²+4²) = 5 है।"],
+["अवकलज का ज्यामितीय अर्थ है—",["क्षेत्रफल","ढाल","आयतन","परिमाप"],1,"अवकलज स्पर्शरेखा की ढाल बताता है।"],
+["दो चर वाले रैखिक समीकरण का ग्राफ है—",["वृत्त","परवलय","सरल रेखा","दीर्घवृत्त"],2,"इसका ग्राफ सरल रेखा होता है।"],
+["tan 45° का मान है—",["0","1","√3","अपरिभाषित"],1,"tan 45° = 1।"],
+["शून्य प्रायिकता वाली घटना है—",["निश्चित","असंभव","समान संभावित","स्वतंत्र"],1,"शून्य प्रायिकता असंभव घटना को दर्शाती है।"]],
+biology:[
+["कोशिका का ऊर्जा गृह है—",["राइबोसोम","माइटोकॉन्ड्रिया","गॉल्जी काय","लाइसोसोम"],1,"माइटोकॉन्ड्रिया ATP निर्माण में प्रमुख है।"],
+["DNA का पूरा नाम है—",["डिऑक्सीराइबोन्यूक्लिक अम्ल","राइबोन्यूक्लिक अम्ल","अमीनो अम्ल","ATP"],0,"DNA का पूरा नाम डिऑक्सीराइबोन्यूक्लिक अम्ल है।"],
+["मानव स्त्री में सामान्य लैंगिक गुणसूत्र हैं—",["XY","XX","XO","YY"],1,"मानव स्त्री में सामान्यतः XX गुणसूत्र होते हैं।"],
+["प्रकाश संश्लेषण मुख्यतः कहाँ होता है?",["माइटोकॉन्ड्रिया","क्लोरोप्लास्ट","केंद्रक","राइबोसोम"],1,"क्लोरोप्लास्ट में प्रकाश संश्लेषण होता है।"],
+["रक्त में ऑक्सीजन का परिवहन मुख्यतः कौन करता है?",["प्लेटलेट","हीमोग्लोबिन","इंसुलिन","पित्त"],1,"हीमोग्लोबिन ऑक्सीजन का परिवहन करता है।"],
+["परागण का अर्थ है—",["बीज अंकुरण","परागकण का वर्तिकाग्र तक पहुँचना","फल बनना","निषेचन"],1,"परागकण परागकोष से वर्तिकाग्र तक पहुँचते हैं।"],
+["इंसुलिन किस अंग से स्रावित होता है?",["थायरॉइड","अग्न्याशय","पीयूष","अधिवृक्क"],1,"अग्न्याशय की बीटा कोशिकाएँ इंसुलिन बनाती हैं।"],
+["पारिस्थितिकी तंत्र के उत्पादक सामान्यतः हैं—",["हरे पौधे","मांसाहारी","अपघटक","परजीवी"],0,"हरे पौधे प्रकाश संश्लेषण से भोजन बनाते हैं।"],
+["मानव में निषेचन सामान्यतः कहाँ होता है?",["गर्भाशय","अंडवाहिनी","अंडाशय","योनि"],1,"निषेचन सामान्यतः अंडवाहिनी में होता है।"],
+["टीकाकरण का मुख्य उद्देश्य है—",["रक्तचाप बढ़ाना","प्रतिरक्षा विकसित करना","पाचन बढ़ाना","ताप घटाना"],1,"टीका प्रतिरक्षा तंत्र को रोगजनक के विरुद्ध तैयार करता है।"]]};
+const labels={physics:"भौतिकी",chemistry:"रसायन विज्ञान",maths:"गणित (PCM)",biology:"जीवविज्ञान (PCB)"};
+let qs=[],ans=[],pos=0,left=900,interval=null,done=false;const el=id=>document.getElementById(id);
+function begin(){qs=bank[el("subject").value];ans=Array(10).fill(null);pos=0;left=900;done=false;el("setup").classList.add("hidden");el("result").classList.add("hidden");el("test").classList.remove("hidden");el("heading").textContent="MP Board • कक्षा 12 • "+labels[el("subject").value];draw();el("timer").textContent="15:00";interval=setInterval(()=>{left--;el("timer").textContent=String(Math.floor(left/60)).padStart(2,"0")+":"+String(left%60).padStart(2,"0");if(left<=0)finish()},1000)}
+function draw(){let q=qs[pos];el("progress").textContent=`प्रश्न ${pos+1}/10 • उत्तर दिए ${ans.filter(v=>v!==null).length}`;el("question").innerHTML=`<div class="card"><b>${pos+1}. ${q[0]}</b>${q[1].map((v,i)=>`<label class="option"><input type="radio" name="a" value="${i}" ${ans[pos]===i?"checked":""}> ${"ABCD"[i]}. ${v}</label>`).join("")}</div>`;document.querySelectorAll('input[name="a"]').forEach(x=>x.onchange=()=>{ans[pos]=+x.value;el("progress").textContent=`प्रश्न ${pos+1}/10 • उत्तर दिए ${ans.filter(v=>v!==null).length}`});el("prev").disabled=pos===0;el("next").classList.toggle("hidden",pos===9);el("submit").classList.toggle("hidden",pos!==9)}
+function finish(){if(done)return;done=true;clearInterval(interval);let score=qs.reduce((n,q,i)=>n+(ans[i]===q[2]?1:0),0);el("test").classList.add("hidden");el("result").classList.remove("hidden");el("score").textContent=score+" / 10";el("summary").textContent=`सही उत्तर ${score} • गलत/छूटे ${10-score}`;el("review").innerHTML=qs.map((q,i)=>`<div class="review"><b>${i+1}. ${q[0]}</b><p class="${ans[i]===q[2]?"correct":"wrong"}">${ans[i]===q[2]?"सही उत्तर":"गलत या अनुत्तरित"}</p><p>सही उत्तर: <b>${q[1][q[2]]}</b></p><p class="muted">${q[3]}</p></div>`).join("")}
+el("start").onclick=begin;el("prev").onclick=()=>{if(pos>0){pos--;draw()}};el("next").onclick=()=>{if(pos<9){pos++;draw()}};el("submit").onclick=()=>{if(confirm("क्या आप टेस्ट जमा करना चाहते हैं?"))finish()};el("again").onclick=()=>{el("result").classList.add("hidden");el("setup").classList.remove("hidden")};
+</script></body></html>
