@@ -51,7 +51,40 @@ Class 12 Commerce – Free Demo Test
 </main><footer><p>© 2026 PR Education Hub | By Pawan Rathore</p><p>Learn Today, Lead Tomorrow.</p></footer>
 <script>
 const chapters=["वास्तविक संख्याएँ (Real Numbers)","बहुपद (Polynomials)","दो चर वाले रैखिक समीकरण युग्म (Pair of Linear Equations in Two Variables)","द्विघात समीकरण (Quadratic Equations)","समांतर श्रेढ़ियाँ (Arithmetic Progressions)","त्रिभुज (Triangles)","निर्देशांक ज्यामिति (Coordinate Geometry)","त्रिकोणमिति का परिचय (Introduction to Trigonometry)","त्रिकोणमिति के कुछ अनुप्रयोग (Some Applications of Trigonometry)","वृत्त (Circles)","वृत्तों से संबंधित क्षेत्रफल (Areas Related to Circles)","पृष्ठीय क्षेत्रफल और आयतन (Surface Areas and Volumes)","सांख्यिकी (Statistics)","प्रायिकता (Probability)"];
-document.getElementById("chapterList").innerHTML=chapters.map((n,i)=>`<article class="card"><h3>Chapter ${i+1}</h3><p>${n}</p><p class="muted">30 Questions • 30 Minutes</p><span class="pill">Premium – Coming Soon</span></article>`).join("");
+const unitVideoIds = [
+"EZmG2Gdgwso",
+"XzEUbelA5x8",
+"v9SPs9sWAuo",
+"itvWr46JhUU",
+"h3FrpGygt8A",
+"OEyfDZ0x0og",
+"m8lXDTo-mT8",
+"HVXOLM2I62A",
+"wuqMCtlIQ1o",
+"9AXq6nyl0oU",
+"GoTTYSlfEjA"
+];
+
+document.getElementById("chapterList").innerHTML=chapters.map((n,i)=>`
+<article class="card unit-card">
+<h3>Chapter ${i+1}</h3>
+<p>${n}</p>
+
+${unitVideoIds[i] ? `
+<iframe class="video-frame"
+src="https://www.youtube.com/embed/${unitVideoIds[i]}"
+title="Class 10 Maths Chapter ${i+1}"
+loading="lazy"
+allowfullscreen></iframe>
+<a class="btn green"
+href="https://youtu.be/${unitVideoIds[i]}"
+target="_blank" rel="noopener">Watch Video</a>
+` : `<p class="muted">इस अध्याय का वीडियो जल्द जोड़ा जाएगा।</p>`}
+
+<p class="muted">30 Questions • 30 Minutes</p>
+<span class="pill">Premium – Coming Soon</span>
+</article>
+`).join("");`<article class="card"><h3>Chapter ${i+1}</h3><p>${n}</p><p class="muted">30 Questions • 30 Minutes</p><span class="pill">Premium – Coming Soon</span></article>`).join("");
 const Q=[
 ["यदि 2x + 4 = 10, तो x का मान क्या है?","If 2x + 4 = 10, what is x?",["2","3","4","5"],1,"2x = 6, इसलिए x = 3।","2x = 6, so x = 3."],
 ["sin 30° का मान है:","The value of sin 30° is:",["0","1/2","√3/2","1"],1,"sin 30° = 1/2।","sin 30° = 1/2."],
