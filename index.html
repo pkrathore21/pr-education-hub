@@ -167,4 +167,114 @@ function tick(){let m=Math.floor(remaining/60),s=remaining%60;el("timer").textCo
 el("startBtn").onclick=()=>{lang=el("language").value;idx=0;answers=Array(10).fill(null);remaining=900;done=false;el("resultArea").hidden=true;el("quizArea").hidden=false;el("startBtn").disabled=true;draw();tick();clock=setInterval(tick,1000);};
 function finish(){if(done)return;done=true;clearInterval(clock);let score=answers.reduce((s,a,i)=>s+(a===Q[i][3]?1:0),0);let out=`<h3>${lang==="hi"?"आपका परिणाम":"Your Result"}: ${score}/10</h3><p>${lang==="hi"?(score>=8?"बहुत अच्छा! नियमित अभ्यास जारी रखें।":score>=5?"अच्छा प्रयास! गलत प्रश्नों का अभ्यास करें।":"दोबारा अभ्यास करें। मेहनत जारी रखें।"):(score>=8?"Excellent! Keep practising.":score>=5?"Good effort! Review the incorrect answers.":"Keep practising. You can improve!")}</p>`;Q.forEach((q,i)=>{out+=`<div class="question"><b>${i+1}. ${q[lang==="hi"?0:1]}</b><p>${lang==="hi"?"आपका उत्तर":"Your answer"}: ${answers[i]===null?(lang==="hi"?"नहीं दिया":"Not answered"):q[2][answers[i]]}</p><p><b>${lang==="hi"?"सही उत्तर":"Correct answer"}:</b> ${q[2][q[3]]}</p><p class="muted">${q[lang==="hi"?4:5]}</p></div>`;});el("resultArea").innerHTML=out+`<button class="btn green" id="again" type="button">${lang==="hi"?"फिर से टेस्ट दें":"Try Again"}</button>`;el("resultArea").hidden=false;el("quizArea").hidden=true;el("startBtn").disabled=false;el("again").onclick=()=>el("startBtn").click();}
 el("submitBtn").onclick=finish;
-</script></body></html>
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
+  authDomain: "pr-education-hub.firebaseapp.com",
+  projectId: "pr-education-hub",
+  storageBucket: "pr-education-hub.firebasestorage.app",
+  messagingSenderId: "907993736868",
+  appId: "1:907993736868:web:b7c098a10914a61ceca831",
+  measurementId: "G-V61NSSNFRQ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+auth.languageCode = "en";
+
+let recaptchaVerifier = null;
+let confirmationResult = null;
+
+const phoneInput = document.getElementById("studentPhone");
+const otpInput = document.getElementById("studentOtp");
+const otpArea = document.getElementById("otpArea");
+const message = document.getElementById("otpMessage");
+const sendBtn = document.getElementById("sendOtpBtn");
+const verifyBtn = document.getElementById("verifyOtpBtn");
+
+sendBtn.addEventListener("click", async () => {
+  const phone = phoneInput.value.trim();
+
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    message.textContent = "कृपया सही 10 अंकों का मोबाइल नंबर डालें।";
+    return;
+  }
+
+  sendBtn.disabled = true;
+  message.textContent = "OTP भेजा जा रहा है...";
+
+  try {
+    if (!recaptchaVerifier) {
+      recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        { size: "normal" }
+      );
+    }
+
+    confirmationResult = await signInWithPhoneNumber(
+      auth,
+      "+91" + phone,
+      recaptchaVerifier
+    );
+
+    otpArea.hidden = false;
+    message.textContent = "OTP भेज दिया गया है। अपना SMS देखें।";
+
+  } catch (error) {
+    console.error(error);
+    message.textContent =
+      "OTP नहीं भेजा जा सका: " + error.message;
+
+    if (recaptchaVerifier) {
+      recaptchaVerifier.clear();
+      recaptchaVerifier = null;
+    }
+  } finally {
+    sendBtn.disabled = false;
+  }
+});
+
+verifyBtn.addEventListener("click", async () => {
+  const otp = otpInput.value.trim();
+
+  if (!/^\d{6}$/.test(otp)) {
+    message.textContent = "कृपया 6 अंकों का OTP डालें।";
+    return;
+  }
+
+  verifyBtn.disabled = true;
+  message.textContent = "OTP सत्यापित हो रहा है...";
+
+  try {
+    const result = await confirmationResult.confirm(otp);
+
+    message.textContent =
+      "मोबाइल OTP सफलतापूर्वक सत्यापित! " +
+      "नंबर: " + result.user.phoneNumber;
+
+    otpArea.hidden = true;
+    sendBtn.hidden = true;
+    phoneInput.disabled = true;
+
+  } catch (error) {
+    console.error(error);
+    message.textContent =
+      "गलत OTP या सत्यापन में समस्या: " + error.message;
+  } finally {
+    verifyBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
+</body></html>
