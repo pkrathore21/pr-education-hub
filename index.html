@@ -102,6 +102,19 @@ Class 12 Commerce – Free Demo Test
   </div>
 
   <p id="otpMessage" class="muted"></p>
+  
+<div id="studentProfile" hidden>
+  <h3>Student Profile</h3>
+
+  <label for="studentName">अपना पूरा नाम लिखें</label>
+  <input id="studentName" type="text"
+    maxlength="50" placeholder="Student Name">
+
+  <button class="btn green" id="saveProfileBtn"
+    type="button">Save Profile</button>
+
+  <p id="profileMessage" class="muted"></p>
+</div>
 </div>
 
 <p class="muted">
@@ -189,6 +202,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+  const db = getFirestore(app);
+let currentUser = null;
 auth.languageCode = "en";
 
 let recaptchaVerifier = null;
@@ -257,7 +272,8 @@ verifyBtn.addEventListener("click", async () => {
 
   try {
     const result = await confirmationResult.confirm(otp);
-
+currentUser = result.user;
+document.getElementById("studentProfile").hidden = false;
     message.textContent =
       "मोबाइल OTP सफलतापूर्वक सत्यापित! " +
       "नंबर: " + result.user.phoneNumber;
@@ -274,7 +290,55 @@ verifyBtn.addEventListener("click", async () => {
     verifyBtn.disabled = false;
   }
 });
-</script>
+
+document.getElementById("saveProfileBtn")
+.addEventListener("click", async () => {
+  if (!currentUser) return;
+
+  const name = document.getElementById("studentName")
+    .value.trim();
+
+  const profileMessage =
+    document.getElementById("profileMessage");
+
+  if (name.length < 2 || name.length > 50) {
+    profileMessage.textContent =
+      "कृपया 2 से 50 अक्षरों के बीच सही नाम लिखें।";
+    return;
+  }
+
+  const saveBtn = document.getElementById("saveProfileBtn");
+  saveBtn.disabled = true;
+  profileMessage.textContent = "Profile सेव हो रही है...";
+
+  try {
+    const studentRef = doc(db, "students", currentUser.uid);
+    const oldProfile = await getDoc(studentRef);
+
+    const profile = {
+      name: name,
+      phoneNumber: currentUser.phoneNumber,
+      updatedAt: serverTimestamp()
+    };
+
+    if (!oldProfile.exists()) {
+      profile.createdAt = serverTimestamp();
+    }
+
+    await setDoc(studentRef, profile, { merge: true });
+
+    profileMessage.textContent =
+      "आपकी Student Profile सफलतापूर्वक सेव हो गई!";
+
+  } catch (error) {
+    console.error(error);
+    profileMessage.textContent =
+      "Profile सेव नहीं हुई: " + error.message;
+  } finally {
+    saveBtn.disabled = false;
+  }
+});
+                          </script>
 </body>
 </html>
 </body></html>
