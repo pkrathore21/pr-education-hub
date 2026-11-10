@@ -439,6 +439,20 @@ document.getElementById("saveProfileBtn")
 
     await setDoc(studentRef, profile, { merge: true });
 
+const updatedProfile = await getDoc(studentRef);
+const membership = updatedProfile.data();
+
+const status = membership.membershipStatus || "inactive";
+const plan = membership.membershipPlan || "none";
+
+document.getElementById("membershipStatus").textContent =
+  status === "active" ? "Active - " + plan : "Free Member";
+
+const expiry = membership.expiryDate;
+
+document.getElementById("membershipExpiry").textContent =
+  expiry ? expiry.toDate().toLocaleDateString("en-IN") : "Not Activated";
+
     profileMessage.textContent =
       "आपकी Student Profile सफलतापूर्वक सेव हो गई!";
 
