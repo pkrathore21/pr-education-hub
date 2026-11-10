@@ -115,6 +115,31 @@ Class 12 Commerce – Free Demo Test
 
   <p id="profileMessage" class="muted"></p>
 </div>
+
+<div id="studentDashboard" hidden>
+  <hr>
+  <h3>My Student Dashboard</h3>
+
+  <p><b>Student Name:</b>
+    <span id="dashboardName"></span>
+  </p>
+
+  <p><b>Mobile Number:</b>
+    <span id="dashboardPhone"></span>
+  </p>
+
+  <p><b>Membership:</b>
+    <span id="membershipStatus">Free Member</span>
+  </p>
+
+  <p><b>Premium Access:</b>
+    <span id="membershipExpiry">Not Activated</span>
+  </p>
+
+  <p class="muted">
+    अपनी Premium Membership लेकर सभी Paid Tests का लाभ उठाएँ।
+  </p>
+</div>
 </div>
 
 <p class="muted">
@@ -336,6 +361,13 @@ document.getElementById("saveProfileBtn")
     profileMessage.textContent =
       "आपकी Student Profile सफलतापूर्वक सेव हो गई!";
 
+document.getElementById("dashboardName").textContent = name;
+
+document.getElementById("dashboardPhone").textContent =
+  currentUser.phoneNumber;
+
+document.getElementById("studentDashboard").hidden = false;
+      
   } catch (error) {
     console.error(error);
     profileMessage.textContent =
