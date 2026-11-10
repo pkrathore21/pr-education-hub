@@ -278,6 +278,41 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
   const db = getFirestore(app);
 let currentUser = null;
+  
+async function checkMembership() {
+  if (!currentUser) return false;
+
+  const studentRef = doc(db, "students", currentUser.uid);
+  const snapshot = await getDoc(studentRef);
+
+  if (!snapshot.exists()) return false;
+
+  const data = snapshot.data();
+
+  const expiry = data.expiryDate;
+
+  if (
+    data.membershipStatus !== "active" ||
+    !expiry ||
+    expiry.toDate() <= new Date()
+  ) {
+    document.getElementById("membershipStatus").textContent =
+      "Free Member";
+
+    document.getElementById("membershipExpiry").textContent =
+      "Not Activated";
+
+    return false;
+  }
+
+  document.getElementById("membershipStatus").textContent =
+    "Active - " + (data.membershipPlan || "");
+
+  document.getElementById("membershipExpiry").textContent =
+    expiry.toDate().toLocaleDateString("en-IN");
+
+  return true;
+}
 auth.languageCode = "en";
 
 let recaptchaVerifier = null;
