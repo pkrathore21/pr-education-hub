@@ -189,7 +189,13 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
-
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
   authDomain: "pr-education-hub.firebaseapp.com",
@@ -341,4 +347,3 @@ document.getElementById("saveProfileBtn")
                           </script>
 </body>
 </html>
-</body></html>
