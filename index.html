@@ -135,6 +135,28 @@ Class 12 Commerce – Free Demo Test
 </div>
 
 <div class="card">
+
+<div class="card" id="paymentSubmission">
+  <h3>Submit Payment Screenshot</h3>
+  <p>भुगतान करने के बाद Screenshot चुनें और WhatsApp पर भेजें।</p>
+
+  <label for="paymentPlan">Membership Plan</label>
+  <select id="paymentPlan">
+    <option value="Class 10 Premium - ₹99">Class 10 - ₹99</option>
+    <option value="Class 12 Premium - ₹99">Class 12 - ₹99</option>
+    <option value="Combo Membership - ₹149">Combo - ₹149</option>
+  </select>
+
+  <br><br>
+  <label for="paymentScreenshot">Payment Screenshot</label>
+  <input id="paymentScreenshot" type="file" accept="image/*">
+
+  <button class="btn green" id="sharePaymentBtn" type="button">
+    Send Screenshot on WhatsApp
+  </button>
+
+  <p id="paymentMessage" class="muted"></p>
+</div>
   <h3>Student Login – Mobile OTP</h3>
   <p>Premium Tests के लिए अपने मोबाइल नंबर से लॉगिन करें।</p>
 
