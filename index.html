@@ -449,7 +449,7 @@ const expiry = membership.expiryDate;
 
 document.getElementById("membershipExpiry").textContent =
   expiry ? expiry.toDate().toLocaleDateString("en-IN") : "Not Activated";
-
+await checkMembership();
     profileMessage.textContent =
       "आपकी Student Profile सफलतापूर्वक सेव हो गई!";
 
