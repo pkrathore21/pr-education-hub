@@ -50,14 +50,73 @@ Class 12 Commerce – Free Demo Test
 <section id="premium">
 <h2>Premium Membership</h2>
 
+
 <div class="grid">
 
   <div class="card">
     <h3>Class 10 Premium</h3>
     <h2>₹99</h2>
     <p>6 Months Access</p>
-    <p>Class 10 Chapter-wise Maths Tests</p>
+    <p>Chapter-wise Maths Tests</p>
+    <a class="btn green" target="_blank"
+       rel="noopener"
+       href="https://rzp.io/rzp/SuJUzh5D">
+       Pay ₹99 – Class 10
+    </a>
   </div>
+
+  <div class="card">
+    <h3>Class 12 Premium</h3>
+    <h2>₹99</h2>
+    <p>6 Months Access</p>
+    <p>Arts • Science • Commerce</p>
+    <a class="btn green" target="_blank"
+       rel="noopener"
+       href="https://rzp.io/rzp/en2Wcl6">
+       Pay ₹99 – Class 12
+    </a>
+  </div>
+
+<div class="card" id="paymentSubmission">
+  <h3>Submit Payment Screenshot</h3>
+  <p>भुगतान करने के बाद Screenshot चुनें और WhatsApp पर भेजें।</p>
+
+  <label for="paymentPlan">Membership Plan</label>
+  <select id="paymentPlan">
+    <option value="Class 10 Premium - ₹99">Class 10 - ₹99</option>
+    <option value="Class 12 Premium - ₹99">Class 12 - ₹99</option>
+    <option value="Combo Membership - ₹149">Combo - ₹149</option>
+  </select>
+
+  <br><br>
+
+  <label for="paymentScreenshot">Payment Screenshot</label>
+  <input
+    id="paymentScreenshot"
+    type="file"
+    accept="image/*"
+  >
+
+  <button class="btn green" id="sharePaymentBtn" type="button">
+    Send Screenshot on WhatsApp
+  </button>
+
+  <p id="paymentMessage" class="muted"></p>
+</div>
+  <div class="card">
+    <h3>Combo Membership</h3>
+    <h2>₹149</h2>
+    <p>6 Months Access</p>
+    <p>Class 10 + Class 12</p>
+    <a class="btn green" target="_blank"
+       rel="noopener"
+       href="https://rzp.io/rzp/IGdsEUs">
+       Pay ₹149 – Combo
+    </a>
+  </div>
+
+</div>
+
 
   <div class="card">
     <h3>Class 12 Premium</h3>
@@ -376,6 +435,76 @@ document.getElementById("studentDashboard").hidden = false;
     saveBtn.disabled = false;
   }
 });
-                          </script>
+                      
+const sharePaymentBtn = document.getElementById("sharePaymentBtn");
+
+sharePaymentBtn.addEventListener("click", async () => {
+  const msg = document.getElementById("paymentMessage");
+  const file = document.getElementById("paymentScreenshot").files[0];
+  const name = document.getElementById("studentName").value.trim();
+
+  if (!currentUser) {
+    msg.textContent = "पहले Mobile OTP से Login करें।";
+    return;
+  }
+
+  if (name.length < 2) {
+    msg.textContent = "पहले अपना Student Profile सेव करें।";
+    return;
+  }
+
+  if (!file || !file.type.startsWith("image/")) {
+    msg.textContent = "कृपया Payment Screenshot चुनें।";
+    return;
+  }
+
+  const plan = document.getElementById("paymentPlan").value;
+
+  const message =
+    "PR Education Hub - Payment Verification\n" +
+    "Student: " + name + "\n" +
+    "Mobile: " + currentUser.phoneNumber + "\n" +
+    "Plan: " + plan + "\n" +
+    "Please verify my payment.";
+
+  sharePaymentBtn.disabled = true;
+  msg.textContent = "WhatsApp Share तैयार हो रहा है...";
+
+  try {
+    if (
+      navigator.share &&
+      navigator.canShare &&
+      navigator.canShare({ files: [file] })
+    ) {
+      await navigator.share({
+        title: "PR Education Hub Payment",
+        text: message,
+        files: [file]
+      });
+
+      msg.textContent =
+        "Share खुल गया। WhatsApp चुनकर Send दबाएँ।";
+
+    } else {
+      const url =
+        "https://wa.me/919300660090?text=" +
+        encodeURIComponent(message);
+
+      window.open(url, "_blank");
+
+      msg.textContent =
+        "WhatsApp में Attachment से Screenshot जोड़कर Send करें।";
+    }
+
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      msg.textContent =
+        "Sharing में समस्या हुई। कृपया दोबारा प्रयास करें।";
+    }
+  } finally {
+    sharePaymentBtn.disabled = false;
+  }
+});
+    </script>
 </body>
 </html>
