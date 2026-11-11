@@ -112,7 +112,9 @@ const board = document.getElementById("board");
 
 function updateSubjects(){
  subject.innerHTML = "";
- subjects[stream.value].forEach(name=>{
+ const list = boardSubjects[board.value][stream.value];
+
+ list.forEach(name=>{
   const option = document.createElement("option");
   option.value = name;
   option.textContent = name;
@@ -121,6 +123,7 @@ function updateSubjects(){
 }
 
 stream.addEventListener("change",updateSubjects);
+board.addEventListener("change",updateSubjects);
 updateSubjects();
 </script>
 
