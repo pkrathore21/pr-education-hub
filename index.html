@@ -224,9 +224,52 @@ target="_blank" rel="noopener">Watch Video</a>
 ` : `<p class="muted">इस अध्याय का वीडियो जल्द जोड़ा जाएगा।</p>`}
 
 <p class="muted">30 Questions • 30 Minutes</p>
-<span class="pill">Premium – Coming Soon</span>
+
+<button class="btn green premium-test-btn"
+        type="button"
+        data-chapter="${i+1}">
+  Open Paid Test
+</button>
 </article>
 `).join("");
+  document.getElementById("chapterList")
+.addEventListener("click", async function(e) {
+
+  const button = e.target.closest(".premium-test-btn");
+  if (!button) return;
+
+  button.disabled = true;
+
+  try {
+    if (typeof window.getMembershipDetails !== "function") {
+      alert("कृपया पहले Mobile OTP से Login करें।");
+      return;
+    }
+
+    const membership = await window.getMembershipDetails();
+
+    if (!membership || !membership.active) {
+      alert("आपकी Premium Membership Active नहीं है।");
+      return;
+    }
+
+    const plan = String(membership.plan).toLowerCase();
+
+    if (plan !== "class 10" && plan !== "combo") {
+      alert("इस Test के लिए Class 10 या Combo Membership जरूरी है।");
+      return;
+    }
+
+    alert("आपकी Class 10 Membership Active है। Paid Test जल्द उपलब्ध होगा।");
+
+  } catch (error) {
+    console.error(error);
+    alert("Membership जाँचने में समस्या हुई। दोबारा Login करें।");
+
+  } finally {
+    button.disabled = false;
+  }
+});
 const Q=[
 ["यदि 2x + 4 = 10, तो x का मान क्या है?","If 2x + 4 = 10, what is x?",["2","3","4","5"],1,"2x = 6, इसलिए x = 3।","2x = 6, so x = 3."],
 ["sin 30° का मान है:","The value of sin 30° is:",["0","1/2","√3/2","1"],1,"sin 30° = 1/2।","sin 30° = 1/2."],
@@ -312,7 +355,34 @@ async function checkMembership() {
     expiry.toDate().toLocaleDateString("en-IN");
 
   return true;
-}
+} window.checkMembership = checkMembership;
+  window.getMembershipDetails = async function () {
+  if (!currentUser) return null;
+
+  const studentRef = doc(db, "students", currentUser.uid);
+  const snapshot = await getDoc(studentRef);
+
+  if (!snapshot.exists()) return null;
+
+  const data = snapshot.data();
+  const expiry = data.expiryDate;
+
+  if (
+    data.membershipStatus !== "active" ||
+    !expiry ||
+    expiry.toDate() <= new Date()
+  ) {
+    return {
+      active: false,
+      plan: "none"
+    };
+  }
+
+  return {
+    active: true,
+    plan: data.membershipPlan || "none"
+  };
+};
 auth.languageCode = "en";
 
 let recaptchaVerifier = null;
