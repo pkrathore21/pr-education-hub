@@ -76,11 +76,35 @@ footer{text-align:center;padding:20px;color:#555}
 </footer>
 
 <script>
-const subjects = {
-science: ["Physics","Chemistry","Mathematics","Biology"],
-commerce: ["Accountancy","Business Studies","Economics"],
-arts: ["History","Geography","Political Science","Economics","Sociology","Psychology"]
+
+const boardSubjects = {
+ mp: {
+  science: ["भौतिकी (Physics)","रसायन विज्ञान (Chemistry)","गणित (Mathematics)","जीव विज्ञान (Biology)"],
+  commerce: ["बुक कीपिंग एवं अकाउंटेंसी","व्यवसाय अध्ययन (Business Studies)","अर्थशास्त्र (Economics)"],
+  arts: ["इतिहास (History)","भूगोल (Geography)","राजनीति विज्ञान (Political Science)","अर्थशास्त्र (Economics)","समाजशास्त्र (Sociology)","मनोविज्ञान (Psychology)"]
+ },
+ cbse: {
+  science: ["Physics","Chemistry","Mathematics","Biology"],
+  commerce: ["Accountancy","Business Studies","Economics","Applied Mathematics"],
+  arts: ["History","Geography","Political Science","Economics","Sociology","Psychology"]
+ }
 };
+
+function updateSubjects(){
+ subject.innerHTML = "";
+ const list = boardSubjects[board.value][stream.value];
+ list.forEach(name=>{
+  const option = document.createElement("option");
+  option.value = name;
+  option.textContent = name;
+  subject.appendChild(option);
+ });
+}
+
+stream.addEventListener("change",updateSubjects);
+board.addEventListener("change",updateSubjects);
+updateSubjects();
+
 
 const stream = document.getElementById("stream");
 const subject = document.getElementById("subject");
