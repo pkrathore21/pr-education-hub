@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class 12 Premium Tests | PR Education Hub</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fc;color:#222}
+header{background:#123b70;color:white;text-align:center;padding:25px 12px}
+.container{max-width:900px;margin:20px auto;padding:15px}
+.card{background:white;padding:18px;margin:15px 0;border-radius:12px;box-shadow:0 2px 10px #0001}
+h2{color:#123b70}
+label{display:block;margin:14px 0 6px;font-weight:bold}
+select{width:100%;padding:12px;border:1px solid #bbb;border-radius:7px;font-size:16px}
+.btn{display:inline-block;background:#087b45;color:white;padding:12px 18px;border-radius:7px;text-decoration:none;margin-top:15px}
+.notice{background:#fff4d6;padding:12px;border-radius:8px;margin-top:15px}
+footer{text-align:center;padding:20px;color:#555}
+</style>
+</head>
+<body>
+
+<header>
+<h1>PR Education Hub</h1>
+<p>Class 12 Premium Chapter-wise Tests</p>
+<p>Learn Today • Lead Tomorrow</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Class 12 Premium Tests</h2>
+<p>MP Board और CBSE के विद्यार्थियों के लिए।</p>
+<p><b>30 Questions • 45 Minutes per Chapter</b></p>
+<p>Important MCQs • Answers • Explanations</p>
+</div>
+
+<div class="card">
+<h2>अपना Board और Stream चुनें</h2>
+
+<label>Board / Medium चुनें</label>
+<select id="board">
+<option value="mp">MP Board – Hindi Medium</option>
+<option value="cbse">CBSE – English Medium</option>
+</select>
+
+<label>Stream चुनें</label>
+<select id="stream">
+<option value="science">Science</option>
+<option value="commerce">Commerce</option>
+<option value="arts">Arts</option>
+</select>
+
+<label>Subject चुनें</label>
+<select id="subject"></select>
+
+<div id="subjectMessage" class="notice">
+अगले चरण में इस विषय के अध्याय और MCQ Tests जोड़े जाएँगे।
+</div>
+
+</div>
+
+<div class="card">
+<h2>Premium Membership</h2>
+<p>Class 12 Membership – ₹99 / 6 Months</p>
+<a class="btn" href="https://rzp.io/rzp/en2Wcl6" target="_blank">Pay ₹99</a>
+</div>
+
+<a class="btn" href="index.html">← Back to Home</a>
+
+</div>
+
+<footer>
+© PR Education Hub | By Pawan Rathore
+</footer>
+
+<script>
+const subjects = {
+science: ["Physics","Chemistry","Mathematics","Biology"],
+commerce: ["Accountancy","Business Studies","Economics"],
+arts: ["History","Geography","Political Science","Economics","Sociology","Psychology"]
+};
+
+const stream = document.getElementById("stream");
+const subject = document.getElementById("subject");
+const board = document.getElementById("board");
+
+function updateSubjects(){
+ subject.innerHTML = "";
+ subjects[stream.value].forEach(name=>{
+  const option = document.createElement("option");
+  option.value = name;
+  option.textContent = name;
+  subject.appendChild(option);
+ });
+}
+
+stream.addEventListener("change",updateSubjects);
+updateSubjects();
+</script>
+
+</body>
+</html>
