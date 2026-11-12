@@ -146,6 +146,7 @@ function updateChapters(){
  });
 }
 
+
 function updateSubjects(){
  subject.innerHTML = "";
  const list = boardSubjects[board.value][stream.value];
@@ -154,9 +155,14 @@ function updateSubjects(){
   const option = document.createElement("option");
   option.value = name;
   option.textContent = name;
-  subject.appendChild(option);updateChapters();
- }subject.addEventListener("change",updateChapters););
+  subject.appendChild(option);
+ });
+
+ updateChapters();
 }
+
+subject.addEventListener("change",updateChapters);
+
 
 stream.addEventListener("change",updateSubjects);
 board.addEventListener("change",updateSubjects);
