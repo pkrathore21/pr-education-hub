@@ -221,10 +221,10 @@ const chapterList = document.getElementById("chapterList");
 
 function updateChapters(){
  chapterList.innerHTML = "";
-const selectedSubject =
- subject.value.includes("Physics") ? "Physics" :
+const selectedSubject = subject.value.includes("Physics") ? "Physics" :
  subject.value.includes("Chemistry") ? "Chemistry" :
-  subject.value.includes("Mathematics") ? "Mathematics" :
+ subject.value.includes("Mathematics") ? "Mathematics" :
+ subject.value.includes("Biology") ? "Biology" :
  subject.value;
  const chapters = board.value === "mp"
  ? (chapterDataHindi[selectedSubject] || chapterData[selectedSubject] || [])
