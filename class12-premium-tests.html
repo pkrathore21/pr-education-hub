@@ -181,6 +181,15 @@ const chapterData = {
   "Financial Markets",
   "Marketing Management",
   "Consumer Protection"
+ ], Economics: [
+  "National Income and Related Aggregates",
+  "Money and Banking",
+  "Determination of Income and Employment",
+  "Government Budget and the Economy",
+  "Balance of Payments",
+  "Development Experience (1947-90) and Economic Reforms since 1991",
+  "Current Challenges Facing Indian Economy",
+  "Development Experience of India – A Comparison with Neighbours"
  ]
 };
  const chapterDataHindi = {
@@ -267,6 +276,15 @@ const chapterData = {
   "वित्तीय बाजार",
   "विपणन प्रबंध",
   "उपभोक्ता संरक्षण"
+ ], Economics: [
+  "राष्ट्रीय आय और संबंधित समुच्चय",
+  "मुद्रा और बैंकिंग",
+  "आय और रोजगार का निर्धारण",
+  "सरकारी बजट और अर्थव्यवस्था",
+  "भुगतान संतुलन",
+  "भारतीय अर्थव्यवस्था का विकास अनुभव एवं आर्थिक सुधार",
+  "भारतीय अर्थव्यवस्था की वर्तमान चुनौतियाँ",
+  "भारत का विकास अनुभव – पड़ोसी देशों से तुलना"
  ]
 };
 const chapterList = document.getElementById("chapterList");
@@ -278,6 +296,7 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
  subject.value.includes("Mathematics") ? "Mathematics" :
  subject.value.includes("Biology") ? "Biology" :
    subject.value.includes("Business Studies") ? "BusinessStudies" :
+  subject.value.includes("Economics") ? "Economics" :
    subject.value.includes("अकाउंटेंसी") || subject.value.includes("Accountancy") ? "Accountancy" :
  subject.value;
  const chapters = board.value === "mp"
