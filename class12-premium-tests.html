@@ -110,21 +110,6 @@ const stream = document.getElementById("stream");
 const subject = document.getElementById("subject");
 const board = document.getElementById("board");
 
-function updateSubjects(){
- subject.innerHTML = "";
- const list = boardSubjects[board.value][stream.value];
-
- list.forEach(name=>{
-  const option = document.createElement("option");
-  option.value = name;
-  option.textContent = name;
-  subject.appendChild(option);
- });
-}
-
-stream.addEventListener("change",updateSubjects);
-board.addEventListener("change",updateSubjects);
-updateSubjects();
 </script>
 
 </body>
