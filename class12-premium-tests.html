@@ -121,7 +121,7 @@ const chapterList = document.getElementById("chapterList");
 function updateChapters(){
  chapterList.innerHTML = "";
 
- const selectedSubject = subject.value;
+ const selectedSubject = subject.value.includes("Physics") ? "Physics" : subject.value;
  const chapters = chapterData[selectedSubject] || [];
 
  if(chapters.length === 0){
