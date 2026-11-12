@@ -169,7 +169,9 @@ const selectedSubject =
  subject.value.includes("Chemistry") ? "Chemistry" :
   subject.value.includes("Mathematics") ? "Mathematics" :
  subject.value;
- const chapters = chapterData[selectedSubject] || [];
+ const chapters = board.value === "mp"
+ ? (chapterDataHindi[selectedSubject] || chapterData[selectedSubject] || [])
+ : (chapterData[selectedSubject] || []);
 
  if(chapters.length === 0){
   chapterList.innerHTML =
