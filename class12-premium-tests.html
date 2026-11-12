@@ -112,7 +112,19 @@ const chapterData = {
   "Dual Nature of Radiation and Matter",
   "Atoms",
   "Nuclei",
-  "Semiconductor Electronics: Materials, Devices and Simple Circuits"
+  "Semiconductor Electronics: Materials, Devices and Simple Circuits",
+ ] ,
+ Chemistry: [
+  "Solutions",
+  "Electrochemistry",
+  "Chemical Kinetics",
+  "The d- and f-Block Elements",
+  "Coordination Compounds",
+  "Haloalkanes and Haloarenes",
+  "Alcohols, Phenols and Ethers",
+  "Aldehydes, Ketones and Carboxylic Acids",
+  "Amines",
+  "Biomolecules"
  ]
 };
  
@@ -120,8 +132,10 @@ const chapterList = document.getElementById("chapterList");
 
 function updateChapters(){
  chapterList.innerHTML = "";
-
- const selectedSubject = subject.value.includes("Physics") ? "Physics" : subject.value;
+const selectedSubject =
+ subject.value.includes("Physics") ? "Physics" :
+ subject.value.includes("Chemistry") ? "Chemistry" :
+ subject.value;
  const chapters = chapterData[selectedSubject] || [];
 
  if(chapters.length === 0){
