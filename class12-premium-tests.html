@@ -54,7 +54,10 @@ footer{text-align:center;padding:20px;color:#555}
 
 <label>Subject चुनें</label>
 <select id="subject"></select>
-
+<div class="card" id="chapterSection">
+  <h3>Chapter-wise Premium Tests</h3>
+  <div id="chapterList"></div>
+</div>
 <div id="subjectMessage" class="notice">
 अगले चरण में इस विषय के अध्याय और MCQ Tests जोड़े जाएँगे।
 </div>
@@ -94,6 +97,55 @@ const stream = document.getElementById("stream");
 const subject = document.getElementById("subject");
 const board = document.getElementById("board");
 
+const chapterData = {
+ Physics: [
+  "Electric Charges and Fields",
+  "Electrostatic Potential and Capacitance",
+  "Current Electricity",
+  "Moving Charges and Magnetism",
+  "Magnetism and Matter",
+  "Electromagnetic Induction",
+  "Alternating Current",
+  "Electromagnetic Waves",
+  "Ray Optics and Optical Instruments",
+  "Wave Optics",
+  "Dual Nature of Radiation and Matter",
+  "Atoms",
+  "Nuclei",
+  "Semiconductor Electronics: Materials, Devices and Simple Circuits"
+ ]
+};
+ 
+const chapterList = document.getElementById("chapterList");
+
+function updateChapters(){
+ chapterList.innerHTML = "";
+
+ const selectedSubject = subject.value;
+ const chapters = chapterData[selectedSubject] || [];
+
+ if(chapters.length === 0){
+  chapterList.innerHTML =
+   "<p>इस विषय के अध्याय जल्द जोड़े जाएँगे।</p>";
+  return;
+ }
+
+ chapters.forEach((chapter,index)=>{
+  const card = document.createElement("div");
+  card.className = "card";
+
+  card.innerHTML = `
+   <h4>${index+1}. ${chapter}</h4>
+   <p>30 Questions • 45 Minutes</p>
+   <button class="btn" type="button" disabled>
+    Premium Test Coming Soon
+   </button>
+  `;
+
+  chapterList.appendChild(card);
+ });
+}
+
 function updateSubjects(){
  subject.innerHTML = "";
  const list = boardSubjects[board.value][stream.value];
@@ -102,8 +154,8 @@ function updateSubjects(){
   const option = document.createElement("option");
   option.value = name;
   option.textContent = name;
-  subject.appendChild(option);
- });
+  subject.appendChild(option);updateChapters();
+ }subject.addEventListener("change",updateChapters););
 }
 
 stream.addEventListener("change",updateSubjects);
