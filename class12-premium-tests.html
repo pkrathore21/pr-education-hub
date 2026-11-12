@@ -124,7 +124,23 @@ const chapterData = {
   "Alcohols, Phenols and Ethers",
   "Aldehydes, Ketones and Carboxylic Acids",
   "Amines",
-  "Biomolecules"
+  "Biomolecules",
+ ]
+ ,
+ Mathematics: [
+  "Relations and Functions",
+  "Inverse Trigonometric Functions",
+  "Matrices",
+  "Determinants",
+  "Continuity and Differentiability",
+  "Applications of Derivatives",
+  "Integrals",
+  "Applications of Integrals",
+  "Differential Equations",
+  "Vector Algebra",
+  "Three Dimensional Geometry",
+  "Linear Programming",
+  "Probability"
  ]
 };
  
@@ -135,6 +151,7 @@ function updateChapters(){
 const selectedSubject =
  subject.value.includes("Physics") ? "Physics" :
  subject.value.includes("Chemistry") ? "Chemistry" :
+  subject.value.includes("Mathematics") ? "Mathematics" :
  subject.value;
  const chapters = chapterData[selectedSubject] || [];
 
