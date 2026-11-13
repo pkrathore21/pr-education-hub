@@ -237,6 +237,16 @@ const chapterData = {
   "The Crisis of Democratic Order",
   "Regional Aspirations",
   "Recent Developments in Indian Politics"
+ ], Sociology: [
+  "The Demographic Structure of Indian Society",
+  "Social Institutions: Continuity and Change",
+  "Patterns of Social Inequality and Exclusion",
+  "The Challenges of Cultural Diversity",
+  "Structural Change",
+  "Cultural Change",
+  "Change and Development in Rural Society",
+  "Change and Development in Industrial Society",
+  "Social Movements"
  ],
 };
  const chapterDataHindi = {
@@ -379,6 +389,16 @@ const chapterData = {
   "लोकतांत्रिक व्यवस्था का संकट",
   "क्षेत्रीय आकांक्षाएँ",
   "भारतीय राजनीति में हाल के घटनाक्रम"
+ ], Sociology: [
+  "भारतीय समाज की जनसांख्यिकीय संरचना",
+  "सामाजिक संस्थाएँ: निरंतरता एवं परिवर्तन",
+  "सामाजिक असमानता एवं बहिष्करण के प्रतिरूप",
+  "सांस्कृतिक विविधता की चुनौतियाँ",
+  "संरचनात्मक परिवर्तन",
+  "सांस्कृतिक परिवर्तन",
+  "ग्रामीण समाज में परिवर्तन एवं विकास",
+  "औद्योगिक समाज में परिवर्तन एवं विकास",
+  "सामाजिक आंदोलन"
  ],
 }; 
 const chapterList = document.getElementById("chapterList");
@@ -393,7 +413,8 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
   subject.value.includes("Economics") ? "Economics" :
   subject.value.includes("History") ? "History" :
   subject.value.includes("Geography") ? "Geography" :subject.value.includes("Political Science") || subject.value.includes("राजनीति विज्ञान") ? "PoliticalScience" :
-   subject.value.includes("अकाउंटेंसी") || subject.value.includes("Accountancy") ? "Accountancy" :
+ subject.value.includes("Sociology") || subject.value.includes("समाजशास्त्र") ? "Sociology" :
+  subject.value.includes("अकाउंटेंसी") || subject.value.includes("Accountancy") ? "Accountancy" :
  subject.value;
  const chapters = board.value === "mp"
  ? (chapterDataHindi[selectedSubject] || chapterData[selectedSubject] || [])
