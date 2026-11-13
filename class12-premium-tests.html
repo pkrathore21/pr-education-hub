@@ -247,7 +247,15 @@ const chapterData = {
   "Change and Development in Rural Society",
   "Change and Development in Industrial Society",
   "Social Movements"
- ],
+ ],Psychology: [
+  "Variations in Psychological Attributes",
+  "Self and Personality",
+  "Meeting Life Challenges",
+  "Psychological Disorders",
+  "Therapeutic Approaches",
+  "Attitude and Social Cognition",
+  "Social Influence and Group Processes"
+],
 };
  const chapterDataHindi = {
     Physics: [
@@ -399,7 +407,15 @@ const chapterData = {
   "ग्रामीण समाज में परिवर्तन एवं विकास",
   "औद्योगिक समाज में परिवर्तन एवं विकास",
   "सामाजिक आंदोलन"
- ],
+ ],Psychology: [
+  "मनोवैज्ञानिक गुणों में विविधता",
+  "स्व एवं व्यक्तित्व",
+  "जीवन की चुनौतियों का सामना",
+  "मनोवैज्ञानिक विकार",
+  "उपचारात्मक उपागम",
+  "अभिवृत्ति एवं सामाजिक संज्ञान",
+  "सामाजिक प्रभाव एवं समूह प्रक्रियाएँ"
+],
 }; 
 const chapterList = document.getElementById("chapterList");
 
@@ -414,6 +430,7 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
   subject.value.includes("History") ? "History" :
   subject.value.includes("Geography") ? "Geography" :subject.value.includes("Political Science") || subject.value.includes("राजनीति विज्ञान") ? "PoliticalScience" :
  subject.value.includes("Sociology") || subject.value.includes("समाजशास्त्र") ? "Sociology" :
+  subject.value.includes("Psychology") || subject.value.includes("मनोविज्ञान") ? "Psychology" :
   subject.value.includes("अकाउंटेंसी") || subject.value.includes("Accountancy") ? "Accountancy" :
  subject.value;
  const chapters = board.value === "mp"
