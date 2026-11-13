@@ -57,6 +57,7 @@ footer{text-align:center;padding:20px;color:#555}
 <div class="card" id="chapterSection">
   <h3>Chapter-wise Premium Tests</h3>
   <div id="chapterList"></div>
+  <div id="testArea"></div>
 </div>
 <div id="subjectMessage" class="notice">
 अगले चरण में इस विषय के अध्याय और MCQ Tests जोड़े जाएँगे।
@@ -418,6 +419,175 @@ const chapterData = {
 ],
 }; 
 const chapterList = document.getElementById("chapterList");
+const testArea = document.getElementById("testArea");
+  const questionBank = {
+  mp: {},
+  cbse: {}
+};
+
+  
+let currentTestQuestions = [];
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let testTimer = null;
+let timeLeft = 45 * 60;
+
+function startTest(testType, subjectKey, chapterIndex) {
+  const subjectData = questionBank[board.value][subjectKey];
+
+  if (!subjectData) {
+    alert("इस विषय के प्रश्न अभी जोड़े नहीं गए हैं।");
+    return;
+  }
+
+  let questions = [];
+
+  if (testType === "chapter") {
+    questions = subjectData.chapters?.[chapterIndex] || [];
+  } else {
+    questions = subjectData[testType] || [];
+  }
+
+  if (questions.length !== 30) {
+    alert("इस टेस्ट के 30 प्रश्न अभी पूरे नहीं जोड़े गए हैं।");
+    return;
+  }
+
+  clearInterval(testTimer);
+
+  currentTestQuestions = questions;
+  currentQuestionIndex = 0;
+  userAnswers = Array(30).fill(null);
+  timeLeft = 45 * 60;
+
+  renderQuestion();
+
+  testTimer = setInterval(() => {
+    timeLeft--;
+
+    const timer = document.getElementById("testTimer");
+    if (timer) {
+      const min = Math.floor(timeLeft / 60);
+      const sec = timeLeft % 60;
+      timer.textContent =
+        String(min).padStart(2, "0") + ":" +
+        String(sec).padStart(2, "0");
+    }
+
+    if (timeLeft <= 0) {
+      submitTest();
+    }
+  }, 1000);
+}
+
+function renderQuestion() {
+  testArea.innerHTML = "";
+
+  const q = currentTestQuestions[currentQuestionIndex];
+
+  const heading = document.createElement("h3");
+  heading.textContent =
+    "Question " + (currentQuestionIndex + 1) + " / 30";
+
+  const timer = document.createElement("h3");
+  timer.id = "testTimer";
+  timer.textContent =
+    String(Math.floor(timeLeft / 60)).padStart(2, "0") +
+    ":" + String(timeLeft % 60).padStart(2, "0");
+
+  const question = document.createElement("p");
+  question.textContent = q.q;
+
+  testArea.append(heading, timer, question);
+
+  q.options.forEach((option, index) => {
+    const label = document.createElement("label");
+    label.style.display = "block";
+    label.style.padding = "10px";
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "mcqAnswer";
+    radio.checked = userAnswers[currentQuestionIndex] === index;
+
+    radio.addEventListener("change", () => {
+      userAnswers[currentQuestionIndex] = index;
+    });
+
+    label.append(radio, document.createTextNode(" " + option));
+    testArea.appendChild(label);
+  });
+
+  const previous = document.createElement("button");
+  previous.textContent = "Previous";
+  previous.className = "btn";
+  previous.disabled = currentQuestionIndex === 0;
+  previous.onclick = () => {
+    currentQuestionIndex--;
+    renderQuestion();
+  };
+
+  const next = document.createElement("button");
+  next.textContent = "Next";
+  next.className = "btn";
+  next.disabled = currentQuestionIndex === 29;
+  next.onclick = () => {
+    currentQuestionIndex++;
+    renderQuestion();
+  };
+
+  const submit = document.createElement("button");
+  submit.textContent = "Submit Test";
+  submit.className = "btn green";
+  submit.onclick = submitTest;
+
+  testArea.append(previous, next, submit);
+}
+
+function submitTest() {
+  if (!currentTestQuestions.length) return;
+
+  clearInterval(testTimer);
+
+  let score = 0;
+  testArea.innerHTML = "";
+
+  currentTestQuestions.forEach((q, index) => {
+    if (userAnswers[index] === q.answer) score++;
+  });
+
+  const result = document.createElement("h2");
+  result.textContent = "Your Score: " + score + " / 30";
+  testArea.appendChild(result);
+
+  currentTestQuestions.forEach((q, index) => {
+    const review = document.createElement("div");
+    review.className = "card";
+
+    const question = document.createElement("h4");
+    question.textContent = (index + 1) + ". " + q.q;
+
+    const answer = document.createElement("p");
+    answer.textContent =
+      "Correct Answer: " + q.options[q.answer];
+
+    const selected = document.createElement("p");
+    selected.textContent =
+      "Your Answer: " +
+      (userAnswers[index] === null
+        ? "Not Attempted"
+        : q.options[userAnswers[index]]);
+
+    const explanation = document.createElement("p");
+    explanation.textContent =
+      "Explanation: " + q.explanation;
+
+    review.append(question, answer, selected, explanation);
+    testArea.appendChild(review);
+  });
+
+  currentTestQuestions = [];
+}
 
 function updateChapters(){
  chapterList.innerHTML = "";
@@ -450,13 +620,47 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
   card.innerHTML = `
    <h4>${index+1}. ${chapter}</h4>
    <p>30 Questions • 45 Minutes</p>
-   <button class="btn" type="button" disabled>
-    Premium Test Coming Soon
+   <button class="btn green" type="button">
+    Start Chapter Test
    </button>
   `;
 
-  chapterList.appendChild(card);
+  card.querySelector("button").addEventListener("click",()=>{
+    startTest("chapter", selectedSubject, index);
+  });
+    chapterList.appendChild(card);
  });
+
+ const testButtons = document.createElement("div");
+ testButtons.className = "card";
+
+ testButtons.innerHTML = `
+   <h3>Full Subject Test</h3>
+   <p>पूरे विषय के सभी अध्यायों से 30 Questions • 45 Minutes</p>
+   <button class="btn green" id="fullSubjectBtn" type="button">
+     Start Full Subject Test
+   </button>
+
+   <h3>Mock Tests</h3>
+   <p>प्रत्येक Mock Test में 30 Questions • 45 Minutes</p>
+   <button class="btn" id="mock1Btn" type="button">Mock Test 1</button>
+   <button class="btn" id="mock2Btn" type="button">Mock Test 2</button>
+   <button class="btn" id="mock3Btn" type="button">Mock Test 3</button>
+ `;
+
+ chapterList.appendChild(testButtons);
+
+ document.getElementById("fullSubjectBtn").onclick = () =>
+   startTest("full", selectedSubject);
+
+ document.getElementById("mock1Btn").onclick = () =>
+   startTest("mock1", selectedSubject);
+
+ document.getElementById("mock2Btn").onclick = () =>
+   startTest("mock2", selectedSubject);
+
+ document.getElementById("mock3Btn").onclick = () =>
+   startTest("mock3", selectedSubject);
 }
 
 
