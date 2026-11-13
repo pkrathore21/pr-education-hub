@@ -3706,6 +3706,8 @@ explanation:"NAND गेट, AND गेट का उल्टा होता �
 };
   
 let currentTestQuestions = [];
+  let currentTestTitle = "";
+  let currentTestStorageKey = "";
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let testTimer = null;
@@ -3718,7 +3720,25 @@ function startTest(testType, subjectKey, chapterIndex) {
     alert("इस विषय के प्रश्न अभी जोड़े नहीं गए हैं।");
     return;
   }
+if (testType === "chapter") {
+  const chapterNames = board.value === "mp"
+    ? (chapterDataHindi[subjectKey] || chapterData[subjectKey] || [])
+    : (chapterData[subjectKey] || []);
 
+  currentTestTitle = chapterNames[chapterIndex] || 
+    "Chapter " + (chapterIndex + 1);
+} else if (testType === "full") {
+  currentTestTitle = "Full Subject Test";
+} else {
+  currentTestTitle = "Mock Test " + testType.replace("mock", "");
+}
+ currentTestStorageKey =
+  "PRHub_" +
+  board.value + "_" +
+  stream.value + "_" +
+  subjectKey + "_" +
+  testType + "_" +
+  (chapterIndex ?? "all");
   let questions = [];
 
   if (testType === "chapter") {
@@ -3781,8 +3801,10 @@ function renderQuestion() {
 
   const question = document.createElement("p");
   question.textContent = q.q;
-
-  testArea.append(heading, timer, question);
+const testTitle = document.createElement("h2");
+testTitle.textContent = currentTestTitle;
+testTitle.style.color = "#16a34a";
+  testArea.append(testTitle, heading, timer, question);
 
   q.options.forEach((option, index) => {
     const label = document.createElement("label");
@@ -3839,7 +3861,27 @@ function submitTest() {
   currentTestQuestions.forEach((q, index) => {
     if (userAnswers[index] === q.answer) score++;
   });
+const progressKey =
+  "PRHub_Progress_" +
+  board.value + "_" +
+  stream.value + "_" +
+  subject.value;
 
+const progress = JSON.parse(
+  localStorage.getItem(progressKey) || "{}"
+);
+
+progress[currentTestStorageKey] = {
+  title: currentTestTitle,
+  score: score,
+  total: currentTestQuestions.length,
+  completedAt: new Date().toLocaleString()
+};
+
+localStorage.setItem(
+  progressKey,
+  JSON.stringify(progress)
+);
   const result = document.createElement("h2");
   result.textContent = "Your Score: " + score + " / 30";
   testArea.appendChild(result);
@@ -3870,6 +3912,7 @@ function submitTest() {
     testArea.appendChild(review);
   });
 chapterList.style.display = "block";
+  updateChapters();
   currentTestQuestions = [];
 }
 
@@ -3896,7 +3939,31 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
    "<p>इस विषय के अध्याय जल्द जोड़े जाएँगे।</p>";
   return;
  }
+const progressKey =
+  "PRHub_Progress_" +
+  board.value + "_" +
+  stream.value + "_" +
+  subject.value;
 
+const progress = JSON.parse(
+  localStorage.getItem(progressKey) || "{}"
+);
+
+const completedCount = chapters.filter((chapter, index) => {
+  const key =
+    "PRHub_" + board.value + "_" +
+    stream.value + "_" +
+    selectedSubject + "_chapter_" + index;
+
+  return !!progress[key];
+}).length;
+
+const progressHeading = document.createElement("h3");
+progressHeading.textContent =
+  "Completed Chapters: " + completedCount +
+  " / " + chapters.length;
+
+chapterList.appendChild(progressHeading);
  chapters.forEach((chapter,index)=>{
   const card = document.createElement("div");
   card.className = "card";
@@ -3908,7 +3975,34 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
     Start Chapter Test
    </button>
   `;
+const progressKey =
+  "PRHub_Progress_" +
+  board.value + "_" +
+  stream.value + "_" +
+  subject.value;
 
+const progress = JSON.parse(
+  localStorage.getItem(progressKey) || "{}"
+);
+
+const storageKey =
+  "PRHub_" + board.value + "_" +
+  stream.value + "_" +
+  selectedSubject + "_chapter_" + index;
+
+const savedResult = progress[storageKey];
+
+const scoreInfo = document.createElement("p");
+
+if (savedResult) {
+  scoreInfo.textContent =
+    "✅ Completed | Score: " +
+    savedResult.score + "/" + savedResult.total;
+} else {
+  scoreInfo.textContent = "⏳ Not Attempted";
+}
+
+card.appendChild(scoreInfo);
   card.querySelector("button").addEventListener("click",()=>{
     startTest("chapter", selectedSubject, index);
   });
