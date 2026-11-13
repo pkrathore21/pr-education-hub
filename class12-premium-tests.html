@@ -190,6 +190,19 @@ const chapterData = {
   "Development Experience (1947-90) and Economic Reforms since 1991",
   "Current Challenges Facing Indian Economy",
   "Development Experience of India – A Comparison with Neighbours"
+ ], History: [
+  "Bricks, Beads and Bones",
+  "Kings, Farmers and Towns",
+  "Kinship, Caste and Class",
+  "Thinkers, Beliefs and Buildings",
+  "Through the Eyes of Travellers",
+  "Bhakti-Sufi Traditions",
+  "An Imperial Capital: Vijayanagar",
+  "Peasants, Zamindars and the State",
+  "Colonialism and the Countryside",
+  "Rebels and the Raj",
+  "Mahatma Gandhi and the Nationalist Movement",
+  "Framing the Constitution"
  ]
 };
  const chapterDataHindi = {
@@ -285,7 +298,20 @@ const chapterData = {
   "भारतीय अर्थव्यवस्था का विकास अनुभव एवं आर्थिक सुधार",
   "भारतीय अर्थव्यवस्था की वर्तमान चुनौतियाँ",
   "भारत का विकास अनुभव – पड़ोसी देशों से तुलना"
- ]
+ ], History: [
+  "ईंटें, मनके तथा अस्थियाँ",
+  "राजा, किसान और नगर",
+  "बंधुत्व, जाति तथा वर्ग",
+  "विचारक, विश्वास और इमारतें",
+  "यात्रियों की दृष्टि से",
+  "भक्ति-सूफी परंपराएँ",
+  "एक साम्राज्य की राजधानी: विजयनगर",
+  "किसान, जमींदार और राज्य",
+  "औपनिवेशिकता और देहात",
+  "विद्रोही और राज",
+  "महात्मा गांधी और राष्ट्रीय आंदोलन",
+  "संविधान का निर्माण"
+ ],
 };
 const chapterList = document.getElementById("chapterList");
 
@@ -297,6 +323,7 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
  subject.value.includes("Biology") ? "Biology" :
    subject.value.includes("Business Studies") ? "BusinessStudies" :
   subject.value.includes("Economics") ? "Economics" :
+  subject.value.includes("History") ? "History" :
    subject.value.includes("अकाउंटेंसी") || subject.value.includes("Accountancy") ? "Accountancy" :
  subject.value;
  const chapters = board.value === "mp"
