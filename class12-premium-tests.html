@@ -221,6 +221,22 @@ const chapterData = {
   "Transport and Communication",
   "International Trade",
   "Geographical Perspective on Selected Issues and Problems"
+ ], PoliticalScience: [
+  "The End of Bipolarity",
+  "Contemporary Centres of Power",
+  "Contemporary South Asia",
+  "International Organizations",
+  "Security in the Contemporary World",
+  "Environment and Natural Resources",
+  "Globalisation",
+  "Challenges of Nation-Building",
+  "Era of One-Party Dominance",
+  "Politics of Planned Development",
+  "India's External Relations",
+  "Challenges to and Restoration of the Congress System",
+  "The Crisis of Democratic Order",
+  "Regional Aspirations",
+  "Recent Developments in Indian Politics"
  ],
 };
  const chapterDataHindi = {
@@ -347,6 +363,22 @@ const chapterData = {
   "परिवहन एवं संचार (भारत)",
   "अंतरराष्ट्रीय व्यापार (भारत)",
   "चयनित मुद्दों एवं समस्याओं का भौगोलिक परिप्रेक्ष्य"
+ ], PoliticalScience: [
+  "दो ध्रुवीयता का अंत",
+  "समकालीन विश्व में शक्ति के नए केंद्र",
+  "समकालीन दक्षिण एशिया",
+  "अंतरराष्ट्रीय संगठन",
+  "समकालीन विश्व में सुरक्षा",
+  "पर्यावरण और प्राकृतिक संसाधन",
+  "वैश्वीकरण",
+  "राष्ट्र निर्माण की चुनौतियाँ",
+  "एकदलीय प्रभुत्व का दौर",
+  "नियोजित विकास की राजनीति",
+  "भारत के विदेश संबंध",
+  "कांग्रेस प्रणाली की चुनौतियाँ और पुनर्स्थापना",
+  "लोकतांत्रिक व्यवस्था का संकट",
+  "क्षेत्रीय आकांक्षाएँ",
+  "भारतीय राजनीति में हाल के घटनाक्रम"
  ],
 }; 
 const chapterList = document.getElementById("chapterList");
@@ -360,7 +392,7 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
    subject.value.includes("Business Studies") ? "BusinessStudies" :
   subject.value.includes("Economics") ? "Economics" :
   subject.value.includes("History") ? "History" :
-  subject.value.includes("Geography") ? "Geography" :
+  subject.value.includes("Geography") ? "Geography" :subject.value.includes("Political Science") || subject.value.includes("राजनीति विज्ञान") ? "PoliticalScience" :
    subject.value.includes("अकाउंटेंसी") || subject.value.includes("Accountancy") ? "Accountancy" :
  subject.value;
  const chapters = board.value === "mp"
