@@ -3722,16 +3722,17 @@ function startTest(testType, subjectKey, chapterIndex) {
   let questions = [];
 
   if (testType === "chapter") {
-    questions = subjectData.chapters?.[chapterIndex] || [];
-  } else {
-    questions = subjectData[testType] || [];
-  }
+  questions = subjectData.chapters?.[chapterIndex] || [];
+} else {
+  questions = subjectData[testType] || [];
+}
 
-  if (questions.length !== 30) {
-    alert("इस टेस्ट के 30 प्रश्न अभी पूरे नहीं जोड़े गए हैं।");
-    return;
-  }
+if (questions.length !== 30) {
+  alert("इस टेस्ट के 30 प्रश्न अभी पूरे नहीं जोड़े गए हैं।");
+  return;
+}
 
+chapterList.style.display = "none";
   clearInterval(testTimer);
 
   currentTestQuestions = questions;
@@ -3740,6 +3741,10 @@ function startTest(testType, subjectKey, chapterIndex) {
   timeLeft = 45 * 60;
 
   renderQuestion();
+  testArea.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 
   testTimer = setInterval(() => {
     timeLeft--;
@@ -3864,7 +3869,7 @@ function submitTest() {
     review.append(question, answer, selected, explanation);
     testArea.appendChild(review);
   });
-
+chapterList.style.display = "block";
   currentTestQuestions = [];
 }
 
