@@ -466,7 +466,8 @@ const chemistryQuestionData = {
       ]
     ]
   },
-  cbse: {      ],
+    cbse: {
+    chapters: [
       [
         {
           q: "रासायनिक बलगतिकी में किसका अध्ययन किया जाता है?",
@@ -647,9 +648,10 @@ const chemistryQuestionData = {
           options: ["तापमान", "केवल अभिकारक की मात्रा", "केवल पात्र का रंग", "केवल उत्पाद का रंग"],
           answer: 0,
           explanation: "निश्चित अभिक्रिया के लिए दर स्थिरांक तापमान पर निर्भर करता है।"
-        }
-      ]
+               }
     ]
+  },
+  cbse: {
     chapters: [
     [
       {
@@ -906,3 +908,5 @@ const chemistryQuestionData = {
   ]
 }
 };
+questionBank.mp.Chemistry = chemistryQuestionData.mp;
+questionBank.cbse.Chemistry = chemistryQuestionData.cbse;
