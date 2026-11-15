@@ -3717,9 +3717,13 @@ function startTest(testType, subjectKey, chapterIndex) {
   const subjectData = questionBank[board.value][subjectKey];
 
   if (!subjectData) {
-    alert("इस विषय के प्रश्न अभी जोड़े नहीं गए हैं।");
-    return;
-  }
+  alert(
+    "Subject: " + subjectKey +
+    "\nAvailable: " +
+    Object.keys(questionBank[board.value] || {}).join(", ")
+  );
+  return;
+}
 if (testType === "chapter") {
   const chapterNames = board.value === "mp"
     ? (chapterDataHindi[subjectKey] || chapterData[subjectKey] || [])
