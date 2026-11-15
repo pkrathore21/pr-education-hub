@@ -1,3 +1,4 @@
+alert("CHEMISTRY FILE LOADED");
 const chemistryQuestionData = {
   mp: {
     chapters: [
