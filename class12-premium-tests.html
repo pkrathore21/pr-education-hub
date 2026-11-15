@@ -8014,10 +8014,37 @@ if (testType === "chapter") {
   subjectKey + "_" +
   testType + "_" +
   (chapterIndex ?? "all");
-  let questions = [];
+  
+let questions = [];
 
-  if (testType === "chapter") {
+if (testType === "chapter") {
   questions = subjectData.chapters?.[chapterIndex] || [];
+
+} else if (testType === "full") {
+  const chapters = (subjectData.chapters || [])
+    .filter(chapter => Array.isArray(chapter))
+    .map(chapter => [...chapter].sort(() => Math.random() - 0.5));
+
+  questions = [];
+
+  let round = 0;
+
+  while (questions.length < 30) {
+    let added = false;
+
+    for (const chapter of chapters) {
+      if (chapter[round]) {
+        questions.push(chapter[round]);
+        added = true;
+
+        if (questions.length === 30) break;
+      }
+    }
+
+    if (!added) break;
+    round++;
+  }
+
 } else {
   questions = subjectData[testType] || [];
 }
@@ -8026,6 +8053,7 @@ if (questions.length !== 30) {
   alert("इस टेस्ट के 30 प्रश्न अभी पूरे नहीं जोड़े गए हैं।");
   return;
 }
+
 
 chapterList.style.display = "none";
   clearInterval(testTimer);
