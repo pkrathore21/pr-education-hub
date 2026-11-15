@@ -4627,7 +4627,7 @@ let testTimer = null;
 let timeLeft = 45 * 60;
 
 function startTest(testType, subjectKey, chapterIndex) {
-  const subjectData = questionBank[board.value][subjectKey];
+  const subjectData = questionBank[board.value][subjectKey.includes("Physics") ? "Physics" : subjectKey.includes("Chemistry") ? "Chemistry" : subjectKey.includes("Mathematics") ? "Mathematics" : subjectKey.includes("Biology") ? "Biology" : subjectKey];
 
   if (!subjectData) {
   alert(
@@ -4638,7 +4638,7 @@ function startTest(testType, subjectKey, chapterIndex) {
   return;
 }
 if (testType === "chapter") {
-  const chapterNames = board.value === "mp"
+  subjectKey = subjectKey.includes("Physics") ? "Physics" : subjectKey.includes("Chemistry") ? "Chemistry" : subjectKey.includes("Mathematics") ? "Mathematics" : subjectKey.includes("Biology") ? "Biology" : subjectKey;
     ? (chapterDataHindi[subjectKey] || chapterData[subjectKey] || [])
     : (chapterData[subjectKey] || []);
 
