@@ -4892,15 +4892,6 @@ chapterList.appendChild(progressHeading);
     Start Chapter Test
    </button>
   `;
-const progressKey =
-  "PRHub_Progress_" +
-  board.value + "_" +
-  stream.value + "_" +
-  subject.value;
-
-const progress = JSON.parse(
-  localStorage.getItem(progressKey) || "{}"
-);
 
 const storageKey =
   "PRHub_" + board.value + "_" +
