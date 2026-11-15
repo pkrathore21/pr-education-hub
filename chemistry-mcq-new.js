@@ -312,5 +312,5 @@ window.chemistryQuestionData = {
 
 window.questionBank.mp.Chemistry = window.chemistryQuestionData.mp;
 window.questionBank.cbse.Chemistry = window.chemistryQuestionData.cbse;
-
+alert("NEW BANK: " + window.questionBank.mp.Chemistry.chapters[0].length);
 console.log("Chemistry Chapter 1 connected");
