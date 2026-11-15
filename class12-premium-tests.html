@@ -4638,10 +4638,9 @@ function startTest(testType, subjectKey, chapterIndex) {
   return;
 }
 if (testType === "chapter") {
-  subjectKey = subjectKey.includes("Physics") ? "Physics" : subjectKey.includes("Chemistry") ? "Chemistry" : subjectKey.includes("Mathematics") ? "Mathematics" : subjectKey.includes("Biology") ? "Biology" : subjectKey;
-    ? (chapterDataHindi[subjectKey] || chapterData[subjectKey] || [])
-    : (chapterData[subjectKey] || []);
-
+  const chapterNames = board.value === "mp"
+  ? (chapterDataHindi[subjectKey] || chapterData[subjectKey] || [])
+  : (chapterData[subjectKey] || []);
   currentTestTitle = chapterNames[chapterIndex] || 
     "Chapter " + (chapterIndex + 1);
 } else if (testType === "full") {
