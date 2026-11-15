@@ -913,3 +913,4 @@ console.log("Chemistry file loaded", chemistryQuestionData);
 questionBank.mp.Chemistry = chemistryQuestionData.mp;
 questionBank.cbse.Chemistry = chemistryQuestionData.cbse;
 alert("Chemistry connected: " + Object.keys(questionBank.mp).join(", "));
+alert("Chemistry connected: " + Object.keys(questionBank.mp).join(", "));
