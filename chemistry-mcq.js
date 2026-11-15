@@ -908,5 +908,6 @@ const chemistryQuestionData = {
   ]
 }
 };
+console.log("Chemistry file loaded", chemistryQuestionData);
 questionBank.mp.Chemistry = chemistryQuestionData.mp;
 questionBank.cbse.Chemistry = chemistryQuestionData.cbse;
