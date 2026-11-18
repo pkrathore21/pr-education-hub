@@ -1469,9 +1469,61 @@ function submitTest(autoSubmit){
    " | Chapters Completed: " + completed + " / " + total;
  }
 
+ 
  document.getElementById("submitButton").disabled = true;
- window.scrollTo({top:document.getElementById("result").offsetTop,behavior:"smooth"});
+
+ const result = document.getElementById("result");
+
+ let summaryHTML = `
+  <div class="card">
+   <h2>📊 Test Result Summary</h2>
+   <p><b>Score:</b> ${score}/${currentQuestions.length}</p>
+   <p><b>Attempted:</b> ${attempted}/${currentQuestions.length}</p>
+   <p><b>Wrong:</b> ${attempted-score}</p>
+   <p><b>Percentage:</b> ${percentage}%</p>
+  </div>`;
+
+ if(p){
+  const progressKey = "prEducationHubProgress";
+  const progress = JSON.parse(localStorage.getItem(progressKey) || "{}");
+  const subjectKey = p.board + "-" + p.medium + "-" + p.subject;
+  const saved = progress[subjectKey] || [];
+  const chapters = chapterLists[p.subject] || [];
+  const completed = saved.filter(x=>x && x.done).length;
+
+  summaryHTML += `
+   <div class="card">
+    <h3>📚 Chapter Progress</h3>
+    <p>Completed: ${completed}/${chapters.length}</p>
+    <p>Pending: ${chapters.length-completed}</p>`;
+
+  chapters.forEach((name,i)=>{
+   const item = saved[i];
+   summaryHTML += `<p>${i+1}. ${name} – ${
+    item && item.done
+     ? "✅ Done – "+item.score+"/"+item.total+" ("+item.percentage+"%)"
+     : "⏳ Pending"
+   }</p>`;
+  });
+
+  summaryHTML += `</div>`;
+ }
+
+ result.innerHTML = summaryHTML;
+
+ const backButton = document.createElement("button");
+ backButton.type = "button";
+ backButton.textContent = "⬅ Back to All Chapters";
+ backButton.onclick = function(){
+  document.getElementById("testArea").style.display = "none";
+  document.getElementById("selectionArea").style.display = "block";
+  window.scrollTo({top:0,behavior:"smooth"});
+ };
+
+ result.appendChild(backButton);
+ window.scrollTo({top:0,behavior:"smooth"});
 }
+
 updateMediumOptions();
 </script>
 </body>
