@@ -81,6 +81,64 @@ button,.btn{width:100%;text-align:center}
   position: static;
   background: transparent;
 }
+ 
+/* Easy Reading - Mobile, Tablet and Laptop */
+
+.question {
+  font-size: 19px;
+  line-height: 1.8;
+  padding: 18px;
+}
+
+.question p {
+  font-size: 21px;
+  line-height: 1.7;
+}
+
+.question label {
+  display: block;
+  font-size: 19px;
+  line-height: 1.8;
+  padding: 10px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.question input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+#questionNavigation button {
+  font-size: 17px;
+  padding: 12px 18px;
+}
+
+#questionNumber {
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .question {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .question p {
+    font-size: 19px;
+  }
+
+  .question label {
+    font-size: 18px;
+    padding: 10px 6px;
+  }
+
+  #questionNavigation button {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
 </style>
 </head>
 
@@ -1259,13 +1317,16 @@ function startTest(){
 }
 
 /* प्रश्न दिखाना */
+
 function renderQuestions(){
  const area = document.getElementById("questions");
  area.innerHTML = "";
+ window.currentQuestionIndex = 0;
 
  currentQuestions.forEach((item,i)=>{
   const div = document.createElement("div");
   div.className = "question";
+  div.id = "questionCard" + i;
 
   let html = `<p><b>प्रश्न ${i+1}. ${item.q}</b></p>`;
 
@@ -1281,6 +1342,44 @@ function renderQuestions(){
   div.innerHTML = html;
   area.appendChild(div);
  });
+
+ const nav = document.createElement("div");
+ nav.id = "questionNavigation";
+ nav.style.cssText = "display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0;";
+
+ nav.innerHTML = `
+  <button type="button" id="previousQuestion"
+   onclick="changeQuestion(-1)">⬅ Previous</button>
+  <b id="questionNumber">1 / ${currentQuestions.length}</b>
+  <button type="button" id="nextQuestion"
+   onclick="changeQuestion(1)">Next ➡</button>
+ `;
+
+ area.appendChild(nav);
+ showQuestion(0);
+}
+
+function showQuestion(index){
+ const total = currentQuestions.length;
+
+ if(index < 0 || index >= total) return;
+
+ window.currentQuestionIndex = index;
+
+ document.querySelectorAll(".question").forEach((card,i)=>{
+  card.style.display = i === index ? "block" : "none";
+ });
+
+ document.getElementById("questionNumber").textContent =
+  (index+1) + " / " + total;
+
+ document.getElementById("previousQuestion").disabled = index === 0;
+ document.getElementById("nextQuestion").disabled = index === total-1;
+}
+
+function changeQuestion(direction){
+ showQuestion(window.currentQuestionIndex + direction);
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
 /* Timer */
@@ -1301,6 +1400,7 @@ function updateTimer(){
 }
 
 /* Submit और Auto Submit */
+
 function submitTest(autoSubmit){
  if(testSubmitted) return;
 
@@ -1329,41 +1429,46 @@ function submitTest(autoSubmit){
    "<br><b>व्याख्या:</b> " + item.e;
  });
 
-const p = window.currentTestProgress;
+ const percentage = Math.round((score / currentQuestions.length) * 100);
 
-if(p && Number.isInteger(p.chapterIndex)){
- const progressKey = "prEducationHubProgress";
- let progress = JSON.parse(localStorage.getItem(progressKey) || "{}");
-
- const subjectKey = p.board + "-" + p.medium + "-" + p.subject;
-
- if(!progress[subjectKey]){
-  progress[subjectKey] = [];
- }
-
- progress[subjectKey][p.chapterIndex] = true;
-
- localStorage.setItem(progressKey, JSON.stringify(progress));
-
- const completed = progress[subjectKey].filter(Boolean).length;
- const total = chapterLists[p.subject].length;
-
- document.getElementById("result").textContent +=
-  " | Chapters Completed: " + completed + " / " + total;
-}
+ const p = window.currentTestProgress;
 
  document.getElementById("result").textContent =
   (autoSubmit ? "समय पूरा! Auto Submit | " : "टेस्ट Submit हुआ | ") +
   "आपका परिणाम: " + score + " / " + currentQuestions.length +
-  " | Attempted: " + attempted;
+  " | Attempted: " + attempted +
+  " | Percentage: " + percentage + "%";
+
+ if(p && Number.isInteger(p.chapterIndex)){
+  const progressKey = "prEducationHubProgress";
+  let progress = JSON.parse(localStorage.getItem(progressKey) || "{}");
+
+  const subjectKey = p.board + "-" + p.medium + "-" + p.subject;
+
+  if(!progress[subjectKey]){
+   progress[subjectKey] = [];
+  }
+
+  progress[subjectKey][p.chapterIndex] = {
+   done: true,
+   score: score,
+   total: currentQuestions.length,
+   percentage: percentage
+  };
+
+  localStorage.setItem(progressKey, JSON.stringify(progress));
+
+  const completed = progress[subjectKey].filter(item => item && item.done).length;
+  const total = chapterLists[p.subject].length;
+
+  document.getElementById("result").textContent +=
+   " | Chapters Completed: " + completed + " / " + total;
+ }
 
  document.getElementById("submitButton").disabled = true;
  window.scrollTo({top:document.getElementById("result").offsetTop,behavior:"smooth"});
 }
-
-/* पहली बार Medium और Chapter list सेट करें */
 updateMediumOptions();
 </script>
-
 </body>
 </html>
