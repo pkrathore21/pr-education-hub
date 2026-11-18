@@ -1158,16 +1158,30 @@ function updateChapters(){
  }
 
  
+const progressKey = "prEducationHubProgress";
+const savedProgress = JSON.parse(localStorage.getItem(progressKey) || "{}");
+const subjectKey = boardSelect.value + "-" +
+ (mediumSelect.value === "hi" ? "hi" : "en") + "-" +
+ subjectSelect.value;
+
+const completedChapters = savedProgress[subjectKey] || [];
+
 chapters.forEach((name,index)=>{
   const div = document.createElement("div");
   div.className = "chapter-item";
+
+  const isDone = completedChapters[index] === true;
+
   div.innerHTML = `
    <label>
     <input type="radio" name="chapterChoice" value="${index}">
-    <span>Chapter ${index+1}: ${name}</span>
+    <span>Chapter ${index+1}: ${name}
+    ${isDone ? " ✅ Done" : " ⏳ Pending"}</span>
    </label>`;
+
   list.appendChild(div);
  });
+
 
 [
   {value:"full", name:"Full Subject Test"},
