@@ -99,15 +99,15 @@ footer{text-align:center;padding:20px;color:#555}
 <h2>अपना Board और Medium चुनें</h2>
 
 <label>Board चुनें</label>
-<select id="board">
-<option value="mp">MP Board</option>
-<option value="cbse">CBSE</option>
+<select id="board" onchange="updateMediumOptions()">
+  <option value="mp">MP Board</option>
+  <option value="cbse">CBSE</option>
 </select>
 
 <label>Medium चुनें</label>
 <select id="medium">
-<option value="hi">Hindi Medium</option>
-<option value="en">English Medium</option>
+  <option value="hi">Hindi Medium</option>
+  <option value="en">English Medium</option>
 </select>
 
 <label>Subject चुनें</label>
