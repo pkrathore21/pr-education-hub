@@ -17,6 +17,65 @@ select{width:100%;padding:12px;border:1px solid #bbb;border-radius:7px;font-size
 .btn{display:inline-block;background:#087b45;color:white;padding:12px 18px;border-radius:7px;text-decoration:none;margin-top:15px;border:0}
 .notice{background:#fff4d6;padding:12px;border-radius:8px;margin-top:15px}
 footer{text-align:center;padding:20px;color:#555}
+/* Mobile Friendly MCQ Design */
+#realNumbersQuestions {
+  width: 100%;
+  max-width: 850px;
+  margin: 15px auto;
+}
+
+#realNumbersQuestions > div {
+  background: #ffffff;
+  border: 1px solid #dbe3ee;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 14px 0 !important;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+}
+
+#realNumbersQuestions label {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  margin: 8px 0 !important;
+  border: 1px solid #dbe3ee;
+  border-radius: 8px;
+  background: #f8fafc;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+#realNumbersQuestions input[type="radio"] {
+  margin-right: 8px;
+  transform: scale(1.15);
+}
+
+#realNumbersTest button {
+  width: 100%;
+  max-width: 300px;
+  padding: 13px;
+  border: 0;
+  border-radius: 8px;
+  background: #16803c;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  #realNumbersQuestions > div {
+    padding: 12px;
+  }
+
+  #realNumbersQuestions label {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  #realNumbersTest button {
+    max-width: 100%;
+  }
+}
 </style>
 </head>
 <body>
