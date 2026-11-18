@@ -5,81 +5,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Class 10 Premium Tests | PR Education Hub</title>
+
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f3f6fc;color:#222}
-header{background:#123b70;color:white;text-align:center;padding:25px 12px}
-.container{max-width:900px;margin:20px auto;padding:15px}
+header{background:#123b70;color:white;text-align:center;padding:22px 12px}
+.container{max-width:900px;margin:20px auto;padding:12px}
 .card{background:white;padding:18px;margin:15px 0;border-radius:12px;box-shadow:0 2px 10px #0001}
-h2{color:#123b70}
-label{display:block;margin:14px 0 6px;font-weight:bold}
-select{width:100%;padding:12px;border:1px solid #bbb;border-radius:7px;font-size:16px}
-.btn{display:inline-block;background:#087b45;color:white;padding:12px 18px;border-radius:7px;text-decoration:none;margin-top:15px;border:0}
-.notice{background:#fff4d6;padding:12px;border-radius:8px;margin-top:15px}
+h2,h3{color:#123b70}
+label{display:block;margin:12px 0 6px;font-weight:bold}
+select{width:100%;padding:12px;border:1px solid #bbb;border-radius:7px;font-size:16px;background:white}
+button,.btn{display:inline-block;background:#087b45;color:white;padding:13px 18px;border-radius:7px;text-decoration:none;margin-top:12px;border:0;font-size:16px;cursor:pointer}
+button:disabled{background:#999}
+.notice{background:#fff4d6;padding:12px;border-radius:8px;margin-top:15px;line-height:1.5}
+.chapter-item{padding:12px;border:1px solid #dbe3ee;border-radius:9px;margin:9px 0;background:#f8fafc}
+.chapter-item label{display:flex;align-items:center;gap:10px;margin:0;font-weight:normal;cursor:pointer}
+.chapter-item input{transform:scale(1.2)}
+#testArea{display:none}
+#timer{font-size:22px;font-weight:bold;color:#b42318;text-align:center}
+#questions{width:100%;margin:15px auto}
+.question{background:#fff;border:1px solid #dbe3ee;border-radius:12px;padding:14px;margin:14px 0;box-shadow:0 2px 7px #0001}
+.question label{display:block;width:100%;padding:11px;margin:8px 0;border:1px solid #dbe3ee;border-radius:8px;background:#f8fafc;cursor:pointer;overflow-wrap:anywhere;font-weight:normal}
+.question input{margin-right:8px}
+#result{font-size:19px;font-weight:bold}
 footer{text-align:center;padding:20px;color:#555}
-/* Mobile Friendly MCQ Design */
-#realNumbersQuestions {
-  width: 100%;
-  max-width: 850px;
-  margin: 15px auto;
-}
-
-#realNumbersQuestions > div {
-  background: #ffffff;
-  border: 1px solid #dbe3ee;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 14px 0 !important;
-  box-shadow: 0 2px 7px rgba(0,0,0,0.06);
-}
-
-#realNumbersQuestions label {
-  display: block;
-  width: 100%;
-  padding: 11px;
-  margin: 8px 0 !important;
-  border: 1px solid #dbe3ee;
-  border-radius: 8px;
-  background: #f8fafc;
-  cursor: pointer;
-  overflow-wrap: anywhere;
-}
-
-#realNumbersQuestions input[type="radio"] {
-  margin-right: 8px;
-  transform: scale(1.15);
-}
-
-#realNumbersTest button {
-  width: 100%;
-  max-width: 300px;
-  padding: 13px;
-  border: 0;
-  border-radius: 8px;
-  background: #16803c;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-@media (max-width: 600px) {
-  #realNumbersQuestions > div {
-    padding: 12px;
-  }
-
-  #realNumbersQuestions label {
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  #realNumbersTest button {
-    max-width: 100%;
-  }
+@media(max-width:600px){
+.container{padding:9px}
+.card{padding:13px}
+.question{padding:12px}
+.question label{font-size:15px;line-height:1.5}
+button,.btn{width:100%;text-align:center}
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
 <h1>PR Education Hub</h1>
 <p>Class 10 Premium Tests</p>
@@ -90,24 +50,23 @@ footer{text-align:center;padding:20px;color:#555}
 
 <div class="card">
 <h2>Class 10 Premium Tests</h2>
-<p>MP Board और CBSE के विद्यार्थियों के लिए।</p>
-<p><b>30 Questions • 45 Minutes per Chapter</b></p>
-<p>Important MCQs • Answers • Explanations</p>
+<p>30 Questions • 45 Minutes per Chapter</p>
+<p>MCQ • Answers • Explanations</p>
 </div>
 
-<div class="card">
-<h2>अपना Board और Medium चुनें</h2>
+<div class="card" id="selectionArea">
+<h2>अपना Board, Medium और Subject चुनें</h2>
 
 <label>Board चुनें</label>
-<select id="board" onchange="updateMediumOptions()">
-  <option value="mp">MP Board</option>
-  <option value="cbse">CBSE</option>
+<select id="board">
+<option value="mp">MP Board</option>
+<option value="cbse">CBSE</option>
 </select>
 
 <label>Medium चुनें</label>
 <select id="medium">
-  <option value="hi">Hindi Medium</option>
-  <option value="en">English Medium</option>
+<option value="hi">Hindi Medium</option>
+<option value="en">English Medium</option>
 </select>
 
 <label>Subject चुनें</label>
@@ -120,121 +79,281 @@ footer{text-align:center;padding:20px;color:#555}
 <option value="Sanskrit">संस्कृत (Sanskrit)</option>
 </select>
 
-<div id="subjectMessage" class="notice">
-अपना Board, Medium और Subject चुनें।
-अगले चरण में अध्याय और MCQ Tests जोड़े जाएँगे।
+<div id="chapterArea">
+<h3>Chapter चुनें</h3>
+<div id="chapterList"></div>
 </div>
+
+<div id="chapterInfo" class="notice">
+पहले Board, Medium और Subject चुनें।
+</div>
+
+<button type="button" id="startButton" onclick="startTest()">
+Start Test
+</button>
+</div>
+
+<div class="card" id="testArea">
+<h2 id="testHeading"></h2>
+<p id="testDetails"></p>
+<div id="timer">45:00</div>
+<div id="questions"></div>
+<button type="button" id="submitButton" onclick="submitTest(false)">
+Submit Test
+</button>
+<h3 id="result"></h3>
+<div id="review"></div>
 </div>
 
 <div class="card">
 <h2>Premium Membership</h2>
 <p>Class 10 Membership – ₹99 / 6 Months</p>
-<a class="btn" href="https://rzp.io/rzp/en2Wcl6" target="_blank">Pay ₹99</a>
+<a class="btn" href="https://rzp.io/rzp/en2Wcl6" target="_blank" rel="noopener">Pay ₹99</a>
 </div>
 
 <a class="btn" href="index.html">← Back to Home</a>
-
 </div>
 
-<footer>
-© PR Education Hub | By Pawan Rathore
-</footer>
-<section class="chapter-test">
-  <h2>Class 10 Mathematics – MP Board Hindi</h2>
-  <h3>Chapter 1: वास्तविक संख्याएँ (Real Numbers)</h3>
-  <p>कुल प्रश्न: 30 | प्रत्येक प्रश्न: 1 अंक</p>
-
-  <form id="realNumbersTest">
-    <div id="realNumbersQuestions"></div>
-    <button type="button" onclick="checkRealNumbersTest()">
-      Submit Test
-    </button>
-  </form>
-  <h3 id="realNumbersResult"></h3>
-</section>
+<footer>© PR Education Hub | By Pawan Rathore</footer>
 
 <script>
-const realNumbersMCQ = [
-{q:"यूक्लिड विभाजन एल्गोरिथ्म में a = bq + r में शेषफल r के लिए सही शर्त क्या है?",o:["0 ≤ r < b","r > b","r = b","r < 0"],a:0,e:"शेषफल हमेशा 0 या धनात्मक होता है और भाजक से छोटा होता है।"},
-{q:"दो धनात्मक पूर्णांकों का HCF ज्ञात करने के लिए किस एल्गोरिथ्म का प्रयोग होता है?",o:["यूक्लिड विभाजन एल्गोरिथ्म","न्यूटन विधि","द्विघात सूत्र","पाइथागोरस प्रमेय"],a:0,e:"यूक्लिड विभाजन एल्गोरिथ्म से HCF ज्ञात किया जाता है।"},
-{q:"12 और 18 का HCF क्या है?",o:["2","3","6","9"],a:2,e:"12 और 18 का सबसे बड़ा उभयनिष्ठ गुणनखंड 6 है।"},
-{q:"12 और 18 का LCM क्या है?",o:["24","36","48","72"],a:1,e:"12 और 18 का लघुत्तम समापवर्त्य 36 है।"},
-{q:"दो संख्याओं के लिए HCF × LCM बराबर होता है?",o:["दोनों का योग","दोनों का अंतर","दोनों का गुणनफल","दोनों का भागफल"],a:2,e:"दो धनात्मक पूर्णांकों का HCF और LCM का गुणनफल, उन संख्याओं के गुणनफल के बराबर होता है।"},
-{q:"निम्न में से कौन अभाज्य संख्या है?",o:["21","27","29","39"],a:2,e:"29 के केवल दो गुणनखंड 1 और 29 हैं।"},
-{q:"सबसे छोटी अभाज्य संख्या कौन-सी है?",o:["0","1","2","3"],a:2,e:"2 सबसे छोटी अभाज्य संख्या है और एकमात्र सम अभाज्य संख्या है।"},
-{q:"1 संख्या कैसी है?",o:["अभाज्य","भाज्य","न अभाज्य न भाज्य","सम अभाज्य"],a:2,e:"1 के केवल एक गुणनखंड होने से यह न अभाज्य है न भाज्य।"},
-{q:"निम्न में से कौन अपरिमेय संख्या है?",o:["1/2","0.25","√2","3"],a:2,e:"√2 को p/q के रूप में नहीं लिखा जा सकता।"},
-{q:"परिमेय संख्या का दशमलव प्रसार कैसा होता है?",o:["सदैव असांत","सांत या असांत आवर्ती","सदैव अनावर्ती","सदैव पूर्णांक"],a:1,e:"परिमेय संख्या का दशमलव प्रसार सांत या असांत आवर्ती होता है।"},
-{q:"अपरिमेय संख्या का दशमलव प्रसार कैसा होता है?",o:["सांत","असांत अनावर्ती","असांत आवर्ती","पूर्णांक"],a:1,e:"अपरिमेय संख्या का दशमलव प्रसार असांत और अनावर्ती होता है।"},
-{q:"√3 किस प्रकार की संख्या है?",o:["परिमेय","अपरिमेय","पूर्णांक","प्राकृतिक"],a:1,e:"√3 अपरिमेय संख्या है।"},
-{q:"0.125 का भिन्न रूप क्या है?",o:["1/4","1/8","1/5","1/10"],a:1,e:"0.125 = 125/1000 = 1/8।"},
-{q:"13 का अभाज्य गुणनखंड क्या है?",o:["1 × 13","2 × 7","3 × 4","5 × 2"],a:0,e:"13 स्वयं एक अभाज्य संख्या है।"},
-{q:"140 का अभाज्य गुणनखंड रूप क्या है?",o:["2² × 5 × 7","2 × 5 × 7","2³ × 5","2² × 7"],a:0,e:"140 = 2 × 2 × 5 × 7।"},
-{q:"96 का अभाज्य गुणनखंड रूप क्या है?",o:["2⁴ × 3","2⁵ × 3","2³ × 3²","2 × 3²"],a:1,e:"96 = 2 × 2 × 2 × 2 × 2 × 3।"},
-{q:"यदि दो संख्याओं का HCF 1 हो तो वे कहलाती हैं?",o:["सम संख्याएँ","सह-अभाज्य संख्याएँ","अभाज्य संख्याएँ","विषम संख्याएँ"],a:1,e:"जिन संख्याओं का HCF 1 होता है वे सह-अभाज्य कहलाती हैं।"},
-{q:"7 और 15 का HCF क्या है?",o:["1","3","5","7"],a:0,e:"7 और 15 का कोई उभयनिष्ठ गुणनखंड 1 के अतिरिक्त नहीं है।"},
-{q:"7 और 15 का LCM क्या है?",o:["35","75","105","120"],a:2,e:"सह-अभाज्य संख्याओं का LCM उनका गुणनफल होता है।"},
-{q:"यदि HCF = 4 और LCM = 60 हो तथा एक संख्या 12 हो, तो दूसरी संख्या क्या होगी?",o:["15","20","24","30"],a:1,e:"दूसरी संख्या = (4 × 60)/12 = 20।"},
-{q:"एक परिमेय संख्या का हर सरलतम रूप में 2 और 5 के अतिरिक्त अभाज्य गुणनखंड रखता है। उसका दशमलव प्रसार कैसा होगा?",o:["सांत","असांत आवर्ती","असांत अनावर्ती","पूर्णांक"],a:1,e:"हर में 2 और 5 के अलावा अन्य अभाज्य गुणनखंड होने पर दशमलव प्रसार असांत आवर्ती होता है।"},
-{q:"किस भिन्न का दशमलव प्रसार सांत होगा?",o:["7/30","13/40","11/21","5/18"],a:1,e:"40 = 2³ × 5 है, इसलिए 13/40 का दशमलव प्रसार सांत है।"},
-{q:"√5 + √5 का मान क्या है?",o:["√10","2√5","5√2","10"],a:1,e:"समान अपरिमेय पद जोड़ने पर √5 + √5 = 2√5।"},
-{q:"निम्न में से कौन-सी संख्या परिमेय है?",o:["√7","√11","√16","√13"],a:2,e:"√16 = 4, जो परिमेय संख्या है।"},
-{q:"2 और 3 के बीच कितनी परिमेय संख्याएँ हैं?",o:["एक","दो","दस","अनंत"],a:3,e:"किन्हीं दो भिन्न परिमेय संख्याओं के बीच अनंत परिमेय संख्याएँ होती हैं।"},
-{q:"यूक्लिड विभाजन प्रमेय में भाजक कैसा होना चाहिए?",o:["शून्य","ऋणात्मक","धनात्मक","कोई भी वास्तविक संख्या"],a:2,e:"यूक्लिड विभाजन प्रमेय में भाजक धनात्मक पूर्णांक होता है।"},
-{q:"135 और 225 का HCF क्या है?",o:["15","25","45","75"],a:2,e:"225 = 135 × 1 + 90; 135 = 90 × 1 + 45; 90 = 45 × 2। HCF = 45।"},
-{q:"96 और 404 का HCF क्या है?",o:["2","4","8","12"],a:1,e:"404 = 96 × 4 + 20; 96 = 20 × 4 + 16; 20 = 16 + 4। HCF = 4।"},
-{q:"यदि किसी संख्या का अभाज्य गुणनखंड रूप 2³ × 3² हो तो संख्या क्या है?",o:["36","72","108","144"],a:2,e:"2³ × 3² = 8 × 9 = 72।"},
-{q:"अंकगणित की आधारभूत प्रमेय के अनुसार प्रत्येक भाज्य संख्या को किस रूप में व्यक्त किया जा सकता है?",o:["अभाज्य गुणनखंडों के गुणनफल के रूप में","केवल सम संख्याओं के रूप में","केवल विषम संख्याओं के रूप में","केवल 1 और स्वयं के योग के रूप में"],a:0,e:"प्रत्येक भाज्य संख्या का अभाज्य गुणनखंडों में गुणनखंडन अद्वितीय होता है।"}
-];
+/* Board और Medium */
+const boardSelect = document.getElementById("board");
+const mediumSelect = document.getElementById("medium");
+const subjectSelect = document.getElementById("subject");
 
-const realNumbersContainer = document.getElementById("realNumbersQuestions");
+/* उपलब्ध अध्यायों की सूची */
+const chapterLists = {
+ Mathematics: [
+  "वास्तविक संख्याएँ (Real Numbers)",
+  "बहुपद (Polynomials)",
+  "दो चरों वाले रैखिक समीकरण युग्म",
+  "द्विघात समीकरण (Quadratic Equations)",
+  "समांतर श्रेढ़ियाँ (Arithmetic Progressions)",
+  "त्रिभुज (Triangles)",
+  "निर्देशांक ज्यामिति (Coordinate Geometry)",
+  "त्रिकोणमिति का परिचय",
+  "त्रिकोणमिति के कुछ अनुप्रयोग",
+  "वृत्त (Circles)",
+  "वृत्तों से संबंधित क्षेत्रफल",
+  "पृष्ठीय क्षेत्रफल और आयतन",
+  "सांख्यिकी (Statistics)",
+  "प्रायिकता (Probability)"
+ ],
+ Science: [],
+ SocialScience: [],
+ Hindi: [],
+ English: [],
+ Sanskrit: []
+};
 
-realNumbersMCQ.forEach((item, i) => {
+/* वर्तमान में उपलब्ध प्रश्न बैंक */
+const questionBank = {
+ "mp-hi-Mathematics-0": [
+ {q:"यूक्लिड विभाजन एल्गोरिथ्म में a = bq + r में शेषफल r के लिए सही शर्त क्या है?",o:["0 ≤ r < b","r > b","r = b","r < 0"],a:0,e:"शेषफल हमेशा 0 या धनात्मक होता है और भाजक से छोटा होता है।"},
+ {q:"दो धनात्मक पूर्णांकों का HCF ज्ञात करने के लिए किस एल्गोरिथ्म का प्रयोग होता है?",o:["यूक्लिड विभाजन एल्गोरिथ्म","न्यूटन विधि","द्विघात सूत्र","पाइथागोरस प्रमेय"],a:0,e:"यूक्लिड विभाजन एल्गोरिथ्म से HCF ज्ञात किया जाता है।"},
+ {q:"12 और 18 का HCF क्या है?",o:["2","3","6","9"],a:2,e:"12 और 18 का सबसे बड़ा उभयनिष्ठ गुणनखंड 6 है।"},
+ {q:"12 और 18 का LCM क्या है?",o:["24","36","48","72"],a:1,e:"12 और 18 का लघुत्तम समापवर्त्य 36 है।"},
+ {q:"दो संख्याओं के लिए HCF × LCM बराबर होता है?",o:["दोनों का योग","दोनों का अंतर","दोनों का गुणनफल","दोनों का भागफल"],a:2,e:"HCF और LCM का गुणनफल उन संख्याओं के गुणनफल के बराबर होता है।"},
+ {q:"निम्न में से कौन अभाज्य संख्या है?",o:["21","27","29","39"],a:2,e:"29 के केवल दो गुणनखंड 1 और 29 हैं।"},
+ {q:"सबसे छोटी अभाज्य संख्या कौन-सी है?",o:["0","1","2","3"],a:2,e:"2 सबसे छोटी अभाज्य संख्या है।"},
+ {q:"1 संख्या कैसी है?",o:["अभाज्य","भाज्य","न अभाज्य न भाज्य","सम अभाज्य"],a:2,e:"1 न अभाज्य है न भाज्य।"},
+ {q:"निम्न में से कौन अपरिमेय संख्या है?",o:["1/2","0.25","√2","3"],a:2,e:"√2 अपरिमेय संख्या है।"},
+ {q:"परिमेय संख्या का दशमलव प्रसार कैसा होता है?",o:["सदैव असांत","सांत या असांत आवर्ती","सदैव अनावर्ती","सदैव पूर्णांक"],a:1,e:"परिमेय संख्या का दशमलव प्रसार सांत या असांत आवर्ती होता है।"},
+ {q:"अपरिमेय संख्या का दशमलव प्रसार कैसा होता है?",o:["सांत","असांत अनावर्ती","असांत आवर्ती","पूर्णांक"],a:1,e:"अपरिमेय संख्या का दशमलव प्रसार असांत और अनावर्ती होता है।"},
+ {q:"√3 किस प्रकार की संख्या है?",o:["परिमेय","अपरिमेय","पूर्णांक","प्राकृतिक"],a:1,e:"√3 अपरिमेय संख्या है।"},
+ {q:"0.125 का भिन्न रूप क्या है?",o:["1/4","1/8","1/5","1/10"],a:1,e:"0.125 = 125/1000 = 1/8।"},
+ {q:"13 का अभाज्य गुणनखंड क्या है?",o:["1 × 13","2 × 7","3 × 4","5 × 2"],a:0,e:"13 स्वयं एक अभाज्य संख्या है।"},
+ {q:"140 का अभाज्य गुणनखंड रूप क्या है?",o:["2² × 5 × 7","2 × 5 × 7","2³ × 5","2² × 7"],a:0,e:"140 = 2 × 2 × 5 × 7।"},
+ {q:"96 का अभाज्य गुणनखंड रूप क्या है?",o:["2⁴ × 3","2⁵ × 3","2³ × 3²","2 × 3²"],a:1,e:"96 = 2⁵ × 3।"},
+ {q:"यदि दो संख्याओं का HCF 1 हो तो वे कहलाती हैं?",o:["सम संख्याएँ","सह-अभाज्य संख्याएँ","अभाज्य संख्याएँ","विषम संख्याएँ"],a:1,e:"जिन संख्याओं का HCF 1 होता है वे सह-अभाज्य कहलाती हैं।"},
+ {q:"7 और 15 का HCF क्या है?",o:["1","3","5","7"],a:0,e:"7 और 15 का HCF 1 है।"},
+ {q:"7 और 15 का LCM क्या है?",o:["35","75","105","120"],a:2,e:"सह-अभाज्य संख्याओं का LCM उनका गुणनफल होता है।"},
+ {q:"यदि HCF = 4 और LCM = 60 हो तथा एक संख्या 12 हो, तो दूसरी संख्या क्या होगी?",o:["15","20","24","30"],a:1,e:"दूसरी संख्या = (4 × 60)/12 = 20।"},
+ {q:"एक परिमेय संख्या का हर सरलतम रूप में 2 और 5 के अतिरिक्त अभाज्य गुणनखंड रखता है। उसका दशमलव प्रसार कैसा होगा?",o:["सांत","असांत आवर्ती","असांत अनावर्ती","पूर्णांक"],a:1,e:"हर में 2 और 5 के अलावा अन्य अभाज्य गुणनखंड होने पर दशमलव प्रसार असांत आवर्ती होता है।"},
+ {q:"किस भिन्न का दशमलव प्रसार सांत होगा?",o:["7/30","13/40","11/21","5/18"],a:1,e:"40 = 2³ × 5 है, इसलिए 13/40 का दशमलव प्रसार सांत है।"},
+ {q:"√5 + √5 का मान क्या है?",o:["√10","2√5","5√2","10"],a:1,e:"√5 + √5 = 2√5।"},
+ {q:"निम्न में से कौन-सी संख्या परिमेय है?",o:["√7","√11","√16","√13"],a:2,e:"√16 = 4, जो परिमेय संख्या है।"},
+ {q:"2 और 3 के बीच कितनी परिमेय संख्याएँ हैं?",o:["एक","दो","दस","अनंत"],a:3,e:"किन्हीं दो भिन्न परिमेय संख्याओं के बीच अनंत परिमेय संख्याएँ होती हैं।"},
+ {q:"यूक्लिड विभाजन प्रमेय में भाजक कैसा होना चाहिए?",o:["शून्य","ऋणात्मक","धनात्मक","कोई भी वास्तविक संख्या"],a:2,e:"भाजक धनात्मक पूर्णांक होता है।"},
+ {q:"135 और 225 का HCF क्या है?",o:["15","25","45","75"],a:2,e:"135 और 225 का HCF 45 है।"},
+ {q:"96 और 404 का HCF क्या है?",o:["2","4","8","12"],a:1,e:"96 और 404 का HCF 4 है।"},
+ {q:"यदि किसी संख्या का अभाज्य गुणनखंड रूप 2³ × 3² हो तो संख्या क्या है?",o:["36","72","108","144"],a:1,e:"2³ × 3² = 8 × 9 = 72।"},
+ {q:"अंकगणित की आधारभूत प्रमेय के अनुसार प्रत्येक भाज्य संख्या को किस रूप में व्यक्त किया जा सकता है?",o:["अभाज्य गुणनखंडों के गुणनफल के रूप में","केवल सम संख्याओं के रूप में","केवल विषम संख्याओं के रूप में","केवल 1 और स्वयं के योग के रूप में"],a:0,e:"प्रत्येक भाज्य संख्या का अभाज्य गुणनखंडों में गुणनखंडन अद्वितीय होता है।"}
+ ]
+};
+
+/* Chapter list दिखाना */
+function updateMediumOptions(){
+ if(boardSelect.value === "cbse"){
+  mediumSelect.innerHTML = '<option value="en">English Medium</option>';
+  mediumSelect.value = "en";
+ }else{
+  mediumSelect.innerHTML =
+   '<option value="hi">Hindi Medium</option><option value="en">English Medium</option>';
+ }
+ updateChapters();
+}
+
+function updateChapters(){
+ const subject = subjectSelect.value;
+ const list = document.getElementById("chapterList");
+ const info = document.getElementById("chapterInfo");
+ list.innerHTML = "";
+
+ const chapters = chapterLists[subject] || [];
+
+ if(chapters.length === 0){
+  info.textContent = "इस विषय की सही अध्याय सूची और MCQ Question Bank अगले चरण में जोड़ी जाएगी।";
+  return;
+ }
+
+ chapters.forEach((name,index)=>{
   const div = document.createElement("div");
-  div.style.margin = "15px 0";
+  div.className = "chapter-item";
   div.innerHTML = `
-    <p><b>प्रश्न ${i + 1}. ${item.q}</b></p>
-    ${item.o.map((option, j) => `
-      <label style="display:block;margin:6px 0">
-        <input type="radio" name="rn${i}" value="${j}">
-        ${option}
-      </label>
-    `).join("")}
-    <p id="rnExplanation${i}" style="display:none"></p>
-  `;
-  realNumbersContainer.appendChild(div);
-});
+   <label>
+    <input type="radio" name="chapterChoice" value="${index}">
+    <span>Chapter ${index+1}: ${name}</span>
+   </label>`;
+  list.appendChild(div);
+ });
 
-function checkRealNumbersTest() {
-  let score = 0;
-  realNumbersMCQ.forEach((item, i) => {
-    const selected = document.querySelector(`input[name="rn${i}"]:checked`);
-    const explanation = document.getElementById(`rnExplanation${i}`);
-    if (selected && Number(selected.value) === item.a) score++;
-    explanation.style.display = "block";
-    explanation.textContent = "सही उत्तर: " + item.o[item.a] + " | " + item.e;
+ info.textContent = "अपना Chapter चुनें। प्रत्येक Chapter Test में 30 प्रश्न और 45 मिनट होंगे।";
+}
+
+boardSelect.addEventListener("change",updateMediumOptions);
+mediumSelect.addEventListener("change",updateChapters);
+subjectSelect.addEventListener("change",updateChapters);
+
+let timerInterval = null;
+let remainingSeconds = 45 * 60;
+let currentQuestions = [];
+let testSubmitted = false;
+
+/* Test शुरू करना */
+function startTest(){
+ const board = boardSelect.value;
+ const medium = mediumSelect.value;
+ const subject = subjectSelect.value;
+ const selected = document.querySelector('input[name="chapterChoice"]:checked');
+
+ if(!selected){
+  alert("कृपया पहले Chapter चुनें।");
+  return;
+ }
+
+ const chapterIndex = Number(selected.value);
+ const key = board + "-" + (medium === "hi" ? "hi" : "en") + "-" + subject + "-" + chapterIndex;
+ const questions = questionBank[key];
+
+ if(!questions){
+  alert("इस Chapter का 30 MCQ Question Bank अभी जोड़ा नहीं गया है। पहले उपलब्ध Chapter 1 का टेस्ट MP Board Hindi Mathematics में है।");
+  return;
+ }
+
+ currentQuestions = questions;
+ testSubmitted = false;
+ remainingSeconds = 45 * 60;
+
+ document.getElementById("selectionArea").style.display = "none";
+ document.getElementById("testArea").style.display = "block";
+
+ const chapterName = chapterLists[subject][chapterIndex];
+ document.getElementById("testHeading").textContent = chapterName;
+ document.getElementById("testDetails").textContent =
+  "MP Board Hindi | Mathematics | 30 Questions | 45 Minutes";
+
+ renderQuestions();
+ updateTimer();
+ timerInterval = setInterval(updateTimer,1000);
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* प्रश्न दिखाना */
+function renderQuestions(){
+ const area = document.getElementById("questions");
+ area.innerHTML = "";
+
+ currentQuestions.forEach((item,i)=>{
+  const div = document.createElement("div");
+  div.className = "question";
+
+  let html = `<p><b>प्रश्न ${i+1}. ${item.q}</b></p>`;
+
+  item.o.forEach((option,j)=>{
+   html += `
+    <label>
+     <input type="radio" name="answer${i}" value="${j}">
+     ${option}
+    </label>`;
   });
-  document.getElementById("realNumbersResult").textContent =
-    "आपका परिणाम: " + score + " / 30";
-}
-</script>
-  <script>
-function updateMediumOptions() {
-  const board = document.getElementById("board").value;
-  const medium = document.getElementById("medium");
 
-  if (board === "cbse") {
-    medium.innerHTML = '<option value="en">English Medium</option>';
-    medium.value = "en";
-  } else {
-    medium.innerHTML = `
-      <option value="hi">Hindi Medium</option>
-      <option value="en">English Medium</option>
-    `;
-    medium.value = "hi";
-  }
+  html += `<p id="explanation${i}" style="display:none"></p>`;
+  div.innerHTML = html;
+  area.appendChild(div);
+ });
 }
+
+/* Timer */
+function updateTimer(){
+ const timer = document.getElementById("timer");
+ const minutes = Math.floor(remainingSeconds/60);
+ const seconds = remainingSeconds%60;
+
+ timer.textContent =
+  String(minutes).padStart(2,"0") + ":" +
+  String(seconds).padStart(2,"0");
+
+ if(remainingSeconds <= 0){
+  submitTest(true);
+  return;
+ }
+ remainingSeconds--;
+}
+
+/* Submit और Auto Submit */
+function submitTest(autoSubmit){
+ if(testSubmitted) return;
+
+ if(!autoSubmit && !confirm("क्या आप टेस्ट Submit करना चाहते हैं?")){
+  return;
+ }
+
+ testSubmitted = true;
+ clearInterval(timerInterval);
+
+ let score = 0;
+ let attempted = 0;
+
+ currentQuestions.forEach((item,i)=>{
+  const selected = document.querySelector(`input[name="answer${i}"]:checked`);
+  const explanation = document.getElementById("explanation"+i);
+
+  if(selected){
+   attempted++;
+   if(Number(selected.value) === item.a) score++;
+  }
+
+  explanation.style.display = "block";
+  explanation.innerHTML =
+   "<b>सही उत्तर:</b> " + item.o[item.a] +
+   "<br><b>व्याख्या:</b> " + item.e;
+ });
+
+ document.getElementById("result").textContent =
+  (autoSubmit ? "समय पूरा! Auto Submit | " : "टेस्ट Submit हुआ | ") +
+  "आपका परिणाम: " + score + " / " + currentQuestions.length +
+  " | Attempted: " + attempted;
+
+ document.getElementById("submitButton").disabled = true;
+ window.scrollTo({top:document.getElementById("result").offsetTop,behavior:"smooth"});
+}
+
+/* पहली बार Medium और Chapter list सेट करें */
+updateMediumOptions();
 </script>
+
 </body>
 </html>
-
