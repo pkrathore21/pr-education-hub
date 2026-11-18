@@ -1157,7 +1157,8 @@ function updateChapters(){
   return;
  }
 
- chapters.forEach((name,index)=>{
+ 
+chapters.forEach((name,index)=>{
   const div = document.createElement("div");
   div.className = "chapter-item";
   div.innerHTML = `
@@ -1167,6 +1168,23 @@ function updateChapters(){
    </label>`;
   list.appendChild(div);
  });
+
+[
+  {value:"full", name:"Full Subject Test"},
+  {value:"mock1", name:"Mock Test 1"},
+  {value:"mock2", name:"Mock Test 2"},
+  {value:"mock3", name:"Mock Test 3"}
+].forEach(item=>{
+  const div = document.createElement("div");
+  div.className = "chapter-item";
+  div.innerHTML = `
+   <label>
+    <input type="radio" name="chapterChoice" value="${item.value}">
+    <span>${item.name} – 30 MCQs | 45 Minutes</span>
+   </label>`;
+  list.appendChild(div);
+ });
+
 
  info.textContent = "अपना Chapter चुनें। प्रत्येक Chapter Test में 30 प्रश्न और 45 मिनट होंगे।";
 }
