@@ -1227,14 +1227,18 @@ const completedChapters = savedProgress[subjectKey] || [];
 chapters.forEach((name,index)=>{
   const div = document.createElement("div");
   div.className = "chapter-item";
+const chapterProgress = completedChapters[index];
+const isDone = chapterProgress && chapterProgress.done === true;
 
-  const isDone = completedChapters[index] === true;
-
+const statusText = isDone
+ ? `✅ Done – ${chapterProgress.score}/${chapterProgress.total} (${chapterProgress.percentage}%)`
+ : "⏳ Pending";
   div.innerHTML = `
    <label>
     <input type="radio" name="chapterChoice" value="${index}">
     <span>Chapter ${index+1}: ${name}
-    ${isDone ? " ✅ Done" : " ⏳ Pending"}</span>
+    ${statusText}
+    </span>
    </label>`;
 
   list.appendChild(div);
