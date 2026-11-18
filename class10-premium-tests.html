@@ -1211,6 +1211,12 @@ function startTest(){
  }
 
  const chapterIndex = Number(selected.value);
+ window.currentTestProgress = {
+ board: board,
+ medium: medium,
+ subject: subject,
+ chapterIndex: chapterIndex
+};
  const key = board + "-" + (medium === "hi" ? "hi" : "en") + "-" + subject + "-" + chapterIndex;
  const questions = questionBank[key];
 
@@ -1308,6 +1314,29 @@ function submitTest(autoSubmit){
    "<b>सही उत्तर:</b> " + item.o[item.a] +
    "<br><b>व्याख्या:</b> " + item.e;
  });
+
+const p = window.currentTestProgress;
+
+if(p && Number.isInteger(p.chapterIndex)){
+ const progressKey = "prEducationHubProgress";
+ let progress = JSON.parse(localStorage.getItem(progressKey) || "{}");
+
+ const subjectKey = p.board + "-" + p.medium + "-" + p.subject;
+
+ if(!progress[subjectKey]){
+  progress[subjectKey] = [];
+ }
+
+ progress[subjectKey][p.chapterIndex] = true;
+
+ localStorage.setItem(progressKey, JSON.stringify(progress));
+
+ const completed = progress[subjectKey].filter(Boolean).length;
+ const total = chapterLists[p.subject].length;
+
+ document.getElementById("result").textContent +=
+  " | Chapters Completed: " + completed + " / " + total;
+}
 
  document.getElementById("result").textContent =
   (autoSubmit ? "समय पूरा! Auto Submit | " : "टेस्ट Submit हुआ | ") +
