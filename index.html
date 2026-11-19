@@ -372,8 +372,10 @@ async function checkMembership() {
     expiry.toDate().toLocaleDateString("en-IN");
 
   return true;
-} window.checkMembership = checkMembership;
-  window.getMembershipDetails = async function () {
+
+window.checkMembership = checkMembership;
+
+window.getMembershipDetails = async function () {
   if (!currentUser) return null;
 
   const studentRef = doc(db, "students", currentUser.uid);
@@ -400,6 +402,55 @@ async function checkMembership() {
     plan: data.membershipPlan || "none"
   };
 };
+
+async function openPremiumPage(requiredPlan, page) {
+  if (!currentUser) {
+    alert("पहले Mobile OTP से Login करें।");
+    document.getElementById("premium")?.scrollIntoView();
+    return;
+  }
+
+  try {
+    const membership = await window.getMembershipDetails();
+
+    if (!membership || !membership.active) {
+      alert("आपकी Premium Membership Active नहीं है। पहले भुगतान करें।");
+      document.getElementById("premium")?.scrollIntoView();
+      return;
+    }
+
+    const plan = String(membership.plan).toLowerCase();
+
+    const allowed =
+      plan.includes("combo") ||
+      plan.includes(requiredPlan);
+
+    if (!allowed) {
+      alert("इस Test के लिए सही Premium Membership जरूरी है।");
+      return;
+    }
+
+    window.location.href = page;
+
+  } catch (error) {
+    console.error(error);
+    alert("Membership जाँचने में समस्या हुई।");
+  }
+}
+
+const class10Btn = document.getElementById("openClass10Btn");
+if (class10Btn) {
+  class10Btn.addEventListener("click", () => {
+    openPremiumPage("class 10", "class10-premium-tests.html");
+  });
+}
+
+const class12Btn = document.getElementById("openClass12Btn");
+if (class12Btn) {
+  class12Btn.addEventListener("click", () => {
+    openPremiumPage("class 12", "class12-premium-tests.html");
+  });
+}
 auth.languageCode = "en";
 
 let recaptchaVerifier = null;
