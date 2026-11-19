@@ -315,7 +315,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebas
 import {
   getAuth,
   RecaptchaVerifier,
-  signInWithPhoneNumber
+  signInWithPhoneNumber,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 import {
   getFirestore,
@@ -338,7 +339,14 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
   const db = getFirestore(app);
 let currentUser = null;
-    
+   onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+
+  if (user) {
+    console.log("Student already logged in:", user.phoneNumber);
+    await checkMembership();
+  }
+}); 
 async function checkMembership() {
   if (!currentUser) return false;
 
