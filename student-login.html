@@ -273,6 +273,139 @@ function continueToOTP(){
  alert("चयन पूरा हुआ। अगला चरण Firebase OTP Verification और सुरक्षित Payment Verification जोड़ना है।");
 }
 </script>
+ 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
+  authDomain: "pr-education-hub.firebaseapp.com",
+  projectId: "pr-education-hub",
+  storageBucket: "pr-education-hub.firebasestorage.app",
+  messagingSenderId: "907993736868",
+  appId: "1:907993736868:web:b7c098a10914a61ceca831",
+  measurementId: "G-V61NSSNFRQ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let confirmationResult = null;
+let recaptchaVerifier = null;
+let currentUser = null;
+
+await setPersistence(auth, browserLocalPersistence);
+
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+
+  if (user) {
+    document.getElementById("otpMessage").textContent =
+      "आप पहले से Login हैं: " + user.phoneNumber;
+    document.getElementById("sendOtpBtn").textContent = "Already Logged In";
+    document.getElementById("sendOtpBtn").disabled = true;
+  }
+});
+
+document.getElementById("sendOtpBtn").addEventListener("click", async () => {
+  const name = document.getElementById("studentName").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+  const message = document.getElementById("otpMessage");
+
+  if (!name) {
+    message.textContent = "कृपया विद्यार्थी का नाम लिखें।";
+    return;
+  }
+
+  if (!/^[6-9]\d{9}$/.test(mobile)) {
+    message.textContent = "कृपया सही 10 अंकों का मोबाइल नंबर लिखें।";
+    return;
+  }
+
+  try {
+    message.textContent = "OTP भेजा जा रहा है...";
+
+    if (!recaptchaVerifier) {
+      recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        { size: "normal" }
+      );
+    }
+
+    await recaptchaVerifier.render();
+
+    confirmationResult = await signInWithPhoneNumber(
+      auth,
+      "+91" + mobile,
+      recaptchaVerifier
+    );
+
+    document.getElementById("otpArea").classList.remove("hidden");
+    message.textContent = "OTP भेज दिया गया है। अपना OTP दर्ज करें।";
+
+  } catch (error) {
+    console.error(error);
+    message.textContent = "OTP नहीं भेजा जा सका: " + error.message;
+  }
+});
+
+document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
+  const name = document.getElementById("studentName").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+  const otp = document.getElementById("studentOtp").value.trim();
+  const message = document.getElementById("otpMessage");
+
+  if (!confirmationResult) {
+    message.textContent = "पहले OTP भेजें।";
+    return;
+  }
+
+  if (!/^\d{6}$/.test(otp)) {
+    message.textContent = "6 अंकों का सही OTP दर्ज करें।";
+    return;
+  }
+
+  try {
+    message.textContent = "OTP Verify हो रहा है...";
+
+    const result = await confirmationResult.confirm(otp);
+    currentUser = result.user;
+
+    await setDoc(doc(db, "students", currentUser.uid), {
+      name: name,
+      phoneNumber: "+91" + mobile,
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+
+    message.textContent = "Login सफल! आपका मोबाइल नंबर Verify हो गया है।";
+
+  } catch (error) {
+    console.error(error);
+    message.textContent = "OTP Verification असफल: " + error.message;
+  }
+});
+</script>
+</body>
+</html>
+
 </body>
 </html>
 
