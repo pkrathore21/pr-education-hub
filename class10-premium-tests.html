@@ -1275,6 +1275,7 @@ let currentQuestions = [];
 let testSubmitted = false;
 
 /* Test शुरू करना */
+
 function startTest(){
  const board = boardSelect.value;
  const medium = mediumSelect.value;
@@ -1282,36 +1283,94 @@ function startTest(){
  const selected = document.querySelector('input[name="chapterChoice"]:checked');
 
  if(!selected){
-  alert("कृपया पहले Chapter चुनें।");
+  alert("कृपया पहले Test या Chapter चुनें।");
   return;
  }
 
- const chapterIndex = Number(selected.value);
- window.currentTestProgress = {
- board: board,
- medium: medium,
- subject: subject,
- chapterIndex: chapterIndex
-};
- const key = board + "-" + (medium === "hi" ? "hi" : "en") + "-" + subject + "-" + chapterIndex;
- const questions = questionBank[key];
+ const selectedValue = selected.value;
+ const prefix = board + "-" +
+  (medium === "hi" ? "hi" : "en") + "-" + subject;
 
- if(!questions){
-  alert("इस Chapter का 30 MCQ Question Bank अभी जोड़ा नहीं गया है। पहले उपलब्ध Chapter 1 का टेस्ट MP Board Hindi Mathematics में है।");
-  return;
+ let testTitle = "";
+ let questions = [];
+ let chapterIndex = null;
+
+ if(selectedValue === "full" ||
+    selectedValue === "mock1" ||
+    selectedValue === "mock2" ||
+    selectedValue === "mock3"){
+
+  const allQuestions = [];
+
+  Object.keys(questionBank).forEach(key=>{
+   if(key.startsWith(prefix + "-")){
+    const bank = questionBank[key];
+    if(Array.isArray(bank)){
+     allQuestions.push(...bank);
+    }
+   }
+  });
+
+  if(allQuestions.length < 30){
+   alert("इस Subject के Full Test और Mock Tests के लिए कम से कम 30 MCQs उपलब्ध होने चाहिए।");
+   return;
+  }
+
+  if(selectedValue === "full"){
+   testTitle = "Full Subject Test";
+  }else{
+   testTitle = "Mock Test " + selectedValue.slice(-1);
+  }
+
+  const shuffled = [...allQuestions];
+
+  for(let i=shuffled.length-1;i>0;i--){
+   const j = Math.floor(Math.random()*(i+1));
+   [shuffled[i],shuffled[j]] = [shuffled[j],shuffled[i]];
+  }
+
+  questions = shuffled.slice(0,30);
+
+ }else{
+
+  chapterIndex = Number(selectedValue);
+
+  const key = prefix + "-" + chapterIndex;
+  questions = questionBank[key];
+
+  if(!questions){
+   alert("इस Chapter का Question Bank अभी उपलब्ध नहीं है।");
+   return;
+  }
+
+  testTitle = chapterLists[subject][chapterIndex];
  }
 
  currentQuestions = questions;
  testSubmitted = false;
  remainingSeconds = 45 * 60;
 
+ window.currentTestProgress = {
+  board: board,
+  medium: medium,
+  subject: subject,
+  chapterIndex: chapterIndex,
+  testType: selectedValue
+ };
+
  document.getElementById("selectionArea").style.display = "none";
  document.getElementById("testArea").style.display = "block";
 
- const chapterName = chapterLists[subject][chapterIndex];
- document.getElementById("testHeading").textContent = chapterName;
+ document.getElementById("testHeading").textContent = testTitle;
+
  document.getElementById("testDetails").textContent =
-  "MP Board Hindi | Mathematics | 30 Questions | 45 Minutes";
+  board.toUpperCase() + " | " +
+  medium.toUpperCase() + " | " +
+  subject + " | 30 Questions | 45 Minutes";
+
+ document.getElementById("submitButton").disabled = false;
+ document.getElementById("result").innerHTML = "";
+ document.getElementById("review").innerHTML = "";
 
  renderQuestions();
  updateTimer();
