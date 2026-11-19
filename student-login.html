@@ -150,14 +150,35 @@ input{
 <p class="muted">Membership अवधि: 6 महीने</p>
 </section>
 
+
 <section class="panel hidden" id="studentPanel">
-<h2>Student Details</h2>
+<h2>Student Details & Mobile Login</h2>
+
 <label>Student Name</label>
 <input id="studentName" placeholder="अपना पूरा नाम लिखें">
+
 <label>Mobile Number</label>
-<input id="mobile" type="tel" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर">
-<button class="action" onclick="continueToOTP()">Continue to OTP Verification</button>
-<p class="muted">अगले चरण में Firebase Mobile OTP Login जोड़ा जाएगा।</p>
+<input id="mobile" type="tel" maxlength="10"
+inputmode="numeric" placeholder="10 अंकों का मोबाइल नंबर">
+
+<button class="action" id="sendOtpBtn" type="button">
+Send Mobile OTP
+</button>
+
+<div id="recaptcha-container"></div>
+
+<div id="otpArea" class="hidden">
+<label>Enter OTP</label>
+<input id="studentOtp" type="text"
+inputmode="numeric" maxlength="6"
+placeholder="6 Digit OTP">
+
+<button class="action" id="verifyOtpBtn" type="button">
+Verify OTP & Login
+</button>
+</div>
+
+<p id="otpMessage" class="muted"></p>
 </section>
 
 </main>
