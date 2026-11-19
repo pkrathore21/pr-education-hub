@@ -338,7 +338,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
   const db = getFirestore(app);
 let currentUser = null;
-  
+    
 async function checkMembership() {
   if (!currentUser) return false;
 
@@ -348,7 +348,6 @@ async function checkMembership() {
   if (!snapshot.exists()) return false;
 
   const data = snapshot.data();
-
   const expiry = data.expiryDate;
 
   if (
@@ -372,6 +371,7 @@ async function checkMembership() {
     expiry.toDate().toLocaleDateString("en-IN");
 
   return true;
+}
 
 window.checkMembership = checkMembership;
 
@@ -405,7 +405,7 @@ window.getMembershipDetails = async function () {
 
 async function openPremiumPage(requiredPlan, page) {
   if (!currentUser) {
-    alert("पहले Mobile OTP से Login करें।");
+    alert("पहले Student Login करें।");
     document.getElementById("premium")?.scrollIntoView();
     return;
   }
@@ -451,6 +451,7 @@ if (class12Btn) {
     openPremiumPage("class 12", "class12-premium-tests.html");
   });
 }
+
 auth.languageCode = "en";
 
 let recaptchaVerifier = null;
