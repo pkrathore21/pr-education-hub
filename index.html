@@ -268,10 +268,10 @@ target="_blank" rel="noopener">Watch Video</a>
 
     const plan = String(membership.plan).toLowerCase();
 
-    if (plan !== "class 10" && plan !== "combo") {
-      alert("इस Test के लिए Class 10 या Combo Membership जरूरी है।");
-      return;
-    }
+    if (!plan.includes("class 10") && !plan.includes("combo")) {
+  alert("इस Test के लिए Class 10 या Combo Membership जरूरी है।");
+  return;
+}
 
     alert("आपकी Class 10 Membership Active है। Paid Test जल्द उपलब्ध होगा।");
 
