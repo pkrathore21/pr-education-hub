@@ -1,320 +1,575 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="PR Education Hub by Pawan Rathore - MP Board, CBSE Maths, Science, Study Materials and Online Tests.">
 <title>PR Education Hub | By Pawan Rathore</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,"Noto Sans Devanagari",sans-serif;line-height:1.6;color:#172033}header{background:#173b72;color:white;text-align:center;padding:22px}nav{background:#102b53;display:flex;flex-wrap:wrap;justify-content:center;position:sticky;top:0;z-index:5}nav a{color:white;text-decoration:none;padding:10px}nav a:hover{background:#315b91}main{max-width:1050px;margin:auto;padding:18px}section{padding:25px 0;border-bottom:1px solid #e3e8ef;scroll-margin-top:60px}h2{color:#173b72;margin-bottom:12px}.hero{display:grid;grid-template-columns:145px 1fr;gap:20px;align-items:center;background:#f3f6fb;padding:20px;border-radius:12px}.profile{width:140px;height:140px;object-fit:cover;border-radius:50%;border:4px solid white}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{border:1px solid #dce3ed;border-radius:10px;padding:15px;box-shadow:0 2px 7px #0000000b}.btn{display:inline-block;border:0;border-radius:7px;background:#173b72;color:white;text-decoration:none;padding:10px 15px;margin:6px 4px 0 0;cursor:pointer;font-size:1rem}.green{background:#16834a}.gold{background:#a96100}.muted{color:#64748b;font-size:.93rem}.pill{display:inline-block;background:#eaf1fc;color:#173b72;border-radius:20px;padding:3px 9px;margin:4px 2px;font-size:.85rem}.notice{background:#fff7e6;border-left:4px solid #f59e0b;padding:12px;margin:12px 0}input,select{padding:9px;border:1px solid #cbd5e1;border-radius:6px;font-size:1rem}.question{padding:14px 0;border-bottom:1px solid #e3e8ef}.option{display:block;padding:9px;margin:7px 0;border:1px solid #dce3ed;border-radius:7px;cursor:pointer}.option input{margin-right:8px}footer{background:#102b53;color:white;text-align:center;padding:22px;margin-top:25px}#quizArea[hidden],#resultArea[hidden]{display:none}@media(max-width:600px){.hero{grid-template-columns:1fr;text-align:center}.profile{margin:auto}main{padding:13px}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,"Noto Sans Devanagari",sans-serif;
+  line-height:1.6;
+  color:#172033;
+  background:#fff
+}
+header{
+  background:#173b72;
+  color:white;
+  text-align:center;
+  padding:20px 12px
+}
+header h1{font-size:25px}
+header p{font-size:14px}
+nav{
+  background:#102b53;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  position:sticky;
+  top:0;
+  z-index:10
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  padding:10px 12px;
+  white-space:nowrap;
+  font-size:14px
+}
+nav a:hover{background:#315b91}
+main{max-width:1050px;margin:auto;padding:16px}
+section{
+  padding:24px 0;
+  border-bottom:1px solid #e3e8ef;
+  scroll-margin-top:65px
+}
+h2{color:#173b72;margin-bottom:12px}
+h3{color:#173b72}
+.hero{
+  display:grid;
+  grid-template-columns:130px 1fr;
+  gap:20px;
+  align-items:center;
+  background:#f3f6fb;
+  padding:20px;
+  border-radius:12px
+}
+.profile{
+  width:125px;
+  height:125px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid white
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px
+}
+.card{
+  border:1px solid #dce3ed;
+  border-radius:10px;
+  padding:15px;
+  box-shadow:0 2px 7px #0000000b;
+  background:white
+}
+.btn{
+  display:inline-block;
+  border:0;
+  border-radius:7px;
+  background:#173b72;
+  color:white;
+  text-decoration:none;
+  padding:10px 15px;
+  margin:6px 4px 0 0;
+  cursor:pointer;
+  font-size:15px;
+  text-align:center
+}
+.btn:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.green{background:#16834a}
+.gold{background:#a96100}
+.muted{color:#64748b;font-size:.93rem}
+.pill{
+  display:inline-block;
+  background:#eaf1fc;
+  color:#173b72;
+  border-radius:20px;
+  padding:3px 9px;
+  margin:4px 2px;
+  font-size:.85rem
+}
+.notice{
+  background:#fff7e6;
+  border-left:4px solid #f59e0b;
+  padding:12px;
+  margin:12px 0
+}
+.demo-panel{
+  background:#f8fafc;
+  border:1px solid #dce3ed;
+  border-radius:10px;
+  padding:15px;
+  margin-top:14px
+}
+.demo-panel h3{margin-bottom:8px}
+.choice-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0
+}
+.choice-buttons .btn{margin:0}
 .video-frame{
-width:100%;
-aspect-ratio:16/9;
-border:0;
-border-radius:8px;
-margin:10px 0;
+  width:100%;
+  aspect-ratio:16/9;
+  border:0;
+  border-radius:8px;
+  margin:10px 0
 }
 .unit-card h3{color:#173b72}
-.unit-card .btn{width:100%;text-align:center}</style></head>
+.unit-card .btn{width:100%;margin:8px 0 0}
+input,select{
+  padding:9px;
+  border:1px solid #cbd5e1;
+  border-radius:6px;
+  font-size:1rem
+}
+.question{padding:14px 0;border-bottom:1px solid #e3e8ef}
+.option{
+  display:block;
+  padding:9px;
+  margin:7px 0;
+  border:1px solid #dce3ed;
+  border-radius:7px;
+  cursor:pointer
+}
+.option input{margin-right:8px}
+footer{
+  background:#102b53;
+  color:white;
+  text-align:center;
+  padding:22px;
+  margin-top:25px
+}
+#quizArea[hidden],#resultArea[hidden]{display:none}
+@media(max-width:600px){
+  main{padding:12px}
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:10px
+  }
+  .profile{margin:auto;width:110px;height:110px}
+  nav{
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap
+  }
+  nav a{font-size:13px;padding:9px}
+  .grid{grid-template-columns:1fr}
+  .btn{font-size:14px}
+}
+</style>
+</head>
+
 <body>
-<header><h1>PR Education Hub</h1><p>By Pawan Rathore | Learn • Practice • Succeed</p></header>
-<nav><a href="#home">Home</a><a href="#classes">Classes</a><a href="#study">Study Material</a><a href="#tests">Online Tests</a><a class="btn green" href="class12-mp-science-hindi-demo.html">
-Class 12 Science – Free Demo Test
-</a><a href="#videos">Videos</a><a href="#jobs">Govt Jobs</a><a href="#about">About</a><a href="#premium">Premium</a></nav>
+
+<header>
+  <h1>PR Education Hub</h1>
+  <p>By Pawan Rathore | Learn • Practice • Succeed</p>
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#tests">Free Demo Tests</a>
+  <a href="#classes">Classes</a>
+  <a href="#study">Study Material</a>
+  <a href="#premium">Premium Tests</a>
+  <a href="#videos">Videos</a>
+  <a href="#jobs">Govt Jobs</a>
+  <a href="#about">About</a>
+  <a href="student-login.html">Student Login</a>
+</nav>
+
 <main>
-<section id="home"><div class="hero"><img class="profile" src="IMG_20240815_080452.jpg" alt="Pawan Rathore"><div><h2>Welcome to PR Education Hub</h2><p>गणित और विज्ञान को सरल भाषा में सीखें। MP Board, CBSE तथा प्रतियोगी परीक्षाओं के लिए उपयोगी अध्ययन सामग्री और अभ्यास प्रश्न।</p><p><b>EXAM VIDEO BY PAWAN RATHORE</b></p>
 
-<a class="btn" href="#tests">Online MCQ Test</a>
+<!-- HOME -->
+<section id="home">
+  <div class="hero">
+    <img class="profile"
+      src="IMG_20240815_080452.jpg"
+      alt="Pawan Rathore">
 
-<a class="btn green" href="class12-mp-science-hindi-demo.html">
-Class 12 Science – Free Demo Test
-</a>
-  <a class="btn green" href="class12-arts-demo.html">
-Class 12 Arts – Free Demo Test
-</a>
+    <div>
+      <h2>Welcome to PR Education Hub</h2>
 
-<a class="btn green" href="class12-commerce-demo.html">
-Class 12 Commerce – Free Demo Test
-</a>
+      <p>
+        गणित और विज्ञान को सरल भाषा में सीखें।
+        MP Board, CBSE तथा प्रतियोगी परीक्षाओं के लिए
+        उपयोगी अध्ययन सामग्री और अभ्यास प्रश्न।
+      </p>
 
-<a class="btn gold" href="#videos">Watch Videos</a></div></div></section>
-<section id="classes"><h2>Classes & Subjects</h2><div class="grid"><div class="card"><h3>Class 9</h3><p>Mathematics • Science</p><span class="pill">MP Board</span><span class="pill">CBSE</span></div><div class="card"><h3>Class 10</h3><p>Mathematics • Science</p><span class="pill">MP Board</span><span class="pill">CBSE</span></div><div class="card"><h3>Competitive Exams</h3><p>गणित, रीजनिंग एवं सामान्य अध्ययन का अभ्यास।</p></div></div></section>
-<section id="study"><h2>Study Material</h2><div class="grid"><div class="card"><h3>Class 10 Maths</h3><p>अध्यायवार नोट्स और महत्वपूर्ण प्रश्न जल्द उपलब्ध होंगे।</p></div><div class="card"><h3>Class 10 Science</h3><p>अध्ययन सामग्री और अभ्यास प्रश्न जल्द उपलब्ध होंगे।</p></div><div class="card"><h3>Previous Year Questions</h3><p>बोर्ड परीक्षा के पुराने प्रश्नपत्र एवं हल।</p></div></div></section>
-<section id="tests"><h2>Online MCQ Tests – MP Board Class 10 Maths</h2>
-<div class="card">
-  <h3>Free Demo Tests</h3>
-  <p>अपनी कक्षा चुनें और Free MCQ Test दें।</p>
+      <p><b>EXAM VIDEO BY PAWAN RATHORE</b></p>
 
-  
-<h3>Free Demo Tests</h3>
-<p>अपनी कक्षा चुनें और Free MCQ Test दें।</p>
+      <div class="choice-buttons">
+        <a class="btn green" href="#tests">
+          Free Demo Tests शुरू करें
+        </a>
 
-<div style="display:flex; gap:12px; flex-wrap:wrap; margin:15px 0;">
-  <button class="btn green" type="button"
-    onclick="document.getElementById('class10Demo').style.display='block'; document.getElementById('class12Demo').style.display='none';">
-    Class 10
-  </button>
+        <a class="btn" href="student-login.html">
+          Student Login / Register
+        </a>
 
-  <button class="btn green" type="button"
-    onclick="document.getElementById('class12Demo').style.display='block'; document.getElementById('class10Demo').style.display='none';">
-    Class 12
-  </button>
-</div>
-</div>
+        <a class="btn gold" href="#videos">
+          Watch Videos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div id="demoPopup" class="popup-overlay"
-  style="display:none; position:fixed; inset:0; background:#0009; z-index:9999; align-items:center; justify-content:center; padding:15px;">
+<!-- FREE DEMO TESTS -->
+<section id="tests">
+  <h2>Free Demo Tests</h2>
 
-  <div class="card" style="width:100%; max-width:420px; background:white; color:#222;">
-    <button type="button"
-      onclick="document.getElementById('demoPopup').style.display='none'"
-      style="float:right;">✕</button>
+  <div class="card">
+    <h3>अपनी कक्षा चुनें</h3>
+    <p class="muted">
+      कक्षा चुनकर उपलब्ध Free MCQ Demo Test शुरू करें।
+      सभी Free Demo Tests मुफ्त हैं।
+    </p>
 
-    <h3>Free Demo Tests</h3>
-    
-<div style="display:flex; gap:12px; margin:15px 0; flex-wrap:wrap;">
+    <div class="choice-buttons">
+      <button class="btn green" id="showClass10" type="button">
+        Class 10
+      </button>
 
-  <button class="btn green" type="button"
-    onclick="
-      document.getElementById('class10Demo').style.display='block';
-      document.getElementById('class12Demo').style.display='none';
-    ">
-    Class 10
-  </button>
+      <button class="btn green" id="showClass12" type="button">
+        Class 12
+      </button>
+    </div>
+  </div>
 
-  <button class="btn green" type="button"
-    onclick="
-      document.getElementById('class12Demo').style.display='block';
-      document.getElementById('class10Demo').style.display='none';
-    ">
-    Class 12
-  </button>
+  <!-- CLASS 10 OPTIONS -->
+  <div id="class10Demo" class="demo-panel" hidden>
+    <h3>Class 10 – Subjects</h3>
+    <p>अपना विषय चुनें।</p>
 
-</div>
+    <a class="btn green" href="#online-test">
+      Mathematics – Free Demo Test
+    </a>
 
-    <div id="class10Demo" style="display:none; margin-top:15px;">
-      <h4>Class 10 – Subjects</h4>
-      <a class="btn green" href="#online-test">Mathematics Demo Test</a>
-      <p>Other subjects coming soon.</p>
+    <p class="muted">
+      Science और अन्य विषयों के Demo Tests जल्द उपलब्ध होंगे।
+    </p>
+  </div>
+
+  <!-- CLASS 12 OPTIONS -->
+  <div id="class12Demo" class="demo-panel" hidden>
+    <h3>Class 12 – Select Your Stream</h3>
+    <p>अपनी Stream चुनें।</p>
+
+    <div class="choice-buttons">
+      <button class="btn green" id="showScience" type="button">
+        Science
+      </button>
+
+      <button class="btn green" id="showCommerce" type="button">
+        Commerce
+      </button>
+
+      <button class="btn green" id="showArts" type="button">
+        Arts
+      </button>
     </div>
 
-    
-<div id="class12Demo" style="display:none; margin-top:15px;">
-  <h4>Class 12 – Streams</h4>
+    <!-- SCIENCE -->
+    <div id="scienceDemo" class="demo-panel" hidden>
+      <h3>Class 12 Science – Select Medium</h3>
 
-  <button class="btn green" type="button"
-    onclick="document.getElementById('scienceDemo').style.display='block'">
-    Science
-  </button>
+      <p><b>Hindi Medium</b></p>
+      <a class="btn green" href="class12-mp-science-hindi-demo.html">
+        Hindi Demo Test शुरू करें
+      </a>
 
-  <button class="btn green" type="button"
-    onclick="document.getElementById('commerceDemo').style.display='block'">
-    Commerce
-  </button>
+      <p style="margin-top:12px"><b>English Medium</b></p>
+      <p class="muted">
+        English Medium Demo Test का link जल्द जोड़ा जाएगा।
+      </p>
+    </div>
 
-  <button class="btn green" type="button"
-    onclick="document.getElementById('artsDemo').style.display='block'">
-    Arts
-  </button>
+    <!-- COMMERCE -->
+    <div id="commerceDemo" class="demo-panel" hidden>
+      <h3>Class 12 Commerce</h3>
+      <p>Commerce Demo Test:</p>
 
-  <div id="scienceDemo" style="display:none; margin-top:12px;">
-    <h4>Science – Medium</h4>
-    <p>Hindi Medium</p>
-    <a class="btn green" href="class12-mp-science-hindi-demo.html">Hindi Demo Test</a>
-    <p>English Medium</p>
-    <p>English Demo Test link will be added.</p>
+      <a class="btn green" href="class12-commerce-demo.html">
+        Commerce Demo Test शुरू करें
+      </a>
+    </div>
+
+    <!-- ARTS -->
+    <div id="artsDemo" class="demo-panel" hidden>
+      <h3>Class 12 Arts</h3>
+      <p>Arts Demo Test:</p>
+
+      <a class="btn green" href="class12-arts-demo.html">
+        Arts Demo Test शुरू करें
+      </a>
+    </div>
   </div>
+</section>
 
-  <div id="commerceDemo" style="display:none; margin-top:12px;">
-    <h4>Commerce</h4>
-    <p>Demo Test coming soon.</p>
-  </div>
+<!-- CLASSES -->
+<section id="classes">
+  <h2>Classes & Subjects</h2>
 
-  <div id="artsDemo" style="display:none; margin-top:12px;">
-    <h4>Arts</h4>
-    <p>Demo Test coming soon.</p>
-  </div>
-</div>
+  <div class="grid">
+    <div class="card">
+      <h3>Class 9</h3>
+      <p>Mathematics • Science</p>
+      <span class="pill">MP Board</span>
+      <span class="pill">CBSE</span>
+    </div>
 
+    <div class="card">
+      <h3>Class 10</h3>
+      <p>Mathematics • Science</p>
+      <span class="pill">MP Board</span>
+      <span class="pill">CBSE</span>
+    </div>
+
+    <div class="card">
+      <h3>Class 12</h3>
+      <p>Science • Commerce • Arts</p>
+      <span class="pill">MP Board</span>
+      <span class="pill">CBSE</span>
+    </div>
+
+    <div class="card">
+      <h3>Competitive Exams</h3>
+      <p>गणित, रीजनिंग एवं सामान्य अध्ययन का अभ्यास।</p>
+    </div>
   </div>
-</div>
- <h3 style="margin-top:20px">Premium Chapter-wise Tests</h3><p class="muted">प्रत्येक अध्याय के लिए 30 प्रश्न, 30 मिनट और Easy / Medium / Hard स्तर की योजना।</p><div class="grid" id="chapterList"></div>
+</section>
+
+<!-- STUDY MATERIAL -->
+<section id="study">
+  <h2>Study Material</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Class 10 Maths</h3>
+      <p>अध्यायवार नोट्स और महत्वपूर्ण प्रश्न जल्द उपलब्ध होंगे।</p>
+    </div>
+
+    <div class="card">
+      <h3>Class 10 Science</h3>
+      <p>अध्ययन सामग्री और अभ्यास प्रश्न जल्द उपलब्ध होंगे।</p>
+    </div>
+
+    <div class="card">
+      <h3>Previous Year Questions</h3>
+      <p>बोर्ड परीक्षा के पुराने प्रश्नपत्र एवं हल।</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLASS 10 MATHS FREE QUIZ -->
+<section id="online-test">
+  <h2>Free Demo Test – Class 10 Maths</h2>
+
   <div class="card">
-  <h3>Class 12 – All Subjects Premium Tests</h3>
-  <p>Science • Commerce • Arts</p>
-  <p>MP Board Hindi Medium • CBSE English Medium</p>
-  <p>30 Questions • 45 Minutes per Chapter</p>
-  <button class="btn green" id="openClass12Btn" type="button">
-  Explore Class 12 Premium Tests
-</button>
-</div>
-  <div class="notice">
-पहले संबंधित Unit का YouTube वीडियो देखें,
-फिर MCQ Test का अभ्यास करें।
-</div><div class="notice">नोट: अध्यायवार प्रीमियम टेस्ट की सामग्री अभी तैयार की जा रही है। ₹99 का UPI लिंक केवल एक बार भुगतान शुरू करता है; इससे अपने-आप सदस्यता या टेस्ट अनलॉक नहीं होता। भुगतान की पुष्टि और एक्सेस मैन्युअल रूप से करना होगा।</div></section>
-<section id="online-test"><h2>Free Demo Test – Class 10 Maths</h2><div class="card"><p>कुल 10 प्रश्न, 15 मिनट। प्रत्येक प्रश्न 1 अंक का है।</p><label for="language"><b>भाषा / Language:</b></label> <select id="language"><option value="hi">हिंदी</option><option value="en">English</option></select> <button class="btn green" id="startBtn" type="button">Start Test / टेस्ट शुरू करें</button> <span class="pill" id="timer">15:00</span><div id="quizArea" hidden><p id="progress" class="muted"></p><div id="questionBox" class="question"></div><button class="btn" id="prevBtn" type="button">Previous</button><button class="btn" id="nextBtn" type="button">Next</button><button class="btn gold" id="submitBtn" type="button">Submit Test</button></div><div id="resultArea" hidden></div></div></section>
-<section id="videos"><h2>Educational Videos</h2><p>गणित एवं विज्ञान के वीडियो देखने के लिए हमारे YouTube चैनल पर जाएँ।</p><a class="btn" href="https://youtube.com/@exam93?si=0KuWN7h50Dso4m_X" target="_blank" rel="noopener">Visit YouTube Channel</a></section>
-<section id="jobs"><h2>Government Job Updates</h2><p>सरकारी भर्ती, पात्रता, आवेदन तिथि, फीस और सिलेबस से संबंधित जानकारी के लिए अपडेट देखते रहें।</p><p class="muted">हर भर्ती की जानकारी आधिकारिक नोटिफिकेशन से अवश्य जाँचें।</p></section>
-<section id="about"><h2>About PR Education Hub</h2><p>PR Education Hub का उद्देश्य विद्यार्थियों को गणित, विज्ञान और प्रतियोगी परीक्षाओं की तैयारी के लिए सरल एवं उपयोगी सामग्री उपलब्ध कराना है।</p><p><b>Founder / Educator:</b> Pawan Rathore</p><a class="btn" href="https://www.facebook.com/share/19cVNJKkEZ/" target="_blank" rel="noopener">Facebook Page</a><a class="btn" href="https://youtube.com/@exam93?si=0KuWN7h50Dso4m_X" target="_blank" rel="noopener">YouTube</a></section>
+    <p>कुल 10 प्रश्न, 15 मिनट। प्रत्येक प्रश्न 1 अंक का है।</p>
+
+    <label for="language"><b>भाषा / Language:</b></label>
+
+    <select id="language">
+      <option value="hi">हिंदी</option>
+      <option value="en">English</option>
+    </select>
+
+    <button class="btn green" id="startBtn" type="button">
+      Start Test / टेस्ट शुरू करें
+    </button>
+
+    <span class="pill" id="timer">15:00</span>
+
+    <div id="quizArea" hidden>
+      <p id="progress" class="muted"></p>
+      <div id="questionBox" class="question"></div>
+
+      <button class="btn" id="prevBtn" type="button">Previous</button>
+      <button class="btn" id="nextBtn" type="button">Next</button>
+      <button class="btn gold" id="submitBtn" type="button">
+        Submit Test
+      </button>
+    </div>
+
+    <div id="resultArea" hidden></div>
+  </div>
+</section>
+
+<!-- PREMIUM TESTS -->
 <section id="premium">
-<h2>Premium Membership</h2>
-
-
-<div class="grid">
+  <h2>Premium Chapter-wise Tests</h2>
 
   <div class="card">
-    <h3>Class 10 Premium</h3>
-    <h2>₹99</h2>
-    <p>6 Months Access</p>
-    <p>Chapter-wise Maths Tests</p>
-    <a class="btn green" target="_blank"
-       rel="noopener"
-       href="https://rzp.io/rzp/SuJUzh5D">
-       Pay ₹99 – Class 10
-    </a>
-    <button class="btn green" id="openClass10Btn" type="button">
-  Open Class 10 Tests
-</button>
-  </div>
+    <h3>Premium Membership</h3>
 
-  <div class="card">
-    <h3>Class 12 Premium</h3>
-    <h2>₹99</h2>
-    <p>6 Months Access</p>
-    <p>Arts • Science • Commerce</p>
-    <a class="btn green" target="_blank"
-       rel="noopener"
-       href="https://rzp.io/rzp/en2Wcl6">
-       Pay ₹99 – Class 12
+    <p>
+      Paid Tests के लिए पहले Student Login / Register करें।
+      Login के बाद अपनी Class, Stream और Membership Plan चुनें।
+    </p>
+
+    <p class="muted">
+      Membership और Payment के विकल्प Student Login Page पर उपलब्ध होंगे।
+    </p>
+
+    <a class="btn green" href="student-login.html">
+      Login & Choose Membership
     </a>
   </div>
 
-<div class="card" id="paymentSubmission">
+  <h3 style="margin-top:20px">Class 10 Maths – Chapter-wise Tests</h3>
 
-  <div class="card">
-    <h3>Combo Membership</h3>
-    <h2>₹149</h2>
-    <p>6 Months Access</p>
-    <p>Class 10 + Class 12</p>
-    <a class="btn green" target="_blank"
-       rel="noopener"
-       href="https://rzp.io/rzp/IGdsEUs">
-       Pay ₹149 – Combo
-    </a>
-  </div>
-
-</div>
-  <h3>Submit Payment Screenshot</h3>
-  <p>भुगतान करने के बाद Screenshot चुनें और WhatsApp पर भेजें।</p>
-
-  <label for="paymentPlan">Membership Plan</label>
-  <select id="paymentPlan">
-    <option value="Class 10 Premium - ₹99">Class 10 - ₹99</option>
-    <option value="Class 12 Premium - ₹99">Class 12 - ₹99</option>
-    <option value="Combo Membership - ₹149">Combo - ₹149</option>
-  </select>
-
-  <br><br>
-
-  <label for="paymentScreenshot">Payment Screenshot</label>
-  <input
-    id="paymentScreenshot"
-    type="file"
-    accept="image/*"
-  >
-
-  <button class="btn green" id="sharePaymentBtn" type="button">
-    Send Screenshot on WhatsApp
-  </button>
-
-  <p id="paymentMessage" class="muted"></p>
-</div>
-  <div class="card">
-  <h3>Student Login / Register</h3>
-  <p>
-    Class, Medium, Stream और Premium Membership चुनकर
-    अपने मोबाइल नंबर से Login करें।
+  <p class="muted">
+    प्रत्येक अध्याय में 30 प्रश्न और अभ्यास के लिए संबंधित YouTube वीडियो।
   </p>
 
-  <a href="student-login.html" class="btn green">
-    Student Login / Register
-  </a>
-</div>
-<div class="card">
+  <div class="grid" id="chapterList"></div>
 
-  <h3>Student Login – Mobile OTP</h3>
-  <p>Premium Tests के लिए अपने मोबाइल नंबर से लॉगिन करें।</p>
+  <div class="card" style="margin-top:18px">
+    <h3>Class 12 – All Subjects Premium Tests</h3>
+    <p>Science • Commerce • Arts</p>
+    <p>MP Board Hindi Medium • CBSE English Medium</p>
+    <p>30 Questions • 45 Minutes per Chapter</p>
 
-  <label for="studentPhone">Mobile Number</label>
-  <input id="studentPhone" type="tel"
-  placeholder="10 digit mobile number"
-  maxlength="10">
-
-  <div id="recaptcha-container"></div>
-
-  <button class="btn green" id="sendOtpBtn" type="button">
-    Send OTP
-  </button>
-
-  <div id="otpArea" hidden>
-    <label for="studentOtp">Enter OTP</label>
-    <input id="studentOtp" type="text"
-    inputmode="numeric" maxlength="6"
-    placeholder="Enter 6 digit OTP">
-
-    <button class="btn green" id="verifyOtpBtn" type="button">
-      Verify OTP
+    <button class="btn green" id="openClass12Btn" type="button">
+      Explore Class 12 Premium Tests
     </button>
   </div>
 
-  <p id="otpMessage" class="muted"></p>
-  
-<div id="studentProfile" hidden>
-  <h3>Student Profile</h3>
+  <div class="notice">
+    Premium Paid Tests का access Active Membership वाले विद्यार्थियों के लिए है।
+  </div>
+</section>
 
-  <label for="studentName">अपना पूरा नाम लिखें</label>
-  <input id="studentName" type="text"
-    maxlength="50" placeholder="Student Name">
+<!-- VIDEOS -->
+<section id="videos">
+  <h2>Educational Videos</h2>
 
-  <button class="btn green" id="saveProfileBtn"
-    type="button">Save Profile</button>
-
-  <p id="profileMessage" class="muted"></p>
-</div>
-
-<div id="studentDashboard" hidden>
-  <hr>
-  <h3>My Student Dashboard</h3>
-
-  <p><b>Student Name:</b>
-    <span id="dashboardName"></span>
+  <p>
+    गणित एवं विज्ञान के वीडियो देखने के लिए हमारे YouTube चैनल पर जाएँ।
   </p>
 
-  <p><b>Mobile Number:</b>
-    <span id="dashboardPhone"></span>
-  </p>
+  <a class="btn" href="https://youtube.com/@exam93?si=0KuWN7h50Dso4m_X"
+     target="_blank" rel="noopener">
+    EXAM VIDEO BY PAWAN RATHORE
+  </a>
+</section>
 
-  <p><b>Membership:</b>
-    <span id="membershipStatus">Free Member</span>
-  </p>
+<!-- JOBS -->
+<section id="jobs">
+  <h2>Government Job Updates</h2>
 
-  <p><b>Premium Access:</b>
-    <span id="membershipExpiry">Not Activated</span>
+  <p>
+    सरकारी भर्ती, पात्रता, आवेदन तिथि, फीस और सिलेबस से संबंधित
+    जानकारी के लिए अपडेट देखते रहें।
   </p>
 
   <p class="muted">
-    अपनी Premium Membership लेकर सभी Paid Tests का लाभ उठाएँ।
+    हर भर्ती की जानकारी आधिकारिक नोटिफिकेशन से अवश्य जाँचें।
   </p>
-</div>
-</div>
-
-<p class="muted">
-Payment और automatic Premium activation जल्द शुरू होंगे।
-सभी Free Demo Tests हमेशा मुफ्त रहेंगे।
-</p>
 </section>
-</main><footer><p>© 2026 PR Education Hub | By Pawan Rathore</p><p>Learn Today, Lead Tomorrow.</p></footer>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About PR Education Hub</h2>
+
+  <p>
+    PR Education Hub का उद्देश्य विद्यार्थियों को गणित,
+    विज्ञान और प्रतियोगी परीक्षाओं की तैयारी के लिए
+    सरल एवं उपयोगी सामग्री उपलब्ध कराना है।
+  </p>
+
+  <p><b>Founder / Educator:</b> Pawan Rathore</p>
+
+  <p><b>माध्यमिक शिक्षक | गणित शिक्षक</b></p>
+
+  <a class="btn" href="https://www.facebook.com/share/19cVNJKkEZ/"
+     target="_blank" rel="noopener">
+    Facebook Page
+  </a>
+
+  <a class="btn" href="https://youtube.com/@exam93?si=0KuWN7h50Dso4m_X"
+     target="_blank" rel="noopener">
+    YouTube
+  </a>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 PR Education Hub | By Pawan Rathore</p>
+  <p>Learn Today • Lead Tomorrow</p>
+</footer>
+
 <script>
-const chapters=["वास्तविक संख्याएँ (Real Numbers)","बहुपद (Polynomials)","दो चर वाले रैखिक समीकरण युग्म (Pair of Linear Equations in Two Variables)","द्विघात समीकरण (Quadratic Equations)","समांतर श्रेढ़ियाँ (Arithmetic Progressions)","त्रिभुज (Triangles)","निर्देशांक ज्यामिति (Coordinate Geometry)","त्रिकोणमिति का परिचय (Introduction to Trigonometry)","त्रिकोणमिति के कुछ अनुप्रयोग (Some Applications of Trigonometry)","वृत्त (Circles)","वृत्तों से संबंधित क्षेत्रफल (Areas Related to Circles)","पृष्ठीय क्षेत्रफल और आयतन (Surface Areas and Volumes)","सांख्यिकी (Statistics)","प्रायिकता (Probability)"];
+/* FREE DEMO CLASS SELECTION */
+
+const el = id => document.getElementById(id);
+
+el("showClass10").addEventListener("click", () => {
+  el("class10Demo").hidden = false;
+  el("class12Demo").hidden = true;
+  el("class10Demo").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+el("showClass12").addEventListener("click", () => {
+  el("class12Demo").hidden = false;
+  el("class10Demo").hidden = true;
+  el("class12Demo").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+function showStream(selected) {
+  el("scienceDemo").hidden = selected !== "science";
+  el("commerceDemo").hidden = selected !== "commerce";
+  el("artsDemo").hidden = selected !== "arts";
+
+  const target = el(selected + "Demo");
+  target.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+el("showScience").addEventListener("click", () => showStream("science"));
+el("showCommerce").addEventListener("click", () => showStream("commerce"));
+el("showArts").addEventListener("click", () => showStream("arts"));
+
+/* CLASS 10 MATHS CHAPTERS AND VIDEOS */
+
+const chapters = [
+"वास्तविक संख्याएँ (Real Numbers)",
+"बहुपद (Polynomials)",
+"दो चर वाले रैखिक समीकरण युग्म (Pair of Linear Equations in Two Variables)",
+"द्विघात समीकरण (Quadratic Equations)",
+"समांतर श्रेढ़ियाँ (Arithmetic Progressions)",
+"त्रिभुज (Triangles)",
+"निर्देशांक ज्यामिति (Coordinate Geometry)",
+"त्रिकोणमिति का परिचय (Introduction to Trigonometry)",
+"त्रिकोणमिति के कुछ अनुप्रयोग (Some Applications of Trigonometry)",
+"वृत्त (Circles)",
+"वृत्तों से संबंधित क्षेत्रफल (Areas Related to Circles)",
+"पृष्ठीय क्षेत्रफल और आयतन (Surface Areas and Volumes)",
+"सांख्यिकी (Statistics)",
+"प्रायिकता (Probability)"
+];
+
 const unitVideoIds = [
 "EZmG2Gdgwso",
 "XzEUbelA5x8",
@@ -329,74 +584,40 @@ const unitVideoIds = [
 "GoTTYSlfEjA"
 ];
 
-document.getElementById("chapterList").innerHTML=chapters.map((n,i)=>`
-<article class="card unit-card">
-<h3>Chapter ${i+1}</h3>
-<p>${n}</p>
+el("chapterList").innerHTML = chapters.map((name,i) => `
+  <article class="card unit-card">
+    <h3>Chapter ${i+1}</h3>
+    <p>${name}</p>
 
-${unitVideoIds[i] ? `
-<iframe class="video-frame"
-src="https://www.youtube.com/embed/${unitVideoIds[i]}"
-title="Class 10 Maths Chapter ${i+1}"
-loading="lazy"
-allowfullscreen></iframe>
-<a class="btn green"
-href="https://youtu.be/${unitVideoIds[i]}"
-target="_blank" rel="noopener">Watch Video</a>
-` : `<p class="muted">इस अध्याय का वीडियो जल्द जोड़ा जाएगा।</p>`}
+    ${unitVideoIds[i] ? `
+      <iframe class="video-frame"
+        src="https://www.youtube.com/embed/${unitVideoIds[i]}"
+        title="Class 10 Maths Chapter ${i+1}"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
 
-<p class="muted">30 Questions • 45 Minutes</p>
+      <a class="btn green"
+        href="https://youtu.be/${unitVideoIds[i]}"
+        target="_blank" rel="noopener">
+        Watch Video
+      </a>
+    ` : `
+      <p class="muted">इस अध्याय का वीडियो जल्द जोड़ा जाएगा।</p>
+    `}
 
-<button class="btn green premium-test-btn"
-        type="button"
-        data-chapter="${i+1}">
-  Open Paid Test
-</button>
-</article>
+    <p class="muted">30 Questions • 45 Minutes</p>
+
+    <button class="btn green premium-test-btn"
+      type="button" data-chapter="${i+1}">
+      Open Paid Test
+    </button>
+  </article>
 `).join("");
-  document.getElementById("chapterList")
-.addEventListener("click", async function(e) {
 
-  const button = e.target.closest(".premium-test-btn");
-  if (!button) return;
+/* CLASS 10 QUIZ */
 
-  button.disabled = true;
-
-  try {
-    if (typeof window.getMembershipDetails !== "function") {
-      alert("कृपया पहले Mobile OTP से Login करें।");
-      return;
-    }
-
-    const membership = await window.getMembershipDetails();
-
-    if (!membership || !membership.active) {
-      alert("आपकी Premium Membership Active नहीं है।");
-      return;
-    }
-
-    const plan = String(membership.plan).toLowerCase();
-
-    if (!plan.includes("class 10") && !plan.includes("combo")) {
-  alert("इस Test के लिए Class 10 या Combo Membership जरूरी है।");
-  return;
-}
-
-    alert("आपकी Class 10 Membership Active है। Paid Test जल्द उपलब्ध होगा।");
-
-  } catch (error) {
-    console.error(error);
-    alert("Membership जाँचने में समस्या हुई। दोबारा Login करें।");
-
-  } finally {
-    button.disabled = false;
-  }
-});
-  const questionBank = {
-  mp: {},
-  cbse: {}
-};
-const Q=[
+const Q = [
 ["यदि 2x + 4 = 10, तो x का मान क्या है?","If 2x + 4 = 10, what is x?",["2","3","4","5"],1,"2x = 6, इसलिए x = 3।","2x = 6, so x = 3."],
 ["sin 30° का मान है:","The value of sin 30° is:",["0","1/2","√3/2","1"],1,"sin 30° = 1/2।","sin 30° = 1/2."],
 ["√169 का मान क्या है?","What is √169?",["11","12","13","14"],2,"13 × 13 = 169।","13 × 13 = 169."],
@@ -408,32 +629,144 @@ const Q=[
 ["बिंदुओं (0,0) और (3,4) के बीच दूरी है:","Distance between (0,0) and (3,4):",["3","4","5","7"],2,"दूरी = √(3² + 4²) = 5।","Distance = √(3² + 4²) = 5."],
 ["बहुपद x² − 5x + 6 के शून्यक हैं:","The zeroes of x² − 5x + 6 are:",["1, 6","2, 3","−2, −3","5, 6"],1,"x² − 5x + 6 = (x − 2)(x − 3)।","x² − 5x + 6 = (x − 2)(x − 3)."]
 ];
-let idx=0,answers=Array(10).fill(null),remaining=900,clock=null,lang="hi",done=false;
-const el=id=>document.getElementById(id);
-function draw(){let q=Q[idx];el("progress").textContent=(lang==="hi"?"प्रश्न ":"Question ")+(idx+1)+" / 10";el("questionBox").innerHTML=`<h3>${q[lang==="hi"?0:1]}</h3>`+q[2].map((v,i)=>`<label class="option"><input type="radio" name="ans" value="${i}" ${answers[idx]===i?"checked":""}>${"ABCD"[i]}. ${v}</label>`).join("");el("prevBtn").disabled=idx===0;el("nextBtn").disabled=idx===9;}
-el("questionBox").addEventListener("change",e=>{if(e.target.name==="ans")answers[idx]=+e.target.value;});
-el("prevBtn").onclick=()=>{if(idx>0){idx--;draw();}};el("nextBtn").onclick=()=>{if(idx<9){idx++;draw();}};
-function tick(){let m=Math.floor(remaining/60),s=remaining%60;el("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");if(remaining--<=0)finish();}
-el("startBtn").onclick=()=>{lang=el("language").value;idx=0;answers=Array(10).fill(null);remaining=900;done=false;el("resultArea").hidden=true;el("quizArea").hidden=false;el("startBtn").disabled=true;draw();tick();clock=setInterval(tick,1000);};
-function finish(){if(done)return;done=true;clearInterval(clock);let score=answers.reduce((s,a,i)=>s+(a===Q[i][3]?1:0),0);let out=`<h3>${lang==="hi"?"आपका परिणाम":"Your Result"}: ${score}/10</h3><p>${lang==="hi"?(score>=8?"बहुत अच्छा! नियमित अभ्यास जारी रखें।":score>=5?"अच्छा प्रयास! गलत प्रश्नों का अभ्यास करें।":"दोबारा अभ्यास करें। मेहनत जारी रखें।"):(score>=8?"Excellent! Keep practising.":score>=5?"Good effort! Review the incorrect answers.":"Keep practising. You can improve!")}</p>`;Q.forEach((q,i)=>{out+=`<div class="question"><b>${i+1}. ${q[lang==="hi"?0:1]}</b><p>${lang==="hi"?"आपका उत्तर":"Your answer"}: ${answers[i]===null?(lang==="hi"?"नहीं दिया":"Not answered"):q[2][answers[i]]}</p><p><b>${lang==="hi"?"सही उत्तर":"Correct answer"}:</b> ${q[2][q[3]]}</p><p class="muted">${q[lang==="hi"?4:5]}</p></div>`;});el("resultArea").innerHTML=out+`<button class="btn green" id="again" type="button">${lang==="hi"?"फिर से टेस्ट दें":"Try Again"}</button>`;el("resultArea").hidden=false;el("quizArea").hidden=true;el("startBtn").disabled=false;el("again").onclick=()=>el("startBtn").click();}
-el("submitBtn").onclick=finish;
+
+let idx = 0;
+let answers = Array(10).fill(null);
+let remaining = 900;
+let clock = null;
+let lang = "hi";
+let done = false;
+
+function draw() {
+  let q = Q[idx];
+
+  el("progress").textContent =
+    (lang === "hi" ? "प्रश्न " : "Question ") + (idx+1) + " / 10";
+
+  el("questionBox").innerHTML =
+    `<h3>${q[lang === "hi" ? 0 : 1]}</h3>` +
+    q[2].map((v,i) => `
+      <label class="option">
+        <input type="radio" name="ans" value="${i}"
+          ${answers[idx] === i ? "checked" : ""}>
+        ${"ABCD"[i]}. ${v}
+      </label>
+    `).join("");
+
+  el("prevBtn").disabled = idx === 0;
+  el("nextBtn").disabled = idx === 9;
+}
+
+el("questionBox").addEventListener("change",e => {
+  if(e.target.name === "ans") answers[idx] = +e.target.value;
+});
+
+el("prevBtn").onclick = () => {
+  if(idx > 0){idx--;draw();}
+};
+
+el("nextBtn").onclick = () => {
+  if(idx < 9){idx++;draw();}
+};
+
+function tick() {
+  let m = Math.floor(remaining/60);
+  let s = remaining%60;
+
+  el("timer").textContent =
+    String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+
+  if(remaining-- <= 0) finish();
+}
+
+el("startBtn").onclick = () => {
+  lang = el("language").value;
+  idx = 0;
+  answers = Array(10).fill(null);
+  remaining = 900;
+  done = false;
+
+  el("resultArea").hidden = true;
+  el("quizArea").hidden = false;
+  el("startBtn").disabled = true;
+
+  draw();
+  tick();
+  clock = setInterval(tick,1000);
+};
+
+function finish() {
+  if(done) return;
+
+  done = true;
+  clearInterval(clock);
+
+  let score = answers.reduce(
+    (s,a,i) => s + (a === Q[i][3] ? 1 : 0),0
+  );
+
+  let out = `
+    <h3>${lang === "hi" ? "आपका परिणाम" : "Your Result"}: ${score}/10</h3>
+    <p>${
+      lang === "hi"
+      ? (score>=8 ? "बहुत अच्छा! नियमित अभ्यास जारी रखें।" :
+         score>=5 ? "अच्छा प्रयास! गलत प्रश्नों का अभ्यास करें।" :
+         "दोबारा अभ्यास करें। मेहनत जारी रखें।")
+      : (score>=8 ? "Excellent! Keep practising." :
+         score>=5 ? "Good effort! Review the incorrect answers." :
+         "Keep practising. You can improve!")
+    }</p>
+  `;
+
+  Q.forEach((q,i) => {
+    out += `
+      <div class="question">
+        <b>${i+1}. ${q[lang === "hi" ? 0 : 1]}</b>
+        <p>${lang === "hi" ? "आपका उत्तर" : "Your answer"}:
+          ${answers[i] === null
+            ? (lang === "hi" ? "नहीं दिया" : "Not answered")
+            : q[2][answers[i]]}
+        </p>
+        <p><b>${lang === "hi" ? "सही उत्तर" : "Correct answer"}:</b>
+          ${q[2][q[3]]}
+        </p>
+        <p class="muted">${q[lang === "hi" ? 4 : 5]}</p>
+      </div>
+    `;
+  });
+
+  el("resultArea").innerHTML = out +
+    `<button class="btn green" id="again" type="button">
+      ${lang === "hi" ? "फिर से टेस्ट दें" : "Try Again"}
+    </button>`;
+
+  el("resultArea").hidden = false;
+  el("quizArea").hidden = true;
+  el("startBtn").disabled = false;
+
+  el("again").onclick = () => el("startBtn").click();
+}
+
+el("submitBtn").onclick = finish;
+
+/* FIREBASE MEMBERSHIP CHECKING */
+
 </script>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 
 import {
   getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
 import {
   getFirestore,
   doc,
-  getDoc,
-  setDoc,
-  serverTimestamp
+  getDoc
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
   authDomain: "pr-education-hub.firebaseapp.com",
@@ -446,20 +779,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-  const db = getFirestore(app);
-let currentUser = null;
-   onAuthStateChanged(auth, async (user) => {
-  currentUser = user;
+const db = getFirestore(app);
 
-  if (user) {
-    console.log("Student already logged in:", user.phoneNumber);
-    await checkMembership();
-  }
-}); 
+let currentUser = null;
+
 async function checkMembership() {
   if (!currentUser) return false;
 
-  const studentRef = doc(db, "students", currentUser.uid);
+  const studentRef = doc(db,"students",currentUser.uid);
   const snapshot = await getDoc(studentRef);
 
   if (!snapshot.exists()) return false;
@@ -472,30 +799,16 @@ async function checkMembership() {
     !expiry ||
     expiry.toDate() <= new Date()
   ) {
-    document.getElementById("membershipStatus").textContent =
-      "Free Member";
-
-    document.getElementById("membershipExpiry").textContent =
-      "Not Activated";
-
     return false;
   }
-
-  document.getElementById("membershipStatus").textContent =
-    "Active - " + (data.membershipPlan || "");
-
-  document.getElementById("membershipExpiry").textContent =
-    expiry.toDate().toLocaleDateString("en-IN");
 
   return true;
 }
 
-window.checkMembership = checkMembership;
-
-window.getMembershipDetails = async function () {
+window.getMembershipDetails = async function() {
   if (!currentUser) return null;
 
-  const studentRef = doc(db, "students", currentUser.uid);
+  const studentRef = doc(db,"students",currentUser.uid);
   const snapshot = await getDoc(studentRef);
 
   if (!snapshot.exists()) return null;
@@ -508,22 +821,30 @@ window.getMembershipDetails = async function () {
     !expiry ||
     expiry.toDate() <= new Date()
   ) {
-    return {
-      active: false,
-      plan: "none"
-    };
+    return {active:false,plan:"none"};
   }
 
   return {
-    active: true,
-    plan: data.membershipPlan || "none"
+    active:true,
+    plan:data.membershipPlan || "none"
   };
 };
 
-async function openPremiumPage(requiredPlan, page) {
+onAuthStateChanged(auth,async user => {
+  currentUser = user;
+  if (user) {
+    try {
+      await checkMembership();
+    } catch(error) {
+      console.error("Membership check:",error);
+    }
+  }
+});
+
+async function openPremiumPage(requiredPlan,page) {
   if (!currentUser) {
     alert("पहले Student Login करें।");
-    document.getElementById("premium")?.scrollIntoView();
+    window.location.href = "student-login.html";
     return;
   }
 
@@ -531,8 +852,8 @@ async function openPremiumPage(requiredPlan, page) {
     const membership = await window.getMembershipDetails();
 
     if (!membership || !membership.active) {
-      alert("आपकी Premium Membership Active नहीं है। पहले भुगतान करें।");
-      document.getElementById("premium")?.scrollIntoView();
+      alert("आपकी Premium Membership Active नहीं है। पहले Membership लें।");
+      window.location.href = "student-login.html";
       return;
     }
 
@@ -549,252 +870,61 @@ async function openPremiumPage(requiredPlan, page) {
 
     window.location.href = page;
 
-  } catch (error) {
+  } catch(error) {
     console.error(error);
     alert("Membership जाँचने में समस्या हुई।");
   }
 }
 
-const class10Btn = document.getElementById("openClass10Btn");
-if (class10Btn) {
-  class10Btn.addEventListener("click", () => {
-    openPremiumPage("class 10", "class10-premium-tests.html");
-  });
-}
-
 const class12Btn = document.getElementById("openClass12Btn");
-if (class12Btn) {
-  class12Btn.addEventListener("click", () => {
-    openPremiumPage("class 12", "class12-premium-tests.html");
+
+if(class12Btn) {
+  class12Btn.addEventListener("click",() => {
+    openPremiumPage("class 12","class12-premium-tests.html");
   });
 }
 
-auth.languageCode = "en";
+document.getElementById("chapterList").addEventListener("click",async e => {
+  const button = e.target.closest(".premium-test-btn");
+  if(!button) return;
 
-let recaptchaVerifier = null;
-let confirmationResult = null;
-
-const phoneInput = document.getElementById("studentPhone");
-const otpInput = document.getElementById("studentOtp");
-const otpArea = document.getElementById("otpArea");
-const message = document.getElementById("otpMessage");
-const sendBtn = document.getElementById("sendOtpBtn");
-const verifyBtn = document.getElementById("verifyOtpBtn");
-
-sendBtn.addEventListener("click", async () => {
-  const phone = phoneInput.value.trim();
-
-  if (!/^[6-9]\d{9}$/.test(phone)) {
-    message.textContent = "कृपया सही 10 अंकों का मोबाइल नंबर डालें।";
-    return;
-  }
-
-  sendBtn.disabled = true;
-  message.textContent = "OTP भेजा जा रहा है...";
+  button.disabled = true;
 
   try {
-    if (!recaptchaVerifier) {
-      recaptchaVerifier = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container",
-        { size: "normal" }
-      );
+    if(!currentUser) {
+      alert("Paid Test के लिए पहले Student Login करें।");
+      window.location.href = "student-login.html";
+      return;
     }
 
-    confirmationResult = await signInWithPhoneNumber(
-      auth,
-      "+91" + phone,
-      recaptchaVerifier
-    );
+    const membership = await window.getMembershipDetails();
 
-    otpArea.hidden = false;
-    message.textContent = "OTP भेज दिया गया है। अपना SMS देखें।";
+    if(!membership || !membership.active) {
+      alert("आपकी Premium Membership Active नहीं है।");
+      window.location.href = "student-login.html";
+      return;
+    }
 
-  } catch (error) {
+    const plan = String(membership.plan).toLowerCase();
+
+    if(!plan.includes("class 10") && !plan.includes("combo")) {
+      alert("इस Test के लिए Class 10 या Combo Membership जरूरी है।");
+      return;
+    }
+
+    alert("आपकी Class 10 Membership Active है। Paid Test जल्द उपलब्ध होगा।");
+
+  } catch(error) {
     console.error(error);
-    message.textContent =
-      "OTP नहीं भेजा जा सका: " + error.message;
-
-    if (recaptchaVerifier) {
-      recaptchaVerifier.clear();
-      recaptchaVerifier = null;
-    }
+    alert("Membership जाँचने में समस्या हुई।");
   } finally {
-    sendBtn.disabled = false;
+    button.disabled = false;
   }
 });
 
-verifyBtn.addEventListener("click", async () => {
-  const otp = otpInput.value.trim();
+</script>
 
-  if (!/^\d{6}$/.test(otp)) {
-    message.textContent = "कृपया 6 अंकों का OTP डालें।";
-    return;
-  }
+<script src="chemistry-mcq.js"></script>
 
-  verifyBtn.disabled = true;
-  message.textContent = "OTP सत्यापित हो रहा है...";
-
-  try {
-    const result = await confirmationResult.confirm(otp);
-currentUser = result.user;
-document.getElementById("studentProfile").hidden = false;
-    message.textContent =
-      "मोबाइल OTP सफलतापूर्वक सत्यापित! " +
-      "नंबर: " + result.user.phoneNumber;
-
-    otpArea.hidden = true;
-    sendBtn.hidden = true;
-    phoneInput.disabled = true;
-
-  } catch (error) {
-    console.error(error);
-    message.textContent =
-      "गलत OTP या सत्यापन में समस्या: " + error.message;
-  } finally {
-    verifyBtn.disabled = false;
-  }
-});
-
-document.getElementById("saveProfileBtn")
-.addEventListener("click", async () => {
-  if (!currentUser) return;
-
-  const name = document.getElementById("studentName")
-    .value.trim();
-
-  const profileMessage =
-    document.getElementById("profileMessage");
-
-  if (name.length < 2 || name.length > 50) {
-    profileMessage.textContent =
-      "कृपया 2 से 50 अक्षरों के बीच सही नाम लिखें।";
-    return;
-  }
-
-  const saveBtn = document.getElementById("saveProfileBtn");
-  saveBtn.disabled = true;
-  profileMessage.textContent = "Profile सेव हो रही है...";
-
-  try {
-    const studentRef = doc(db, "students", currentUser.uid);
-    const oldProfile = await getDoc(studentRef);
-
-    const profile = {
-      name: name,
-      phoneNumber: currentUser.phoneNumber,
-      updatedAt: serverTimestamp()
-    };
-
-    if (!oldProfile.exists()) {
-      profile.createdAt = serverTimestamp();
-    }
-
-    await setDoc(studentRef, profile, { merge: true });
-
-const updatedProfile = await getDoc(studentRef);
-const membership = updatedProfile.data();
-
-const status = membership.membershipStatus || "inactive";
-const plan = membership.membershipPlan || "none";
-
-document.getElementById("membershipStatus").textContent =
-  status === "active" ? "Active - " + plan : "Free Member";
-
-const expiry = membership.expiryDate;
-
-document.getElementById("membershipExpiry").textContent =
-  expiry ? expiry.toDate().toLocaleDateString("en-IN") : "Not Activated";
-await checkMembership();
-    profileMessage.textContent =
-      "आपकी Student Profile सफलतापूर्वक सेव हो गई!";
-
-document.getElementById("dashboardName").textContent = name;
-
-document.getElementById("dashboardPhone").textContent =
-  currentUser.phoneNumber;
-
-document.getElementById("studentDashboard").hidden = false;
-      
-  } catch (error) {
-    console.error(error);
-    profileMessage.textContent =
-      "Profile सेव नहीं हुई: " + error.message;
-  } finally {
-    saveBtn.disabled = false;
-  }
-});
-                      
-const sharePaymentBtn = document.getElementById("sharePaymentBtn");
-
-sharePaymentBtn.addEventListener("click", async () => {
-  const msg = document.getElementById("paymentMessage");
-  const file = document.getElementById("paymentScreenshot").files[0];
-  const name = document.getElementById("studentName").value.trim();
-
-  if (!currentUser) {
-    msg.textContent = "पहले Mobile OTP से Login करें।";
-    return;
-  }
-
-  if (name.length < 2) {
-    msg.textContent = "पहले अपना Student Profile सेव करें।";
-    return;
-  }
-
-  if (!file || !file.type.startsWith("image/")) {
-    msg.textContent = "कृपया Payment Screenshot चुनें।";
-    return;
-  }
-
-  const plan = document.getElementById("paymentPlan").value;
-
-  const message =
-    "PR Education Hub - Payment Verification\n" +
-    "Student: " + name + "\n" +
-    "Mobile: " + currentUser.phoneNumber + "\n" +
-    "Plan: " + plan + "\n" +
-    "Please verify my payment.";
-
-  sharePaymentBtn.disabled = true;
-  msg.textContent = "WhatsApp Share तैयार हो रहा है...";
-
-  try {
-    if (
-      navigator.share &&
-      navigator.canShare &&
-      navigator.canShare({ files: [file] })
-    ) {
-      await navigator.share({
-        title: "PR Education Hub Payment",
-        text: message,
-        files: [file]
-      });
-
-      msg.textContent =
-        "Share खुल गया। WhatsApp चुनकर Send दबाएँ।";
-
-    } else {
-      const url =
-        "https://wa.me/919300660090?text=" +
-        encodeURIComponent(message);
-
-      window.open(url, "_blank");
-
-      msg.textContent =
-        "WhatsApp में Attachment से Screenshot जोड़कर Send करें।";
-    }
-
-  } catch (error) {
-    if (error.name !== "AbortError") {
-      msg.textContent =
-        "Sharing में समस्या हुई। कृपया दोबारा प्रयास करें।";
-    }
-  } finally {
-    sharePaymentBtn.disabled = false;
-  }
-});
-    </script>
-  <script src="chemistry-mcq.js"></script>
 </body>
 </html>
