@@ -170,41 +170,54 @@ function chooseStream(stream,button){
  show("mediumPanel");
 }
 
+
 function chooseMedium(medium,button){
  selectedMedium=medium;
- document.querySelectorAll("#mediumPanel .option").forEach(b=>b.classList.remove("selected"));
+
+ document.querySelectorAll("#mediumPanel .option").forEach(b=>{
+  b.classList.remove("selected");
+ });
  button.classList.add("selected");
 
+ hide("studentPanel");
  hide("paymentArea");
  hide("otpArea");
 
- let singlePlan="";
- let comboPlan="";
+ let eligible=false;
+ let planName="";
 
- if(selectedClass==="10"){
-  singlePlan="Class 10 All Subjects";
-  comboPlan="Class 10 All Subjects – Hindi + English Medium";
- }else{
-  singlePlan="Class "+selectedClass+" "+selectedStream+" – All Subjects";
-  comboPlan="Class "+selectedClass+" All Streams Combo";
+ if(selectedClass==="10" && medium==="Hindi"){
+  eligible=true;
+  planName="Class 10 All Subjects - Hindi Medium";
+ }
+
+ if(selectedClass==="12" && selectedStream==="Science"){
+  eligible=true;
+  planName="Class 12 Science All Subjects - "+medium+" Medium";
+ }
+
+ if(!eligible){
+  document.getElementById("planOptions").innerHTML=`
+   <div class="notice">
+    इस Course के Premium MCQ Tests अभी Payment के लिए उपलब्ध नहीं हैं।
+    Tests पूरे और जाँच होने के बाद Payment खुलेगा।
+   </div>`;
+  show("planPanel");
+  return;
  }
 
  document.getElementById("planOptions").innerHTML=`
-  <div class="plan" onclick="choosePlan(99,'${singlePlan}',this)">
-   <b>${singlePlan}</b>
+  <div class="plan selected"
+   onclick="choosePlan(99,'${planName}',this)">
+   <b>${planName}</b>
    <div class="price">₹99</div>
-   <small>6 Months • ${medium} Medium</small>
-  </div>
-  <div class="plan" onclick="choosePlan(149,'${comboPlan}',this)">
-   <b>${comboPlan}</b>
-   <div class="price">₹149</div>
-   <small>6 Months • Hindi + English Medium • All Streams (where applicable)</small>
+   <small>6 Months Membership • All Subjects</small>
   </div>
  `;
 
  show("planPanel");
+ choosePlan(99,planName,document.querySelector(".plan"));
 }
-
 function choosePlan(amount,plan,element){
  selectedAmount=amount;
  selectedPlan=plan;
