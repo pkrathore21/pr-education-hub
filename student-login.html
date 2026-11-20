@@ -300,14 +300,15 @@ function choosePlan(amount,plan,element){
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 
 import {
- getAuth,
- setPersistence,
- browserLocalPersistence,
- RecaptchaVerifier,
- signInWithPhoneNumber,
- onAuthStateChanged
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
-
 import {
  getFirestore,
  doc,
@@ -333,23 +334,48 @@ let confirmationResult=null;
 let recaptchaVerifier=null;
 
 await setPersistence(auth,browserLocalPersistence);
+document.getElementById("generatePasswordBtn").addEventListener("click",()=>{
+ const chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789@#";
+ const randomValues=new Uint32Array(10);
+ crypto.getRandomValues(randomValues);
 
+ let password="";
+ for(let i=0;i<10;i++){
+  password+=chars[randomValues[i]%chars.length];
+ }
+
+ const passwordInput=document.getElementById("studentPassword");
+ passwordInput.type="text";
+ passwordInput.value=password;
+
+ document.getElementById("passwordMessage").textContent=
+  "आपका नया Password बन गया है। इसे सुरक्षित लिखकर रखें।";
+});
 onAuthStateChanged(auth,async(user)=>{
  currentUser=user;
 
- if(user){
+ if(!user) return;
+
+ const isPhoneUser=user.providerData.some(
+  provider=>provider.providerId==="phone"
+ );
+
+ if(isPhoneUser){
   document.getElementById("otpMessage").textContent=
-   "आप पहले से Login हैं: "+user.phoneNumber+
+   "आप पहले से OTP Login हैं: "+user.phoneNumber+
    " | इस device पर आपका login सुरक्षित रहेगा।";
 
   document.getElementById("sendOtpBtn").textContent="Already Logged In";
   document.getElementById("sendOtpBtn").disabled=true;
+ }else{
+  document.getElementById("passwordMessage").textContent=
+   "आप पहले से Student ID + Password से Login हैं।";
+ }
 
-  if(window.selectedPlan){
-   document.getElementById("chosenPlanText").textContent=
-    "Selected: "+window.selectedPlan+" | ₹"+window.selectedAmount+" | 6 Months";
-   document.getElementById("paymentArea").classList.remove("hidden");
-  }
+ if(window.selectedPlan){
+  document.getElementById("chosenPlanText").textContent=
+   "Selected: "+window.selectedPlan+" | ₹"+window.selectedAmount+" | 6 Months";
+  document.getElementById("paymentArea").classList.remove("hidden");
  }
 });
 
@@ -446,10 +472,99 @@ document.getElementById("payBtn").addEventListener("click",()=>{
   alert("कृपया Membership Plan चुनें।");
   return;
  }
+ // New Student Account Registration
+document.getElementById("createPasswordAccountBtn").addEventListener("click",async()=>{
+ const name=document.getElementById("passwordStudentName").value.trim();
+ const mobile=document.getElementById("passwordStudentMobile").value.trim();
+ const password=document.getElementById("studentPassword").value;
+ const message=document.getElementById("passwordMessage");
+
+ if(!window.selectedPlan){
+  message.textContent="पहले Class, Stream, Medium और Membership Plan चुनें।";
+  return;
+ }
+ if(name.length<2){
+  message.textContent="कृपया अपना पूरा नाम लिखें।";
+  return;
+ }
+ if(!/^[6-9]\d{9}$/.test(mobile)){
+  message.textContent="सही 10 अंकों का मोबाइल नंबर लिखें।";
+  return;
+ }
+ if(password.length<8){
+  message.textContent="कम से कम 8 अक्षरों का Password बनाएँ।";
+  return;
+ }
+
+ try{
+  message.textContent="Account बनाया जा रहा है...";
+
+  const studentEmail=mobile+"@student.pr-education-hub.com";
+
+  const result=await createUserWithEmailAndPassword(
+   auth,studentEmail,password
+  );
+
+  currentUser=result.user;
+
+  message.textContent=
+   "Account बन गया! आपका Student ID आपका मोबाइल नंबर है। Password सुरक्षित रखें।";
+
+  document.getElementById("chosenPlanText").textContent=
+   "Selected: "+window.selectedPlan+" | ₹"+window.selectedAmount+" | 6 Months";
+
+  document.getElementById("paymentArea").classList.remove("hidden");
+
+ }catch(error){
+  console.error(error);
+  message.textContent="Account नहीं बन पाया: "+error.message;
+ }
+});
+
+
+// Existing Student Password Login
+document.getElementById("passwordLoginBtn").addEventListener("click",async()=>{
+ const mobile=document.getElementById("passwordStudentMobile").value.trim();
+ const password=document.getElementById("studentPassword").value;
+ const message=document.getElementById("passwordMessage");
+
+ if(!/^[6-9]\d{9}$/.test(mobile)){
+  message.textContent="सही 10 अंकों का Student ID लिखें।";
+  return;
+ }
+ if(!password){
+  message.textContent="अपना Password लिखें।";
+  return;
+ }
+
+ try{
+  message.textContent="Login हो रहा है...";
+
+  const studentEmail=mobile+"@student.pr-education-hub.com";
+
+  const result=await signInWithEmailAndPassword(
+   auth,studentEmail,password
+  );
+
+  currentUser=result.user;
+  message.textContent="Login सफल! आपका Student ID सत्यापित हो गया।";
+
+  if(window.selectedPlan){
+   document.getElementById("chosenPlanText").textContent=
+    "Selected: "+window.selectedPlan+" | ₹"+window.selectedAmount+" | 6 Months";
+
+   document.getElementById("paymentArea").classList.remove("hidden");
+  }
+
+ }catch(error){
+  console.error(error);
+  message.textContent="Login असफल: Student ID या Password जाँचें।";
+ }
+});
  window.open(window.selectedPaymentLink,"_blank");
 });
 </script>
-
+</script>
 <script>
 /* Share selected plan values with Firebase module */
 Object.defineProperties(window,{
