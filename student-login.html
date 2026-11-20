@@ -79,8 +79,18 @@ input{width:100%;padding:14px;border:1px solid #cbd5e1;border-radius:10px;font-s
 </section>
 
 <section class="panel hidden" id="studentPanel">
-<h2>5. Student Details & Mobile Login</h2>
+<div class="login-options">
+  <button class="action" type="button"
+    onclick="showOtpLogin()">
+    Old Student – Mobile OTP Login
+  </button>
 
+  <button class="action" type="button"
+    onclick="showPasswordLogin()">
+    New Student – Student ID & Password
+  </button>
+</div>
+ <div id="otpLoginPanel">
 <label>Student Name</label>
 <input id="studentName" placeholder="अपना पूरा नाम लिखें">
 
@@ -109,6 +119,7 @@ maxlength="6" placeholder="6 Digit OTP">
 Payment करने के बाद membership verification होगी।
 सफल verification के बाद ही 6 महीने की membership active होगी।
 </p>
+</div>
 </div>
 </section>
 
