@@ -313,9 +313,9 @@ import {
  getFirestore,
  doc,
  setDoc,
+ getDoc,
  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
-
 const firebaseConfig={
  apiKey:"AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
  authDomain:"pr-education-hub.firebaseapp.com",
@@ -502,9 +502,26 @@ document.getElementById("createPasswordAccountBtn").addEventListener("click",asy
   const studentEmail=mobile+"@student.pr-education-hub.com";
 
   const result=await createUserWithEmailAndPassword(
-   auth,studentEmail,password
-  );
+ auth,studentEmail,password
+);
 
+currentUser=result.user;
+
+// Save new student record
+await setDoc(doc(db,"students",currentUser.uid),{
+ name:name,
+ studentId:mobile,
+ phoneNumber:"+91"+mobile,
+ authMethod:"password",
+ selectedClass:window.selectedClass,
+ selectedStream:window.selectedStream || "",
+ selectedMedium:window.selectedMedium,
+ membershipPlan:window.selectedPlan,
+ membershipAmount:window.selectedAmount,
+ membershipStatus:"pending_payment",
+ createdAt:serverTimestamp(),
+ updatedAt:serverTimestamp()
+});
   currentUser=result.user;
 
   message.textContent=
