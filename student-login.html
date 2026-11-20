@@ -218,15 +218,29 @@ function chooseMedium(medium,button){
  show("planPanel");
  choosePlan(99,planName,document.querySelector(".plan"));
 }
+
 function choosePlan(amount,plan,element){
  selectedAmount=amount;
  selectedPlan=plan;
- selectedPaymentLink=paymentLinks[String(amount)];
 
- document.querySelectorAll(".plan").forEach(p=>p.classList.remove("selected"));
+ if(selectedClass==="10"){
+  selectedPaymentLink="https://rzp.io/rzp/SuJUzh5D";
+ }
+ else if(selectedClass==="12" && selectedStream==="Science"){
+  selectedPaymentLink="https://rzp.io/rzp/en2Wcl6";
+ }
+ else{
+  selectedPaymentLink="";
+ }
+
+ document.querySelectorAll(".plan").forEach(p=>{
+  p.classList.remove("selected");
+ });
+
  element.classList.add("selected");
 
  show("studentPanel");
+
  document.getElementById("chosenPlanText").textContent=
   "Selected: "+selectedPlan+" | ₹"+selectedAmount+" | 6 Months";
 
