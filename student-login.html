@@ -480,16 +480,18 @@ if(studentSnap.exists()){
   message.textContent="OTP Verification असफल: "+error.message;
  }
 });
-
 document.getElementById("payBtn").addEventListener("click",()=>{
  if(!currentUser){
-  alert("पहले Mobile OTP Verify करें।");
+  alert("पहले Login या OTP Verify करें।");
   return;
  }
  if(!window.selectedPaymentLink){
   alert("कृपया Membership Plan चुनें।");
   return;
  }
+ window.open(window.selectedPaymentLink,"_blank");
+});
+
  // New Student Account Registration
 document.getElementById("createPasswordAccountBtn").addEventListener("click",async()=>{
  const name=document.getElementById("passwordStudentName").value.trim();
@@ -596,9 +598,7 @@ document.getElementById("passwordLoginBtn").addEventListener("click",async()=>{
   message.textContent="Login असफल: Student ID या Password जाँचें।";
  }
 });
- window.open(window.selectedPaymentLink,"_blank");
-});
-</script>
+ 
 </script>
 <script>
 /* Share selected plan values with Firebase module */
