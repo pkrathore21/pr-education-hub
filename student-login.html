@@ -442,18 +442,36 @@ document.getElementById("verifyOtpBtn").addEventListener("click",async()=>{
   const result=await confirmationResult.confirm(otp);
   currentUser=result.user;
 
-  await setDoc(doc(db,"students",currentUser.uid),{
-   name:name,
-   phoneNumber:currentUser.phoneNumber,
-   selectedClass:window.selectedClass,
-   selectedStream:window.selectedStream,
-   selectedMedium:window.selectedMedium,
-   membershipPlan:window.selectedPlan,
-   membershipAmount:window.selectedAmount,
-   membershipStatus:"pending_payment",
-   updatedAt:serverTimestamp()
+  const studentRef=doc(db,"students",currentUser.uid);
+const studentSnap=await getDoc(studentRef);
+
+if(studentSnap.exists()){
+
+  // Existing student: preserve membership status and dates
+  await setDoc(studentRef,{
+    name:name,
+    selectedClass:window.selectedClass,
+    selectedStream:window.selectedStream || "",
+    selectedMedium:window.selectedMedium,
+    updatedAt:serverTimestamp()
   },{merge:true});
 
+}else{
+
+  // New OTP student
+  await setDoc(studentRef,{
+    name:name,
+    phoneNumber:currentUser.phoneNumber,
+    selectedClass:window.selectedClass,
+    selectedStream:window.selectedStream || "",
+    selectedMedium:window.selectedMedium,
+    membershipPlan:window.selectedPlan,
+    membershipAmount:window.selectedAmount,
+    membershipStatus:"pending_payment",
+    createdAt:serverTimestamp(),
+    updatedAt:serverTimestamp()
+  });
+}
   message.textContent="OTP Verification सफल! अब Payment करें।";
   document.getElementById("paymentArea").classList.remove("hidden");
 
