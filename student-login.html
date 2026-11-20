@@ -7,100 +7,30 @@
 <title>Student Login | PR Education Hub</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#f1f5f9;
- color:#172554;
-}
-header{
- background:#123b70;
- color:white;
- text-align:center;
- padding:22px 12px;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172554}
+header{background:#123b70;color:white;text-align:center;padding:22px 12px}
 header h1{margin:0;font-size:27px}
 header p{margin:8px 0 0}
-.container{
- width:min(100% - 24px,850px);
- margin:25px auto;
-}
-.panel{
- background:white;
- padding:24px;
- border-radius:18px;
- box-shadow:0 5px 22px #00000012;
- margin-bottom:20px;
-}
+.container{width:min(100% - 24px,850px);margin:25px auto}
+.panel{background:white;padding:24px;border-radius:18px;box-shadow:0 5px 22px #00000012;margin-bottom:20px}
 h2{text-align:center;margin-top:0}
-.grid{
- display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:16px;
-}
-.option{
- min-height:145px;
- border:3px solid #dbeafe;
- border-radius:16px;
- background:white;
- font-size:22px;
- font-weight:bold;
- color:#123b70;
- cursor:pointer;
- padding:20px 10px;
-}
-.option small{
- display:block;
- font-size:14px;
- font-weight:normal;
- margin-top:12px;
-}
-.option.selected{
- border-color:#16a34a;
- background:#f0fdf4;
-}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.option{min-height:110px;border:2px solid #dbeafe;border-radius:14px;background:white;font-size:20px;font-weight:bold;color:#123b70;cursor:pointer;padding:16px 10px}
+.option small{display:block;font-size:14px;font-weight:normal;margin-top:8px}
+.option.selected,.plan.selected{border-color:#16a34a;background:#f0fdf4}
 .stream-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-.medium-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.plan{
- border:2px solid #dbeafe;
- border-radius:14px;
- padding:18px;
- margin:12px 0;
- cursor:pointer;
-}
-.plan.selected{
- border-color:#16a34a;
- background:#f0fdf4;
-}
-.price{
- font-size:27px;
- font-weight:bold;
- color:#15803d;
-}
-input{
- width:100%;
- padding:14px;
- border:1px solid #cbd5e1;
- border-radius:10px;
- font-size:17px;
- margin:8px 0 15px;
-}
-.action{
- width:100%;
- padding:15px;
- border:0;
- border-radius:10px;
- background:#123b70;
- color:white;
- font-size:18px;
- font-weight:bold;
- cursor:pointer;
-}
-.muted{text-align:center;color:#64748b;font-size:14px}
+.plan{border:2px solid #dbeafe;border-radius:14px;padding:18px;margin:12px 0;cursor:pointer}
+.price{font-size:27px;font-weight:bold;color:#15803d;margin:8px 0}
+input{width:100%;padding:14px;border:1px solid #cbd5e1;border-radius:10px;font-size:17px;margin:8px 0 15px}
+.action{width:100%;padding:15px;border:0;border-radius:10px;background:#123b70;color:white;font-size:17px;font-weight:bold;cursor:pointer;margin-top:8px}
+.action:disabled{opacity:.5;cursor:not-allowed}
+.pay{background:#15803d}
+.muted{text-align:center;color:#64748b;font-size:14px;line-height:1.6}
 .hidden{display:none}
+.notice{background:#fff7ed;padding:12px;border-radius:10px;color:#9a3412;font-size:14px;line-height:1.5}
 @media(max-width:520px){
  .panel{padding:17px}
- .option{min-height:125px;font-size:19px}
+ .option{font-size:18px}
  .stream-grid{grid-template-columns:1fr}
  header h1{font-size:23px}
 }
@@ -111,48 +41,45 @@ input{
 <header>
 <h1>PR Education Hub</h1>
 <p>Learn Today • Lead Tomorrow</p>
-<p>Student Registration & Premium Membership</p>
+<p>Student Login & Premium Membership</p>
 </header>
 
 <main class="container">
 
 <section class="panel">
-<h2>Select Your Class</h2>
-<div class="grid">
-<button class="option" onclick="chooseClass('10')">
-10th
-<small>Class 10</small>
-</button>
-<button class="option" onclick="chooseClass('12')">
-12th
-<small>Class 12</small>
-</button>
+<h2>1. Select Your Class</h2>
+<div class="grid" id="classOptions">
+<button class="option" onclick="chooseClass('10',this)">10th<small>Class 10</small></button>
+<button class="option" onclick="chooseClass('11',this)">11th<small>Class 11</small></button>
+<button class="option" onclick="chooseClass('12',this)">12th<small>Class 12</small></button>
+</div>
+</section>
+
+<section class="panel hidden" id="streamPanel">
+<h2>2. Select Your Stream</h2>
+<div class="grid stream-grid">
+<button class="option" onclick="chooseStream('Science',this)">Science</button>
+<button class="option" onclick="chooseStream('Commerce',this)">Commerce</button>
+<button class="option" onclick="chooseStream('Arts',this)">Arts</button>
 </div>
 </section>
 
 <section class="panel hidden" id="mediumPanel">
-<h2>Select Medium</h2>
-<div class="grid medium-grid" id="mediumOptions"></div>
-</section>
-
-<section class="panel hidden" id="streamPanel">
-<h2>Select Your Stream</h2>
-<div class="grid stream-grid">
-<button class="option" onclick="chooseStream('Science')">Science</button>
-<button class="option" onclick="chooseStream('Commerce')">Commerce</button>
-<button class="option" onclick="chooseStream('Arts')">Arts</button>
+<h2>3. Select Medium</h2>
+<div class="grid">
+<button class="option" onclick="chooseMedium('Hindi',this)">Hindi Medium</button>
+<button class="option" onclick="chooseMedium('English',this)">English Medium</button>
 </div>
 </section>
 
 <section class="panel hidden" id="planPanel">
-<h2>Premium Membership Plan</h2>
+<h2>4. Select Membership Plan</h2>
 <div id="planOptions"></div>
-<p class="muted">Membership अवधि: 6 महीने</p>
+<p class="muted">सभी Membership की अवधि: 6 महीने</p>
 </section>
 
-
 <section class="panel hidden" id="studentPanel">
-<h2>Student Details & Mobile Login</h2>
+<h2>5. Student Details & Mobile Login</h2>
 
 <label>Student Name</label>
 <input id="studentName" placeholder="अपना पूरा नाम लिखें">
@@ -161,248 +88,306 @@ input{
 <input id="mobile" type="tel" maxlength="10"
 inputmode="numeric" placeholder="10 अंकों का मोबाइल नंबर">
 
-<button class="action" id="sendOtpBtn" type="button">
-Send Mobile OTP
-</button>
+<button class="action" id="sendOtpBtn" type="button">Send Mobile OTP</button>
 
 <div id="recaptcha-container"></div>
 
 <div id="otpArea" class="hidden">
 <label>Enter OTP</label>
-<input id="studentOtp" type="text"
-inputmode="numeric" maxlength="6"
-placeholder="6 Digit OTP">
-
-<button class="action" id="verifyOtpBtn" type="button">
-Verify OTP & Login
-</button>
+<input id="studentOtp" type="text" inputmode="numeric"
+maxlength="6" placeholder="6 Digit OTP">
+<button class="action" id="verifyOtpBtn" type="button">Verify OTP & Login</button>
 </div>
 
 <p id="otpMessage" class="muted"></p>
+
+<div id="paymentArea" class="hidden">
+<h3>Mobile Verification Successful!</h3>
+<p class="muted" id="chosenPlanText"></p>
+<button class="action pay" id="payBtn" type="button">Proceed to Razorpay Payment</button>
+<p class="notice">
+Payment करने के बाद membership verification होगी।
+सफल verification के बाद ही 6 महीने की membership active होगी।
+</p>
+</div>
 </section>
 
 </main>
 
 <script>
 let selectedClass="";
-let selectedMedium="";
 let selectedStream="";
+let selectedMedium="";
 let selectedPlan="";
+let selectedAmount=0;
+let selectedPaymentLink="";
+let currentUser=null;
+
+const paymentLinks={
+  "99":"https://rzp.io/rzp/SuJUzh5D",
+  "149":"https://rzp.io/rzp/IGdsEUs"
+};
 
 function show(id){
  document.getElementById(id).classList.remove("hidden");
 }
-
 function hide(id){
  document.getElementById(id).classList.add("hidden");
 }
 
-function chooseClass(cls){
+function chooseClass(cls,button){
  selectedClass=cls;
- selectedMedium="";
  selectedStream="";
+ selectedMedium="";
  selectedPlan="";
+ selectedAmount=0;
+ selectedPaymentLink="";
 
- hide("mediumPanel");
+ document.querySelectorAll("#classOptions .option").forEach(b=>b.classList.remove("selected"));
+ button.classList.add("selected");
+
  hide("streamPanel");
+ hide("mediumPanel");
  hide("planPanel");
  hide("studentPanel");
+ hide("paymentArea");
+ hide("otpArea");
 
  if(cls==="10"){
-  document.getElementById("mediumOptions").innerHTML=`
-   <button class="option" onclick="chooseMedium('Hindi')">Hindi Medium</button>
-   <button class="option" onclick="chooseMedium('English')">English Medium</button>`;
   show("mediumPanel");
  }else{
   show("streamPanel");
  }
 }
 
-function chooseStream(stream){
+function chooseStream(stream,button){
  selectedStream=stream;
- document.getElementById("mediumOptions").innerHTML=`
-  <button class="option" onclick="chooseMedium('Hindi')">Hindi Medium</button>
-  <button class="option" onclick="chooseMedium('English')">English Medium</button>`;
+ document.querySelectorAll("#streamPanel .option").forEach(b=>b.classList.remove("selected"));
+ button.classList.add("selected");
+ hide("mediumPanel");
+ hide("planPanel");
+ hide("studentPanel");
  show("mediumPanel");
 }
 
-function chooseMedium(medium){
+function chooseMedium(medium,button){
  selectedMedium=medium;
- selectedPlan=selectedClass==="10"
-  ? "Class 10 Premium - ₹99"
-  : "Class 12 "+selectedStream+" Premium - ₹99";
+ document.querySelectorAll("#mediumPanel .option").forEach(b=>b.classList.remove("selected"));
+ button.classList.add("selected");
 
- let plans=`
- <div class="plan selected" onclick="choosePlan('${selectedPlan}',this)">
-  <b>${selectedPlan}</b>
-  <div class="price">₹99</div>
-  <small>6 Months • ${selectedMedium} Medium</small>
- </div>`;
+ hide("paymentArea");
+ hide("otpArea");
 
- plans+=`
- <div class="plan" onclick="choosePlan('Combo Membership - ₹149',this)">
-  <b>Combo Membership</b>
-  <div class="price">₹149</div>
-  <small>6 Months • Class 10 + Class 12 All Streams • Hindi + English</small>
- </div>`;
+ let singlePlan="";
+ let comboPlan="";
 
- document.getElementById("planOptions").innerHTML=plans;
+ if(selectedClass==="10"){
+  singlePlan="Class 10 All Subjects";
+  comboPlan="Class 10 All Subjects – Hindi + English Medium";
+ }else{
+  singlePlan="Class "+selectedClass+" "+selectedStream+" – All Subjects";
+  comboPlan="Class "+selectedClass+" All Streams Combo";
+ }
+
+ document.getElementById("planOptions").innerHTML=`
+  <div class="plan" onclick="choosePlan(99,'${singlePlan}',this)">
+   <b>${singlePlan}</b>
+   <div class="price">₹99</div>
+   <small>6 Months • ${medium} Medium</small>
+  </div>
+  <div class="plan" onclick="choosePlan(149,'${comboPlan}',this)">
+   <b>${comboPlan}</b>
+   <div class="price">₹149</div>
+   <small>6 Months • Hindi + English Medium • All Streams (where applicable)</small>
+  </div>
+ `;
+
  show("planPanel");
- show("studentPanel");
 }
 
-function choosePlan(plan,element){
+function choosePlan(amount,plan,element){
+ selectedAmount=amount;
  selectedPlan=plan;
+ selectedPaymentLink=paymentLinks[String(amount)];
+
  document.querySelectorAll(".plan").forEach(p=>p.classList.remove("selected"));
  element.classList.add("selected");
-}
 
-function continueToOTP(){
- const name=document.getElementById("studentName").value.trim();
- const mobile=document.getElementById("mobile").value.trim();
+ show("studentPanel");
+ document.getElementById("chosenPlanText").textContent=
+  "Selected: "+selectedPlan+" | ₹"+selectedAmount+" | 6 Months";
 
- if(!name){
-  alert("कृपया Student Name लिखें।");
-  return;
+ if(currentUser){
+  show("paymentArea");
  }
- if(!/^[6-9]\d{9}$/.test(mobile)){
-  alert("सही 10 अंकों का Mobile Number डालें।");
-  return;
- }
-
- alert("चयन पूरा हुआ। अगला चरण Firebase OTP Verification और सुरक्षित Payment Verification जोड़ना है।");
 }
 </script>
- 
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 
 import {
-  getAuth,
-  setPersistence,
-  browserLocalPersistence,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-  onAuthStateChanged
+ getAuth,
+ setPersistence,
+ browserLocalPersistence,
+ RecaptchaVerifier,
+ signInWithPhoneNumber,
+ onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
 import {
-  getFirestore,
-  doc,
-  setDoc,
-  serverTimestamp
+ getFirestore,
+ doc,
+ setDoc,
+ serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
-  authDomain: "pr-education-hub.firebaseapp.com",
-  projectId: "pr-education-hub",
-  storageBucket: "pr-education-hub.firebasestorage.app",
-  messagingSenderId: "907993736868",
-  appId: "1:907993736868:web:b7c098a10914a61ceca831",
-  measurementId: "G-V61NSSNFRQ"
+const firebaseConfig={
+ apiKey:"AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
+ authDomain:"pr-education-hub.firebaseapp.com",
+ projectId:"pr-education-hub",
+ storageBucket:"pr-education-hub.firebasestorage.app",
+ messagingSenderId:"907993736868",
+ appId:"1:907993736868:web:b7c098a10914a61ceca831",
+ measurementId:"G-V61NSSNFRQ"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
-let confirmationResult = null;
-let recaptchaVerifier = null;
-let currentUser = null;
+let confirmationResult=null;
+let recaptchaVerifier=null;
 
-await setPersistence(auth, browserLocalPersistence);
+await setPersistence(auth,browserLocalPersistence);
 
-onAuthStateChanged(auth, (user) => {
-  currentUser = user;
+onAuthStateChanged(auth,async(user)=>{
+ currentUser=user;
 
-  if (user) {
-    document.getElementById("otpMessage").textContent =
-      "आप पहले से Login हैं: " + user.phoneNumber;
-    document.getElementById("sendOtpBtn").textContent = "Already Logged In";
-    document.getElementById("sendOtpBtn").disabled = true;
+ if(user){
+  document.getElementById("otpMessage").textContent=
+   "आप पहले से Login हैं: "+user.phoneNumber+
+   " | इस device पर आपका login सुरक्षित रहेगा।";
+
+  document.getElementById("sendOtpBtn").textContent="Already Logged In";
+  document.getElementById("sendOtpBtn").disabled=true;
+
+  if(window.selectedPlan){
+   document.getElementById("chosenPlanText").textContent=
+    "Selected: "+window.selectedPlan+" | ₹"+window.selectedAmount+" | 6 Months";
+   document.getElementById("paymentArea").classList.remove("hidden");
   }
+ }
 });
 
-document.getElementById("sendOtpBtn").addEventListener("click", async () => {
-  const name = document.getElementById("studentName").value.trim();
-  const mobile = document.getElementById("mobile").value.trim();
-  const message = document.getElementById("otpMessage");
+document.getElementById("sendOtpBtn").addEventListener("click",async()=>{
+ const name=document.getElementById("studentName").value.trim();
+ const mobile=document.getElementById("mobile").value.trim();
+ const message=document.getElementById("otpMessage");
 
-  if (!name) {
-    message.textContent = "कृपया विद्यार्थी का नाम लिखें।";
-    return;
+ if(!window.selectedPlan){
+  message.textContent="कृपया पहले Class, Stream, Medium और Plan चुनें।";
+  return;
+ }
+ if(!name){
+  message.textContent="कृपया Student Name लिखें।";
+  return;
+ }
+ if(!/^[6-9]\d{9}$/.test(mobile)){
+  message.textContent="सही 10 अंकों का Mobile Number डालें।";
+  return;
+ }
+
+ try{
+  message.textContent="OTP भेजा जा रहा है...";
+
+  if(!recaptchaVerifier){
+   recaptchaVerifier=new RecaptchaVerifier(auth,"recaptcha-container",{
+    size:"normal"
+   });
   }
 
-  if (!/^[6-9]\d{9}$/.test(mobile)) {
-    message.textContent = "कृपया सही 10 अंकों का मोबाइल नंबर लिखें।";
-    return;
-  }
+  await recaptchaVerifier.render();
 
-  try {
-    message.textContent = "OTP भेजा जा रहा है...";
+  confirmationResult=await signInWithPhoneNumber(
+   auth,"+91"+mobile,recaptchaVerifier
+  );
 
-    if (!recaptchaVerifier) {
-      recaptchaVerifier = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container",
-        { size: "normal" }
-      );
-    }
+  document.getElementById("otpArea").classList.remove("hidden");
+  message.textContent="OTP भेज दिया गया है। अपना OTP दर्ज करें।";
 
-    await recaptchaVerifier.render();
-
-    confirmationResult = await signInWithPhoneNumber(
-      auth,
-      "+91" + mobile,
-      recaptchaVerifier
-    );
-
-    document.getElementById("otpArea").classList.remove("hidden");
-    message.textContent = "OTP भेज दिया गया है। अपना OTP दर्ज करें।";
-
-  } catch (error) {
-    console.error(error);
-    message.textContent = "OTP नहीं भेजा जा सका: " + error.message;
-  }
+ }catch(error){
+  console.error(error);
+  message.textContent="OTP नहीं भेजा जा सका: "+error.message;
+ }
 });
 
-document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
-  const name = document.getElementById("studentName").value.trim();
-  const mobile = document.getElementById("mobile").value.trim();
-  const otp = document.getElementById("studentOtp").value.trim();
-  const message = document.getElementById("otpMessage");
+document.getElementById("verifyOtpBtn").addEventListener("click",async()=>{
+ const name=document.getElementById("studentName").value.trim();
+ const mobile=document.getElementById("mobile").value.trim();
+ const otp=document.getElementById("studentOtp").value.trim();
+ const message=document.getElementById("otpMessage");
 
-  if (!confirmationResult) {
-    message.textContent = "पहले OTP भेजें।";
-    return;
-  }
+ if(!confirmationResult){
+  message.textContent="पहले OTP भेजें।";
+  return;
+ }
+ if(!/^\d{6}$/.test(otp)){
+  message.textContent="6 अंकों का सही OTP दर्ज करें।";
+  return;
+ }
 
-  if (!/^\d{6}$/.test(otp)) {
-    message.textContent = "6 अंकों का सही OTP दर्ज करें।";
-    return;
-  }
+ try{
+  message.textContent="OTP Verify हो रहा है...";
 
-  try {
-    message.textContent = "OTP Verify हो रहा है...";
+  const result=await confirmationResult.confirm(otp);
+  currentUser=result.user;
 
-    const result = await confirmationResult.confirm(otp);
-    currentUser = result.user;
+  await setDoc(doc(db,"students",currentUser.uid),{
+   name:name,
+   phoneNumber:currentUser.phoneNumber,
+   selectedClass:window.selectedClass,
+   selectedStream:window.selectedStream,
+   selectedMedium:window.selectedMedium,
+   membershipPlan:window.selectedPlan,
+   membershipAmount:window.selectedAmount,
+   membershipStatus:"pending_payment",
+   updatedAt:serverTimestamp()
+  },{merge:true});
 
-    await setDoc(doc(db, "students", currentUser.uid), {
-      name: name,
-      phoneNumber: "+91" + mobile,
-      updatedAt: serverTimestamp()
-    }, { merge: true });
+  message.textContent="OTP Verification सफल! अब Payment करें।";
+  document.getElementById("paymentArea").classList.remove("hidden");
 
-    message.textContent = "Login सफल! आपका मोबाइल नंबर Verify हो गया है।";
+ }catch(error){
+  console.error(error);
+  message.textContent="OTP Verification असफल: "+error.message;
+ }
+});
 
-  } catch (error) {
-    console.error(error);
-    message.textContent = "OTP Verification असफल: " + error.message;
-  }
+document.getElementById("payBtn").addEventListener("click",()=>{
+ if(!currentUser){
+  alert("पहले Mobile OTP Verify करें।");
+  return;
+ }
+ if(!window.selectedPaymentLink){
+  alert("कृपया Membership Plan चुनें।");
+  return;
+ }
+ window.open(window.selectedPaymentLink,"_blank");
 });
 </script>
+
+<script>
+/* Share selected plan values with Firebase module */
+Object.defineProperties(window,{
+ selectedClass:{get:()=>selectedClass},
+ selectedStream:{get:()=>selectedStream},
+ selectedMedium:{get:()=>selectedMedium},
+ selectedPlan:{get:()=>selectedPlan},
+ selectedAmount:{get:()=>selectedAmount},
+ selectedPaymentLink:{get:()=>selectedPaymentLink}
+});
+</script>
+
 </body>
 </html>
-
