@@ -121,6 +121,41 @@ Payment करने के बाद membership verification होगी।
 </p>
 </div>
 </div>
+ <div id="passwordLoginPanel" class="hidden">
+
+  <h3>Student ID & Password Login</h3>
+
+  <label>Student Name (New Registration)</label>
+  <input id="passwordStudentName"
+    type="text" placeholder="अपना पूरा नाम लिखें">
+
+  <label>Student ID (Mobile Number)</label>
+  <input id="passwordStudentMobile"
+    type="tel" maxlength="10" inputmode="numeric"
+    placeholder="10 अंकों का मोबाइल नंबर">
+
+  <label>Password</label>
+  <input id="studentPassword"
+    type="password" placeholder="अपना Password लिखें">
+
+  <button class="action" type="button"
+    id="generatePasswordBtn">
+    Generate New Password
+  </button>
+
+  <button class="action" type="button"
+    id="createPasswordAccountBtn">
+    Create New Student Account
+  </button>
+
+  <button class="action" type="button"
+    id="passwordLoginBtn">
+    Login
+  </button>
+
+  <p id="passwordMessage" class="muted"></p>
+
+</div>
 </section>
 
 </main>
@@ -426,6 +461,16 @@ Object.defineProperties(window,{
  selectedPaymentLink:{get:()=>selectedPaymentLink}
 });
 </script>
+<script>
+window.showOtpLogin = function () {
+  document.getElementById("otpLoginPanel").classList.remove("hidden");
+  document.getElementById("passwordLoginPanel").classList.add("hidden");
+};
 
+window.showPasswordLogin = function () {
+  document.getElementById("otpLoginPanel").classList.add("hidden");
+  document.getElementById("passwordLoginPanel").classList.remove("hidden");
+};
+</script>
 </body>
 </html>
