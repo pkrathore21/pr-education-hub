@@ -454,7 +454,26 @@ $("loginBtn").addEventListener("click",async()=>{
  }
 
 });
+// Forgot Password - Email Reset Link
 
+$("forgotPasswordBtn").addEventListener("click",async()=>{
+
+ const email=$("loginEmail").value.trim().toLowerCase();
+
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  message("पहले अपना Registered Email Address लिखें।");
+  return;
+ }
+
+ try{
+  await sendPasswordResetEmail(auth,email);
+  message("Password Reset Link आपके Email पर भेज दिया गया है। Inbox और Spam Folder जाँचें।");
+ }catch(error){
+  console.error(error);
+  message("Reset Link भेजने में समस्या आई। Email जाँचें या थोड़ी देर बाद प्रयास करें।");
+ }
+
+});
 // Dashboard
 
 async function loadDashboard(){
