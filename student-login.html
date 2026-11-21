@@ -295,29 +295,9 @@ $("selectCourseBtn").addEventListener("click",()=>{
  }
 });
 
-
-// Generate password
-
-$("generatePasswordBtn").addEventListener("click",()=>{
- const chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789@#";
- const values=new Uint32Array(12);
- crypto.getRandomValues(values);
-
- let password="";
- for(let i=0;i<12;i++){
-  password+=chars[values[i]%chars.length];
- }
-
- $("studentPassword").type="text";
- $("studentPassword").value=password;
-
- message("Password Generate हो गया है। इसे सुरक्षित लिखकर रखें।");
-});
-
-
 // Create Student Profile
 
-async function createStudentProfile(user,name,mobile){
+async function createStudentProfile(user,name,mobile,email){
 
  const studentRef=doc(db,"students",user.uid);
  const snap=await getDoc(studentRef);
@@ -325,6 +305,7 @@ async function createStudentProfile(user,name,mobile){
  if(!snap.exists()){
   await setDoc(studentRef,{
    name:name,
+   email:email,
    studentId:mobile,
    phoneNumber:"+91"+mobile,
    authMethod:"password",
@@ -337,7 +318,6 @@ async function createStudentProfile(user,name,mobile){
   });
  }
 }
-
 
 // Add selected course as a separate membership
 
@@ -377,13 +357,13 @@ async function addSelectedCourse(){
  await loadDashboard();
 }
 
-
 // Registration
 
 $("registerBtn").addEventListener("click",async()=>{
 
  const name=$("studentName").value.trim();
  const mobile=$("mobile").value.trim();
+ const email=$("studentEmail").value.trim().toLowerCase();
  const password=$("studentPassword").value;
 
  if(!selectedCourse){
@@ -401,6 +381,11 @@ $("registerBtn").addEventListener("click",async()=>{
   return;
  }
 
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  message("सही Email Address लिखें।");
+  return;
+ }
+
  if(password.length<8){
   message("Password कम से कम 8 अक्षरों का होना चाहिए।");
   return;
@@ -409,15 +394,16 @@ $("registerBtn").addEventListener("click",async()=>{
  try{
   message("Account बनाया जा रहा है...");
 
-  const email=mobile+"@student.pr-education-hub.com";
-
   const result=await createUserWithEmailAndPassword(
    auth,email,password
   );
 
   currentUser=result.user;
 
-  await createStudentProfile(currentUser,name,mobile);
+  await createStudentProfile(
+   currentUser,name,mobile,email
+  );
+
   await addSelectedCourse();
   await loadDashboard();
 
@@ -435,11 +421,11 @@ $("registerBtn").addEventListener("click",async()=>{
 
 $("loginBtn").addEventListener("click",async()=>{
 
- const mobile=$("loginMobile").value.trim();
+ const email=$("loginEmail").value.trim().toLowerCase();
  const password=$("loginPassword").value;
 
- if(!/^[6-9][0-9]{9}$/.test(mobile)){
-  message("सही 10 अंकों का Student ID लिखें।");
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  message("सही Registered Email लिखें।");
   return;
  }
 
@@ -450,8 +436,6 @@ $("loginBtn").addEventListener("click",async()=>{
 
  try{
   message("Login हो रहा है...");
-
-  const email=mobile+"@student.pr-education-hub.com";
 
   const result=await signInWithEmailAndPassword(
    auth,email,password
@@ -465,11 +449,10 @@ $("loginBtn").addEventListener("click",async()=>{
 
  }catch(error){
   console.error(error);
-  message("Login असफल: Student ID या Password जाँचें।");
+  message("Login असफल: Email या Password जाँचें।");
  }
 
 });
-
 
 // Dashboard
 
