@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -8,25 +7,120 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172554}
-header{background:#123b70;color:white;text-align:center;padding:22px 12px}
-header h1{margin:0;font-size:27px}
-.container{width:min(100% - 24px,850px);margin:25px auto}
-.panel{background:white;padding:22px;border-radius:16px;box-shadow:0 5px 22px #00000012;margin-bottom:18px}
-h2{text-align:center;margin-top:0}
-label{display:block;font-weight:bold;margin-top:12px}
-input,select{width:100%;padding:14px;border:1px solid #cbd5e1;border-radius:10px;font-size:16px;margin:7px 0}
-.action{width:100%;padding:14px;border:0;border-radius:10px;background:#123b70;color:white;font-size:16px;font-weight:bold;cursor:pointer;margin-top:9px}
+
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f1f5f9;
+ color:#172554;
+}
+
+header{
+ background:#123b70;
+ color:white;
+ text-align:center;
+ padding:22px 12px;
+}
+
+header h1{
+ margin:0;
+ font-size:27px;
+}
+
+.container{
+ width:min(100% - 24px,850px);
+ margin:25px auto;
+}
+
+.panel{
+ background:white;
+ padding:22px;
+ border-radius:16px;
+ box-shadow:0 5px 22px #00000012;
+ margin-bottom:18px;
+}
+
+h2{
+ text-align:center;
+ margin-top:0;
+}
+
+label{
+ display:block;
+ font-weight:bold;
+ margin-top:12px;
+}
+
+input,select{
+ width:100%;
+ padding:14px;
+ border:1px solid #cbd5e1;
+ border-radius:10px;
+ font-size:16px;
+ margin:7px 0;
+}
+
+.action{
+ width:100%;
+ padding:14px;
+ border:0;
+ border-radius:10px;
+ background:#123b70;
+ color:white;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+ margin-top:9px;
+}
+
 .green{background:#15803d}
 .red{background:#b91c1c}
+
 .hidden{display:none!important}
-.muted{text-align:center;color:#64748b;font-size:14px;line-height:1.6}
-.notice{background:#fff7ed;padding:12px;border-radius:10px;color:#9a3412;font-size:14px;line-height:1.5;margin-top:12px}
-.course-card{border:1px solid #dbeafe;border-radius:12px;padding:16px;margin:12px 0}
-.status{font-weight:bold;margin:8px 0}
+
+.muted{
+ text-align:center;
+ color:#64748b;
+ font-size:14px;
+ line-height:1.6;
+}
+
+.notice{
+ background:#fff7ed;
+ padding:12px;
+ border-radius:10px;
+ color:#9a3412;
+ font-size:14px;
+ line-height:1.5;
+ margin-top:12px;
+}
+
+.course-card{
+ border:1px solid #dbeafe;
+ border-radius:12px;
+ padding:16px;
+ margin:12px 0;
+}
+
+.status{
+ font-weight:bold;
+ margin:8px 0;
+}
+
 .active{color:#15803d}
 .pending{color:#b45309}
-hr{border:0;border-top:1px solid #e2e8f0;margin:18px 0}
+
+hr{
+ border:0;
+ border-top:1px solid #e2e8f0;
+ margin:18px 0;
+}
+
+a{
+ color:#123b70;
+ font-weight:bold;
+}
+
 @media(max-width:520px){
  .panel{padding:16px}
  header h1{font-size:23px}
@@ -80,29 +174,36 @@ Select Course
 <p id="courseMessage" class="muted"></p>
 </section>
 
+
 <section class="panel" id="accountPanel">
 
 <h2>Student Account</h2>
 
 <div id="registerBox">
+
 <h3>New Student Registration</h3>
 
 <label>Student Name</label>
 <input id="studentName" type="text"
-placeholder="अपना पूरा नाम लिखें">
+placeholder="अपना पूरा नाम लिखें"
+autocomplete="name">
 
 <label>Mobile Number</label>
 <input id="mobile" type="tel"
 maxlength="10" inputmode="numeric"
-placeholder="10 अंकों का मोबाइल नंबर">
- 
-<label>Email Address (Optional)</label>
+placeholder="10 अंकों का मोबाइल नंबर"
+autocomplete="tel">
+
+<label>Email Address (Required)</label>
 <input id="studentEmail" type="email"
-placeholder="अपना Email Address लिखें">
- 
+placeholder="अपना Email Address लिखें"
+autocomplete="email">
+
 <label>Password</label>
 <input id="studentPassword" type="password"
-placeholder="कम से कम 8 अक्षर">
+minlength="8"
+placeholder="कम से कम 8 अक्षर"
+autocomplete="new-password">
 
 <button class="action" id="generatePasswordBtn">
 Generate Password
@@ -111,34 +212,37 @@ Generate Password
 <button class="action green" id="registerBtn">
 Create New Student Account
 </button>
+
 </div>
 
 <hr>
 
 <div id="loginBox">
+
 <h3>Existing Student Login</h3>
 
-<label>Student ID (Mobile Number)</label>
-<input id="loginMobile" type="tel"
-maxlength="10" inputmode="numeric"
-placeholder="अपना 10 अंकों का मोबाइल नंबर">
- 
-<label>Email Address (अगर Email से Login करना है)</label>
+<label>Registered Email Address</label>
 <input id="loginEmail" type="email"
-placeholder="अपना Registered Email लिखें">
+placeholder="अपना Registered Email लिखें"
+autocomplete="username">
+
 <label>Password</label>
 <input id="loginPassword" type="password"
-placeholder="अपना Password लिखें">
+placeholder="अपना Password लिखें"
+autocomplete="current-password">
 
 <button class="action" id="loginBtn">
 Login
 </button>
-<p>
-<a href="https://wa.me/919300660090?text=Namaste%2C%20main%20PR%20Education%20Hub%20ka%20student%20hoon.%20Mujhe%20apna%20password%20reset%20karwana%20hai."
-target="_blank" rel="noopener">
+
+<button class="action" id="forgotPasswordBtn">
 Forgot Password? पासवर्ड भूल गए?
-</a>
+</button>
+
+<p class="muted">
+Forgot Password पर क्लिक करने से पहले अपना Registered Email लिखें।
 </p>
+
 </div>
 
 <p id="authMessage" class="muted"></p>
@@ -149,6 +253,7 @@ Browser का Data साफ करने या Logout करने पर द
 </div>
 
 </section>
+
 
 <section class="panel hidden" id="dashboard">
 
@@ -178,10 +283,12 @@ Logout
 
 </main>
 
+
 <script type="module">
 
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import {
+ initializeApp
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 
 import {
  getAuth,
@@ -215,6 +322,7 @@ const firebaseConfig={
  measurementId:"G-V61NSSNFRQ"
 };
 
+
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
@@ -226,15 +334,18 @@ let selectedCourse=null;
 
 const $=id=>document.getElementById(id);
 
+
 const paymentLinks={
  class10_hindi:"https://rzp.io/rzp/SuJUzh5D",
  class12_science_hindi:"https://rzp.io/rzp/en2Wcl6",
  class12_science_english:"https://rzp.io/rzp/en2Wcl6"
 };
 
+
 function message(text){
  $("authMessage").textContent=text;
 }
+
 
 function courseDetails(){
 
@@ -272,23 +383,33 @@ function courseDetails(){
 // Class and course selection
 
 $("classSelect").addEventListener("change",()=>{
+
  const cls=$("classSelect").value;
 
  $("streamBox").classList.toggle("hidden",cls!=="12");
  $("mediumBox").classList.toggle("hidden",!cls);
+
+ $("streamSelect").value="";
+ $("mediumSelect").value="";
+
  $("courseMessage").textContent="";
  selectedCourse=null;
+
 });
+
 
 $("streamSelect").addEventListener("change",()=>{
  selectedCourse=null;
 });
 
+
 $("mediumSelect").addEventListener("change",()=>{
  selectedCourse=null;
 });
 
+
 $("selectCourseBtn").addEventListener("click",()=>{
+
  const course=courseDetails();
 
  if(!course){
@@ -307,7 +428,32 @@ $("selectCourseBtn").addEventListener("click",()=>{
   $("dashboardMessage").textContent=
    "Course चुना गया है। Add Selected Course दबाएँ।";
  }
+
 });
+
+
+// Generate Password
+
+$("generatePasswordBtn").addEventListener("click",()=>{
+
+ const chars=
+  "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789@#$";
+
+ let password="";
+
+ for(let i=0;i<12;i++){
+  password+=chars.charAt(
+   Math.floor(Math.random()*chars.length)
+  );
+ }
+
+ $("studentPassword").value=password;
+ $("studentPassword").type="text";
+
+ message("Password Generate हो गया है। इसे सुरक्षित रखें।");
+
+});
+
 
 // Create Student Profile
 
@@ -317,6 +463,7 @@ async function createStudentProfile(user,name,mobile,email){
  const snap=await getDoc(studentRef);
 
  if(!snap.exists()){
+
   await setDoc(studentRef,{
    name:name,
    email:email,
@@ -330,10 +477,13 @@ async function createStudentProfile(user,name,mobile,email){
    createdAt:serverTimestamp(),
    updatedAt:serverTimestamp()
   });
+
  }
+
 }
 
-// Add selected course as a separate membership
+
+// Add selected course
 
 async function addSelectedCourse(){
 
@@ -347,8 +497,10 @@ async function addSelectedCourse(){
  const courseSnap=await getDoc(courseRef);
 
  if(courseSnap.exists()){
+
   $("dashboardMessage").textContent=
    "यह Course आपके Account में पहले से मौजूद है।";
+
   await loadDashboard();
   return;
  }
@@ -369,7 +521,9 @@ async function addSelectedCourse(){
   "Course जुड़ गया। अब Payment कर सकते हैं।";
 
  await loadDashboard();
+
 }
+
 
 // Registration
 
@@ -406,6 +560,7 @@ $("registerBtn").addEventListener("click",async()=>{
  }
 
  try{
+
   message("Account बनाया जा रहा है...");
 
   const result=await createUserWithEmailAndPassword(
@@ -424,8 +579,19 @@ $("registerBtn").addEventListener("click",async()=>{
   message("Registration सफल! आपका Student ID: "+mobile);
 
  }catch(error){
+
   console.error(error);
-  message("Registration असफल: "+error.message);
+
+  if(error.code==="auth/email-already-in-use"){
+   message("यह Email पहले से Registered है। Existing Student Login करें।");
+  }else if(error.code==="auth/weak-password"){
+   message("Password कम से कम 8 अक्षरों का रखें।");
+  }else if(error.code==="auth/invalid-email"){
+   message("Email Address सही नहीं है।");
+  }else{
+   message("Registration असफल: "+error.message);
+  }
+
  }
 
 });
@@ -449,6 +615,7 @@ $("loginBtn").addEventListener("click",async()=>{
  }
 
  try{
+
   message("Login हो रहा है...");
 
   const result=await signInWithEmailAndPassword(
@@ -462,12 +629,17 @@ $("loginBtn").addEventListener("click",async()=>{
   message("Login सफल!");
 
  }catch(error){
+
   console.error(error);
+
   message("Login असफल: Email या Password जाँचें।");
+
  }
 
 });
-// Forgot Password - Email Reset Link
+
+
+// Forgot Password
 
 $("forgotPasswordBtn").addEventListener("click",async()=>{
 
@@ -479,14 +651,26 @@ $("forgotPasswordBtn").addEventListener("click",async()=>{
  }
 
  try{
+
   await sendPasswordResetEmail(auth,email);
-  message("Password Reset Link आपके Email पर भेज दिया गया है। Inbox और Spam Folder जाँचें।");
+
+  message(
+   "Password Reset Link आपके Email पर भेज दिया गया है। Inbox और Spam Folder जाँचें।"
+  );
+
  }catch(error){
+
   console.error(error);
-  message("Reset Link भेजने में समस्या आई। Email जाँचें या थोड़ी देर बाद प्रयास करें।");
+
+  message(
+   "Reset Link भेजने में समस्या आई। Email जाँचें या थोड़ी देर बाद प्रयास करें।"
+  );
+
  }
 
 });
+
+
 // Dashboard
 
 async function loadDashboard(){
@@ -497,8 +681,10 @@ async function loadDashboard(){
  const studentSnap=await getDoc(studentRef);
 
  if(!studentSnap.exists()){
+
   $("dashboardMessage").textContent=
    "Student Record नहीं मिला। Admin से संपर्क करें।";
+
   return;
  }
 
@@ -521,6 +707,7 @@ async function loadDashboard(){
  let courseFound=false;
 
  coursesSnap.forEach(courseDoc=>{
+
   courseFound=true;
 
   const course=courseDoc.data();
@@ -546,8 +733,10 @@ async function loadDashboard(){
    button.textContent="Open Tests";
 
    button.addEventListener("click",()=>{
+
     $("dashboardMessage").textContent=
      "इस Course के Test Page का लिंक जोड़ना बाकी है: "+courseDoc.id;
+
    });
 
    card.appendChild(button);
@@ -562,6 +751,7 @@ async function loadDashboard(){
    button.textContent="Pay ₹"+course.amount;
 
    button.addEventListener("click",()=>{
+
     const link=paymentLinks[courseDoc.id];
 
     if(!link){
@@ -570,17 +760,20 @@ async function loadDashboard(){
     }
 
     window.open(link,"_blank");
+
    });
 
    card.appendChild(price);
    card.appendChild(button);
+
   }
 
   list.appendChild(card);
+
  });
 
 
- // Old root-level Active Membership compatibility
+ // Existing Membership compatibility
 
  if(!courseFound && student.membershipStatus==="active"){
 
@@ -597,13 +790,17 @@ async function loadDashboard(){
 
   legacy.appendChild(title);
   legacy.appendChild(status);
+
   list.appendChild(legacy);
+
  }
 
 
  if(!courseFound && student.membershipStatus!=="active"){
+
   list.innerHTML=
    "<p class='muted'>अभी कोई Membership Course नहीं जुड़ा है।</p>";
+
  }
 
 }
@@ -612,6 +809,7 @@ async function loadDashboard(){
 // Add Course button
 
 $("addCourseBtn").addEventListener("click",async()=>{
+
  if(!selectedCourse){
   $("dashboardMessage").textContent=
    "पहले ऊपर से नया Course चुनें।";
@@ -619,19 +817,27 @@ $("addCourseBtn").addEventListener("click",async()=>{
  }
 
  try{
+
   await addSelectedCourse();
+
  }catch(error){
+
   console.error(error);
+
   $("dashboardMessage").textContent=
    "Course नहीं जुड़ पाया: "+error.message;
+
  }
+
 });
 
 
 // Logout
 
 $("logoutBtn").addEventListener("click",async()=>{
+
  try{
+
   await signOut(auth);
   currentUser=null;
 
@@ -639,31 +845,47 @@ $("logoutBtn").addEventListener("click",async()=>{
   $("accountPanel").classList.remove("hidden");
 
   message("आप Logout हो गए हैं।");
+
  }catch(error){
+
   console.error(error);
+
  }
+
 });
 
 
-// Persistent login
+// Persistent Login
 
 onAuthStateChanged(auth,async(user)=>{
+
  currentUser=user;
 
  if(user){
+
   try{
+
    await loadDashboard();
+
   }catch(error){
+
    console.error(error);
+
    $("dashboardMessage").textContent=
     "Dashboard लोड नहीं हुआ। कृपया दोबारा प्रयास करें।";
+
   }
+
  }else{
+
   $("dashboard").classList.add("hidden");
   $("accountPanel").classList.remove("hidden");
+
  }
+
 });
 
 </script>
+
 </body>
 </html>
