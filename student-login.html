@@ -757,14 +757,48 @@ async function loadDashboard(){
 
    const button=document.createElement("button");
    button.className="action green";
-   button.textContent="Open Tests";
+   
 
-  button.addEventListener("click",()=>{
+button.textContent="Open Tests";
+
+button.addEventListener("click",()=>{
+
  const testPages={
   "class10_mp_hindi":"class10-premium-tests.html",
   "class10_mp_english":"class10-premium-tests.html",
-  "class10_cbse_english":"class10-premium-tests.html"
-};
+  "class10_cbse_english":"class10-premium-tests.html",
+
+  "class12_science_mp_hindi":"class12-science-premium-tests.html",
+  "class12_science_mp_english":"class12-science-premium-tests.html",
+  "class12_science_cbse_english":"class12-science-premium-tests.html"
+ };
+
+ const testPage=testPages[courseDoc.id];
+
+ if(testPage){
+
+  const board=course.selectedBoard ||
+   (courseDoc.id.includes("_cbse_") ? "cbse" : "mp");
+
+  const medium=course.selectedMedium || "";
+  const cls=course.selectedClass || "10";
+  const stream=course.selectedStream || "";
+
+  const params=new URLSearchParams({
+   board:board,
+   medium:medium,
+   class:cls,
+   stream:stream
+  });
+
+  window.location.href=testPage+"?"+params.toString();
+
+ }else{
+  $("dashboardMessage").textContent=
+   "इस Course का Test Page अभी जोड़ा नहीं गया है।";
+ }
+
+});
 
  const testPage=testPages[courseDoc.id];
 
