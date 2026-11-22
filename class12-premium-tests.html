@@ -20043,9 +20043,10 @@ card.appendChild(scoreInfo);
 }
 
 
+
 function updateSubjects(){
-  alert("UPDATE SUBJECTS RUNNING");
  subject.innerHTML = "";
+
  const list = boardSubjects[board.value][stream.value];
 
  list.forEach(name=>{
@@ -20060,10 +20061,33 @@ function updateSubjects(){
 
 subject.addEventListener("change",updateChapters);
 
-
 stream.addEventListener("change",updateSubjects);
 board.addEventListener("change",updateSubjects);
+medium.addEventListener("change",updateSubjects);
+
+/* Membership से Board, Medium और Stream */
+const params = new URLSearchParams(window.location.search);
+
+const membershipBoard = params.get("board");
+const membershipMedium = params.get("medium");
+const membershipStream = params.get("stream");
+
+if(membershipBoard === "mp" || membershipBoard === "cbse"){
+ board.value = membershipBoard;
+}
+
+if(membershipMedium === "Hindi"){
+ medium.value = "hi";
+}else if(membershipMedium === "English"){
+ medium.value = "en";
+}
+
+if(membershipStream){
+ stream.value = membershipStream.toLowerCase();
+}
+
 updateSubjects();
+
 alert("HTML SCRIPT BOTTOM REACHED");
 </script>
   <script>
