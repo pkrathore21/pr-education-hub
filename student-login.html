@@ -499,6 +499,7 @@ async function createStudentProfile(user,name,mobile,email){
    selectedClass:selectedCourse.cls,
    selectedStream:selectedCourse.stream,
    selectedMedium:selectedCourse.medium,
+   selectedBoard:selectedCourse.board,
    createdAt:serverTimestamp(),
    updatedAt:serverTimestamp()
   });
@@ -535,6 +536,7 @@ async function addSelectedCourse(){
   selectedClass:selectedCourse.cls,
   selectedStream:selectedCourse.stream,
   selectedMedium:selectedCourse.medium,
+  selectedBoard:selectedCourse.board,
   amount:selectedCourse.amount,
   membershipStatus:"pending_payment",
   paymentStatus:"pending",
