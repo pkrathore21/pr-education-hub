@@ -365,60 +365,67 @@ function courseDetails(){
  const cls=$("classSelect").value;
  const stream=$("streamSelect").value;
  const medium=$("mediumSelect").value;
-const board=$("boardSelect").value;
- 
-if(cls==="10" && board==="mp" && medium==="Hindi"){
+ const board=$("boardSelect").value;
+
+ if(cls==="10" && board==="mp" && medium==="Hindi"){
   return {
    id:"class10_mp_hindi",
    name:"Class 10 All Subjects - MP Board Hindi Medium",
-   amount:99,
-   cls:"10",
-   stream:"",
-   board:"mp",
-   medium:"Hindi"
+   amount:99, cls:"10", stream:"",
+   board:"mp", medium:"Hindi"
   };
  }
 
-if(cls==="10" && board==="mp" && medium==="English"){
+ if(cls==="10" && board==="mp" && medium==="English"){
   return {
    id:"class10_mp_english",
    name:"Class 10 All Subjects - MP Board English Medium",
-   amount:99,
-   cls:"10",
-   stream:"",
-   board:"mp",
-   medium:"English"
+   amount:99, cls:"10", stream:"",
+   board:"mp", medium:"English"
   };
  }
 
-if(cls==="10" && board==="cbse" && medium==="English"){
+ if(cls==="10" && board==="cbse" && medium==="English"){
   return {
    id:"class10_cbse_english",
    name:"Class 10 All Subjects - CBSE English Medium",
-   amount:99,
-   cls:"10",
-   stream:"",
-   board:"cbse",
-   medium:"English"
+   amount:99, cls:"10", stream:"",
+   board:"cbse", medium:"English"
   };
  }
 
+ if(cls==="12" && stream==="Science" &&
+    board==="mp" && medium==="Hindi"){
+  return {
+   id:"class12_science_mp_hindi",
+   name:"Class 12 Science - MP Board Hindi Medium",
+   amount:99, cls:"12", stream:"Science",
+   board:"mp", medium:"Hindi"
+  };
+ }
 
  if(cls==="12" && stream==="Science" &&
-    (medium==="Hindi" || medium==="English")){
+    board==="mp" && medium==="English"){
   return {
-   id:"class12_science_"+medium.toLowerCase(),
-   name:"Class 12 Science All Subjects - "+medium+" Medium",
-   amount:99,
-   cls:"12",
-   stream:"Science",
-   medium:medium
+   id:"class12_science_mp_english",
+   name:"Class 12 Science - MP Board English Medium",
+   amount:99, cls:"12", stream:"Science",
+   board:"mp", medium:"English"
+  };
+ }
+
+ if(cls==="12" && stream==="Science" &&
+    board==="cbse" && medium==="English"){
+  return {
+   id:"class12_science_cbse_english",
+   name:"Class 12 Science - CBSE English Medium",
+   amount:99, cls:"12", stream:"Science",
+   board:"cbse", medium:"English"
   };
  }
 
  return null;
 }
-
 
 // Class and course selection
 
