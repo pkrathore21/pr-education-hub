@@ -714,8 +714,18 @@ async function loadDashboard(){
    button.textContent="Open Tests";
 
   button.addEventListener("click",()=>{
- $("dashboardMessage").textContent=
-  "इस Course के Test Page का लिंक जोड़ना बाकी है: "+courseDoc.id;
+ const testPages={
+  "class10_hindi":"class10-premium-tests.html"
+ };
+
+ const testPage=testPages[courseDoc.id];
+
+ if(testPage){
+  window.location.href=testPage;
+ }else{
+  $("dashboardMessage").textContent=
+   "इस Course का Test Page अभी जोड़ा नहीं गया है।";
+ }
 });
 
 
