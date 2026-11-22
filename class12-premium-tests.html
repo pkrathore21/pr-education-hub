@@ -105,7 +105,10 @@ const stream = document.getElementById("stream");
 const subject = document.getElementById("subject");
 const board = document.getElementById("board");
 const medium = document.getElementById("medium");
-const chapterData = {
+/* Science Membership के लिए Stream निर्धारित करें */
+stream.value = "science";
+stream.disabled = true;
+  const chapterData = {
  Physics: [
   "Electric Charges and Fields",
   "Electrostatic Potential and Capacitance",
