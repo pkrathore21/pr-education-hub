@@ -4102,6 +4102,25 @@ boardSelect.addEventListener("change",updateMediumOptions);
 mediumSelect.addEventListener("change",updateChapters);
 subjectSelect.addEventListener("change",updateChapters);
 
+/* Membership से Board और Medium प्राप्त करें */
+const params = new URLSearchParams(window.location.search);
+
+const membershipBoard = params.get("board");
+const membershipMedium = params.get("medium");
+
+if (membershipBoard === "mp" || membershipBoard === "cbse") {
+ boardSelect.value = membershipBoard;
+ updateMediumOptions();
+
+ if (membershipMedium === "Hindi") {
+  mediumSelect.value = "hi";
+ } else if (membershipMedium === "English") {
+  mediumSelect.value = "en";
+ }
+
+ updateChapters();
+}
+
 let timerInterval = null;
 let remainingSeconds = 45 * 60;
 let currentQuestions = [];
