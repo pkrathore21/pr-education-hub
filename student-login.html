@@ -428,7 +428,8 @@ $("classSelect").addEventListener("change",()=>{
 
  $("streamBox").classList.toggle("hidden",cls!=="12");
  $("mediumBox").classList.toggle("hidden",!cls);
-
+$("boardBox").classList.toggle("hidden",!cls);
+$("boardSelect").value="";
  $("streamSelect").value="";
  $("mediumSelect").value="";
 
