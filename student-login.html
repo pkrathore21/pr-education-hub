@@ -713,125 +713,136 @@ async function loadDashboard(){
    button.className="action green";
    button.textContent="Open Tests";
 
-  
-button.addEventListener("click", async () => {
+  button.addEventListener("click",()=>{
+ $("dashboardMessage").textContent=
+  "इस Course के Test Page का लिंक जोड़ना बाकी है: "+courseDoc.id;
+});
 
- try {
-  button.disabled = true;
-  button.textContent = "Payment तैयार हो रहा है...";
 
-  if (!currentUser) {
-   throw new Error("कृपया पहले Login करें।");
-  }
+   card.appendChild(button);
+ 
+  } else {
 
-  const token = await currentUser.getIdToken();
+   const price=document.createElement("p");
+   price.textContent="Membership: ₹"+(course.amount || 99);
 
-  // Create secure Razorpay Order
-  const orderResponse = await fetch(
-   PAYMENT_WORKER_URL + "/create-order",
-   {
-    method: "POST",
-    headers: {
-     "Content-Type": "application/json",
-     "Authorization": "Bearer " + token
-    },
-    body: JSON.stringify({
-     courseId: courseDoc.id
-    })
-   }
-  );
+   const button=document.createElement("button");
+   button.className="action green";
+   button.textContent="Pay ₹"+(course.amount || 99);
 
-  const order = await orderResponse.json();
-
-  if (!orderResponse.ok) {
-   throw new Error(order.error || "Order नहीं बन पाया।");
-  }
-
-  // Load Razorpay Checkout
-  if (!window.Razorpay) {
-   await new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-   });
-  }
-
-  const checkout = new Razorpay({
-   key: order.keyId,
-   amount: order.amount,
-   currency: order.currency,
-   name: "PR Education Hub",
-   description: order.courseName,
-   order_id: order.orderId,
-
-   prefill: {
-    email: currentUser.email || ""
-   },
-
-   handler: async function (response) {
+   button.addEventListener("click", async () => {
 
     try {
-     $("dashboardMessage").textContent =
-      "Payment सत्यापित किया जा रहा है...";
+     button.disabled=true;
+     button.textContent="Payment तैयार हो रहा है...";
 
-     const verifyResponse = await fetch(
-      PAYMENT_WORKER_URL + "/verify-payment",
+     if(!currentUser){
+      throw new Error("कृपया पहले Login करें।");
+     }
+
+     const token=await currentUser.getIdToken();
+
+     const orderResponse=await fetch(
+      PAYMENT_WORKER_URL+"/create-order",
       {
-       method: "POST",
-       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token
+       method:"POST",
+       headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer "+token
        },
-       body: JSON.stringify({
-        courseId: courseDoc.id,
-        razorpay_order_id: response.razorpay_order_id,
-        razorpay_payment_id: response.razorpay_payment_id,
-        razorpay_signature: response.razorpay_signature
+       body:JSON.stringify({
+        courseId:courseDoc.id
        })
       }
      );
 
-     const result = await verifyResponse.json();
+     const order=await orderResponse.json();
 
-     if (!verifyResponse.ok || result.status !== "active") {
-      throw new Error(
-       result.message || result.error || "Payment verification pending."
-      );
+     if(!orderResponse.ok){
+      throw new Error(order.error || "Order नहीं बन पाया।");
      }
 
-     alert("Payment सफल! आपकी Membership Active हो गई है।");
-     await loadDashboard();
+     if(!window.Razorpay){
+      await new Promise((resolve,reject)=>{
+       const script=document.createElement("script");
+       script.src="https://checkout.razorpay.com/v1/checkout.js";
+       script.onload=resolve;
+       script.onerror=reject;
+       document.head.appendChild(script);
+      });
+     }
 
-    } catch (error) {
+     const checkout=new Razorpay({
+      key:order.keyId,
+      amount:order.amount,
+      currency:order.currency,
+      name:"PR Education Hub",
+      description:order.courseName,
+      order_id:order.orderId,
+
+      prefill:{
+       email:currentUser.email || ""
+      },
+
+      handler:async function(response){
+
+       try{
+        $("dashboardMessage").textContent=
+         "Payment सत्यापित किया जा रहा है...";
+
+        const verifyResponse=await fetch(
+         PAYMENT_WORKER_URL+"/verify-payment",
+         {
+          method:"POST",
+          headers:{
+           "Content-Type":"application/json",
+           "Authorization":"Bearer "+token
+          },
+          body:JSON.stringify({
+           courseId:courseDoc.id,
+           razorpay_order_id:response.razorpay_order_id,
+           razorpay_payment_id:response.razorpay_payment_id,
+           razorpay_signature:response.razorpay_signature
+          })
+         }
+        );
+
+        const result=await verifyResponse.json();
+
+        if(!verifyResponse.ok || result.status!=="active"){
+         throw new Error(
+          result.message || result.error ||
+          "Payment verification pending."
+         );
+        }
+
+        alert("Payment सफल! Membership Active हो गई है।");
+        await loadDashboard();
+
+       }catch(error){
+        alert(error.message);
+       }
+      },
+
+      theme:{color:"#198754"}
+     });
+
+     checkout.on("payment.failed",function(){
+      alert("Payment पूरा नहीं हुआ। दोबारा कोशिश करें।");
+     });
+
+     checkout.open();
+
+    }catch(error){
      alert(error.message);
+    }finally{
+     button.disabled=false;
+     button.textContent="Pay ₹"+(course.amount || 99);
     }
-   },
-
-   theme: {
-    color: "#198754"
-   }
-  });
-
-  checkout.on("payment.failed", function () {
-   alert("Payment पूरा नहीं हुआ। आप दोबारा कोशिश कर सकते हैं।");
-  });
-
-  checkout.open();
-
- } catch (error) {
-  alert(error.message);
- } finally {
-  button.disabled = false;
-  button.textContent = "Pay ₹" + course.amount;
- }
-
-});
+   });
 
    card.appendChild(price);
    card.appendChild(button);
-
   }
 
   list.appendChild(card);
