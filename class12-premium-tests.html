@@ -20071,18 +20071,22 @@ medium.addEventListener("change",updateSubjects);
 /* Membership से Board, Medium और Stream */
 const params = new URLSearchParams(window.location.search);
 
+
 const membershipBoard = params.get("board");
 const membershipMedium = params.get("medium");
 const membershipStream = params.get("stream");
 
 if(membershipBoard === "mp" || membershipBoard === "cbse"){
  board.value = membershipBoard;
+ board.disabled = true;
 }
 
 if(membershipMedium === "Hindi"){
  medium.value = "hi";
+ medium.disabled = true;
 }else if(membershipMedium === "English"){
  medium.value = "en";
+ medium.disabled = true;
 }
 
 if(membershipStream){
