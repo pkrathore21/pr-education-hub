@@ -357,16 +357,43 @@ function courseDetails(){
  const stream=$("streamSelect").value;
  const medium=$("mediumSelect").value;
 
- if(cls==="10" && medium==="Hindi"){
+ 
+if(cls==="10" && board==="mp" && medium==="Hindi"){
   return {
-   id:"class10_hindi",
-   name:"Class 10 All Subjects - Hindi Medium",
+   id:"class10_mp_hindi",
+   name:"Class 10 All Subjects - MP Board Hindi Medium",
    amount:99,
    cls:"10",
    stream:"",
+   board:"mp",
    medium:"Hindi"
   };
  }
+
+if(cls==="10" && board==="mp" && medium==="English"){
+  return {
+   id:"class10_mp_english",
+   name:"Class 10 All Subjects - MP Board English Medium",
+   amount:99,
+   cls:"10",
+   stream:"",
+   board:"mp",
+   medium:"English"
+  };
+ }
+
+if(cls==="10" && board==="cbse" && medium==="English"){
+  return {
+   id:"class10_cbse_english",
+   name:"Class 10 All Subjects - CBSE English Medium",
+   amount:99,
+   cls:"10",
+   stream:"",
+   board:"cbse",
+   medium:"English"
+  };
+ }
+
 
  if(cls==="12" && stream==="Science" &&
     (medium==="Hindi" || medium==="English")){
