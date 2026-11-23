@@ -1,0 +1,910 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="PR Education Hub - CBSE and All in One Board study materials, MCQ practice, demo tests and premium exams.">
+<title>PR Education Hub | Smart Study • Better Practice • Higher Score</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#102a63;--blue:#145de0;--sky:#eaf4ff;--gold:#ffbd35;--ink:#172554;--muted:#64748b;--line:#dce8fb}
+html{scroll-behavior:smooth}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.search-results{margin-top:8px;background:#fff;color:#172554;border-radius:14px;padding:10px;box-shadow:0 12px 28px #001b5540;max-height:260px;overflow:auto;text-align:left}
+.search-results a{display:block;padding:9px 10px;border-radius:9px;text-decoration:none;font-weight:700}
+.search-results a:hover{background:#eaf2ff}
+.rating-stars{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.rating-stars button{font-size:28px;border:0;background:#eef4ff;border-radius:10px;padding:5px 10px;cursor:pointer}
+.rating-stars button[aria-pressed="true"]{background:#ffefb5;box-shadow:inset 0 0 0 2px #f5b400}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:650px){.form-row{grid-template-columns:1fr}}
+body{font-family:Arial,"Noto Sans Devanagari",sans-serif;line-height:1.6;color:var(--ink);background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 48%,#fff 100%)}
+a{color:inherit}
+header.site-header{background:rgba(255,255,255,.94);color:var(--navy);padding:12px 4%;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 8px 28px #102a6320;position:relative;z-index:20}
+.brand{display:flex;align-items:center;gap:12px;min-width:230px}
+.brand-mark{width:52px;height:52px;border-radius:16px;background:linear-gradient(145deg,#247bff,#102a63);display:grid;place-items:center;color:#fff;font-size:27px;box-shadow:0 8px 18px #145de044}
+.brand h1{font-size:clamp(18px,2vw,25px);line-height:1.2}
+.brand p{font-size:12px;color:#49628f;font-weight:700}
+nav{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap}
+nav a{color:#19366e;text-decoration:none;padding:9px 11px;border-radius:12px;font-size:14px;font-weight:700}
+nav a:hover,nav a:focus{background:#eaf2ff;color:#0754d8}
+.header-actions{display:flex;gap:8px;align-items:center}
+main{max-width:1220px;margin:auto;padding:20px}
+section{padding:28px 0;border-bottom:1px solid #e3ebf8;scroll-margin-top:75px}
+h2{color:#123b78;margin-bottom:12px;font-size:clamp(22px,3vw,30px)}
+h3{color:#173b72}
+.hero{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:center;padding:clamp(24px,5vw,56px);border-radius:30px;background:radial-gradient(circle at 78% 22%,#55c6ff 0,transparent 25%),radial-gradient(circle at 8% 90%,#6e8dff 0,transparent 28%),linear-gradient(125deg,#08245f 0%,#0759c8 55%,#102a63 100%);color:#fff;box-shadow:0 24px 50px #123b7830}
+.hero:before,.hero:after{content:"";position:absolute;z-index:-1;border:1px solid #b8e8ff88;border-radius:50%;width:360px;height:360px;right:4%;top:-190px;box-shadow:0 0 45px #42d7ff66,inset 0 0 35px #42d7ff33}
+.hero:after{width:230px;height:230px;right:16%;top:auto;bottom:-150px}
+.hero-copy{position:relative;z-index:2}
+.hero-kicker{display:inline-block;background:#ffffff20;border:1px solid #ffffff55;border-radius:30px;padding:6px 13px;font-size:13px;font-weight:700;margin-bottom:14px}
+.hero h2{color:white;font-size:clamp(32px,5vw,58px);line-height:1.12;margin:0 0 14px}
+.hero h2 span{color:#ffd35c;text-shadow:0 4px 18px #ffb00055}
+.hero p{color:#eaf4ff;font-size:clamp(15px,1.8vw,19px);max-width:650px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-art{min-height:265px;display:grid;place-items:center;position:relative}
+.virtual-orb{width:min(290px,70vw);aspect-ratio:1;border-radius:42% 58% 55% 45%;background:linear-gradient(145deg,#ffffffdd,#8bd8ff55);border:1px solid #ffffffaa;box-shadow:inset 0 0 40px #fff9,0 25px 55px #001b5680;transform:rotate(-8deg);display:grid;place-items:center;position:relative}
+.virtual-orb:before{content:"";position:absolute;inset:18px;border:2px solid #ffffff9c;border-radius:50%;transform:rotate(25deg) scaleX(1.2)}
+.virtual-book{font-size:112px;filter:drop-shadow(0 18px 14px #001b5570);transform:rotate(8deg)}
+.float-chip{position:absolute;background:#fff;color:#123b78;border:1px solid #d8edff;border-radius:15px;padding:10px 14px;font-weight:800;box-shadow:0 12px 25px #001b5555}
+.chip-one{top:8%;left:-4%}.chip-two{bottom:8%;right:-5%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{border:1px solid var(--line);border-radius:20px;padding:20px;background:linear-gradient(160deg,#fff,#f5f9ff);box-shadow:0 9px 25px #123b780d;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 30px #123b781b}
+.card-icon{font-size:34px;margin-bottom:7px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:12px;background:linear-gradient(135deg,#1769f5,#123b9c);color:white;text-decoration:none;padding:11px 17px;margin:6px 4px 0 0;cursor:pointer;font-size:15px;font-weight:800;box-shadow:0 7px 15px #145de033}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.green{background:linear-gradient(135deg,#14a56a,#087344)}
+.gold{background:linear-gradient(135deg,#ffd65b,#f59e0b);color:#392600}
+.purple{background:linear-gradient(135deg,#8b5cf6,#5422ca)}
+.muted{color:var(--muted);font-size:.93rem}
+.pill{display:inline-block;background:#eaf1fc;color:#173b72;border-radius:20px;padding:4px 10px;margin:4px 2px;font-size:.85rem;font-weight:700}
+.notice{background:#fff7e6;border:1px solid #ffe1a3;border-left:4px solid #f59e0b;padding:14px;margin:14px 0;border-radius:12px}
+.demo-panel{background:#f3f8ff;border:1px solid #d6e6ff;border-radius:16px;padding:17px;margin-top:14px}
+.demo-panel h3{margin-bottom:8px}
+.choice-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.choice-buttons .btn{margin:0}
+.video-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;margin:10px 0}
+.unit-card h3{color:#173b72}.unit-card .btn{width:100%;margin:8px 0 0}
+input,select{padding:10px;border:1px solid #cbd5e1;border-radius:9px;font-size:1rem}
+.question{padding:14px 0;border-bottom:1px solid #e3e8ef}
+.option{display:block;padding:9px;margin:7px 0;border:1px solid #dce3ed;border-radius:9px;cursor:pointer}
+.option input{margin-right:8px}
+footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align:center;padding:28px;margin-top:25px}
+#quizArea[hidden],#resultArea[hidden]{display:none}
+.board-card{position:relative;overflow:hidden;min-height:190px}
+.board-card:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-35px;top:-45px;background:#dcecff;z-index:0}
+.board-card>*{position:relative;z-index:1}
+.board-card.cbse{background:linear-gradient(145deg,#fff,#eef8ff)}
+.board-card.allboard{background:linear-gradient(145deg,#fff,#f4efff)}
+.board-card .card-icon{font-size:48px}
+.feature-card{text-align:center}
+.feature-card .card-icon{font-size:38px}
+@media(max-width:900px){header.site-header{flex-wrap:wrap}.brand{flex:1}nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}.header-actions{margin-left:auto}}
+@media(max-width:650px){main{padding:12px}.hero{grid-template-columns:1fr;text-align:center;padding:25px 18px}.hero-actions{justify-content:center}.hero-art{min-height:220px}.virtual-orb{width:210px}.virtual-book{font-size:85px}.float-chip{font-size:12px}.grid{grid-template-columns:1fr}.brand{min-width:0}.header-actions .btn{padding:9px 11px;font-size:13px}}
+</style>
+</head>
+
+<body>
+
+
+<header class="site-header">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">📘</div>
+    <div><h1>PR Education Hub</h1><p>Learn Today • Lead Tomorrow</p></div>
+  </div>
+  <nav aria-label="मुख्य मेन्यू">
+    <a href="#home">होम</a><a href="#boards">बोर्ड</a><a href="#tests">डेमो टेस्ट</a>
+    <a href="#premium">प्रीमियम टेस्ट</a><a href="#study">स्टडी मटेरियल</a><a href="#videos">वीडियो</a><a href="#help">मदद</a><a href="#feedback">Feedback</a><a href="#rating">Rating</a>
+  </nav>
+  <div class="header-actions">
+    <a class="btn" href="student-login.html">Student Login</a>
+  </div>
+</header>
+
+
+<main>
+
+
+<section id="home">
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="hero-kicker">🎓 SMART STUDY • BETTER PRACTICE • HIGHER SCORE</span>
+      <h2>Your Complete <span>Education Platform</span></h2>
+      <p>अब हर परीक्षा की तैयारी होगी आसान! अपनी कक्षा, बोर्ड, विषय और अध्याय के अनुसार MCQ अभ्यास करें और बेहतर परिणाम की ओर बढ़ें।</p>
+      <div class="hero-actions">
+        <a class="btn gold" href="#boards">अपना बोर्ड चुनें →</a>
+        <a class="btn" href="#tests">Free Demo Test शुरू करें</a>
+      </div>
+      <p style="margin-top:16px;font-size:13px">YouTube: <a href="https://youtube.com/@exam93" target="_blank" rel="noopener" style="color:#ffe08a;font-weight:800">@exam93</a></p>
+      <div class="site-search" role="search" style="margin-top:20px;max-width:620px">
+        <label for="siteSearch" class="sr-only">वेबसाइट में खोजें</label>
+        <div style="display:flex;gap:8px;background:#fff;padding:7px;border-radius:15px;box-shadow:0 10px 25px #001b5540">
+          <input id="siteSearch" type="search" placeholder="कक्षा, बोर्ड, विषय या टेस्ट खोजें..." style="flex:1;min-width:0;border:0;outline:0;padding:10px 12px" autocomplete="off">
+          <button class="btn" id="siteSearchBtn" type="button" style="margin:0">खोजें</button>
+        </div>
+        <div id="searchResults" class="search-results" hidden aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-label="शिक्षा की 3D चित्रात्मक सजावट">
+      <div class="virtual-orb"><div class="virtual-book">📚</div></div>
+      <div class="float-chip chip-one">🏆 लक्ष्य: बेहतर अंक</div>
+      <div class="float-chip chip-two">✨ Learn • Practice • Succeed</div>
+    </div>
+  </div>
+</section>
+
+<section id="boards">
+  <h2>अपना Education Board चुनें</h2>
+  <p class="muted">एक ही जगह पर बोर्ड के अनुसार पढ़ाई और परीक्षा की तैयारी। उपलब्ध टेस्ट और सामग्री के अनुसार विकल्प चुनें।</p>
+  <div class="grid" style="margin-top:16px">
+    <article class="card board-card cbse">
+      <div class="card-icon">🏫</div><span class="pill">Special Board</span>
+      <h3>CBSE Board</h3><p>NCERT आधारित तैयारी • कक्षा 6वीं से 12वीं तक के लिए विस्तार योग्य प्लेटफॉर्म।</p>
+      <a class="btn" href="#tests">CBSE तैयारी देखें →</a>
+    </article>
+    <article class="card board-card allboard">
+      <div class="card-icon">🌐</div><span class="pill">All in One</span>
+      <h3>All in One Board</h3><p>सभी State Boards के विद्यार्थियों के लिए एक ही प्लेटफॉर्म। वर्तमान उपलब्ध टेस्ट के साथ शुरुआत करें।</p>
+      <a class="btn purple" href="#tests">सभी बोर्ड के टेस्ट देखें →</a>
+    </article>
+  </div>
+</section>
+
+
+<!-- FREE DEMO TESTS -->
+<section id="tests">
+  <h2>Free Demo Tests</h2>
+
+  <div class="card">
+    <h3>अपनी कक्षा चुनें</h3>
+    <p class="muted">
+      कक्षा चुनकर उपलब्ध Free MCQ Demo Test शुरू करें।
+      सभी Free Demo Tests मुफ्त हैं।
+    </p>
+
+    <div class="choice-buttons">
+      <button class="btn green" id="showClass10" type="button">
+        Class 10
+      </button>
+
+      <button class="btn green" id="showClass12" type="button">
+        Class 12
+      </button>
+    </div>
+  </div>
+
+  <!-- CLASS 10 OPTIONS -->
+  <div id="class10Demo" class="demo-panel" hidden>
+    <h3>Class 10 – Subjects</h3>
+    <p>अपना विषय चुनें।</p>
+
+    <a class="btn green" href="#online-test">
+      Mathematics – Free Demo Test
+    </a>
+
+    <p class="muted">अभी इस पेज पर Class 10 Mathematics का Free Demo Test उपलब्ध है। अन्य विषयों के Demo Tests सामग्री जुड़ने पर दिखेंगे।</p>
+  </div>
+
+  <!-- CLASS 12 OPTIONS -->
+  <div id="class12Demo" class="demo-panel" hidden>
+    <h3>Class 12 – Select Your Stream</h3>
+    <p>अपनी Stream चुनें।</p>
+
+    <div class="choice-buttons">
+      <button class="btn green" id="showScience" type="button">
+        Science
+      </button>
+
+      <button class="btn green" id="showCommerce" type="button">
+        Commerce
+      </button>
+
+      <button class="btn green" id="showArts" type="button">
+        Arts
+      </button>
+    </div>
+
+    <!-- SCIENCE -->
+    <div id="scienceDemo" class="demo-panel" hidden>
+      <h3>Class 12 Science – Select Medium</h3>
+
+      <p><b>Hindi Medium</b></p>
+      <a class="btn green" href="class12-mp-science-hindi-demo.html">
+        Hindi Demo Test शुरू करें
+      </a>
+
+      <p style="margin-top:12px"><b>English Medium</b></p>
+      <p class="muted">
+        English Medium Demo Test का link जल्द जोड़ा जाएगा।
+      </p>
+    </div>
+
+    <!-- COMMERCE -->
+    <div id="commerceDemo" class="demo-panel" hidden>
+      <h3>Class 12 Commerce</h3>
+      <p>Commerce Demo Test:</p>
+
+      <a class="btn green" href="class12-commerce-demo.html">
+        Commerce Demo Test शुरू करें
+      </a>
+    </div>
+
+    <!-- ARTS -->
+    <div id="artsDemo" class="demo-panel" hidden>
+      <h3>Class 12 Arts</h3>
+      <p>Arts Demo Test:</p>
+
+      <a class="btn green" href="class12-arts-demo.html">
+        Arts Demo Test शुरू करें
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section id="classes">
+  <h2>Classes & Subjects</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Class 9</h3>
+      <p>Mathematics • Science</p>
+      <span class="pill">MP Board</span>
+      <span class="pill">CBSE</span>
+    </div>
+
+    <div class="card">
+      <h3>Class 10</h3>
+      <p>Mathematics • Science</p>
+      <span class="pill">MP Board</span>
+      <span class="pill">CBSE</span>
+    </div>
+
+    <div class="card">
+      <h3>Class 12</h3>
+      <p>Science • Commerce • Arts</p>
+      <span class="pill">MP Board</span>
+      <span class="pill">CBSE</span>
+    </div>
+
+    <div class="card">
+      <h3>Competitive Exams</h3>
+      <p>गणित, रीजनिंग एवं सामान्य अध्ययन का अभ्यास।</p>
+    </div>
+  </div>
+</section>
+
+<!-- STUDY MATERIAL -->
+<section id="study">
+  <h2>Study Material</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Class 10 Maths</h3>
+      <p>अध्यायवार नोट्स और महत्वपूर्ण प्रश्न जल्द उपलब्ध होंगे।</p>
+    </div>
+
+    <div class="card">
+      <h3>Class 10 Science</h3>
+      <p>अध्ययन सामग्री और अभ्यास प्रश्न जल्द उपलब्ध होंगे।</p>
+    </div>
+
+    <div class="card">
+      <h3>Previous Year Questions</h3>
+      <p>बोर्ड परीक्षा के पुराने प्रश्नपत्र एवं हल।</p>
+    </div>
+  </div>
+</section>
+
+<section id="chapter-videos">
+  <h2>Class 10 Maths – Chapter-wise Learning</h2>
+  <p class="muted">अध्याय के अनुसार वीडियो देखें और उपलब्ध प्रीमियम अभ्यास टेस्ट खोलें।</p>
+  <div id="chapterList" class="grid" style="margin-top:16px"></div>
+</section>
+
+<!-- CLASS 10 MATHS FREE QUIZ -->
+<section id="online-test">
+  <h2>Free Demo Test – Class 10 Maths</h2>
+
+  <div class="card">
+    <p>कुल 10 प्रश्न, 15 मिनट। प्रत्येक प्रश्न 1 अंक का है।</p>
+
+    <label for="language"><b>भाषा / Language:</b></label>
+
+    <select id="language">
+      <option value="hi">हिंदी</option>
+      <option value="en">English</option>
+    </select>
+
+    <button class="btn green" id="startBtn" type="button">
+      Start Test / टेस्ट शुरू करें
+    </button>
+
+    <span class="pill" id="timer">15:00</span>
+
+    <div id="quizArea" hidden>
+      <p id="progress" class="muted"></p>
+      <div id="questionBox" class="question"></div>
+
+      <button class="btn" id="prevBtn" type="button">Previous</button>
+      <button class="btn" id="nextBtn" type="button">Next</button>
+      <button class="btn gold" id="submitBtn" type="button">
+        Submit Test
+      </button>
+    </div>
+
+    <div id="resultArea" hidden></div>
+  </div>
+</section>
+
+
+<section id="premium">
+  <h2>Premium Tests – अपनी तैयारी को अगले स्तर पर ले जाएँ</h2>
+  <p class="muted">Premium Membership और भुगतान के लिए Student Login करें। मौजूदा लॉगिन एवं भुगतान प्रक्रिया यथावत रखी गई है।</p>
+  <div class="grid" style="margin-top:16px">
+    <article class="card"><div class="card-icon">📘</div><h3>Class 10 – All Subjects</h3><p>सभी उपलब्ध विषयों के अध्यायवार और पूर्ण विषय टेस्ट।</p><a class="btn green" href="student-login.html">Membership / Login →</a><a class="btn" href="class10-premium-tests.html">Test Page देखें</a></article>
+    <article class="card"><div class="card-icon">🔬</div><h3>Class 12 – Science Stream</h3><p>Physics, Chemistry, Biology और Mathematics के अनुसार टेस्ट।</p><a class="btn green" href="student-login.html">Membership / Login →</a><a class="btn" href="class12-premium-tests.html?board=mp&medium=Hindi&stream=Science">Science Test Page देखें</a></article>
+  </div>
+  <div class="notice">
+    <b>Premium Membership – जरूरी जानकारी</b>
+    <p>Membership और भुगतान की मौजूदा प्रक्रिया Student Login के माध्यम से ही उपयोग करें। Free Demo Tests के लिए Membership आवश्यक नहीं है। Premium Test का उपयोग अपने सक्रिय Membership के अनुसार करें।</p>
+  </div>
+  <a href="student-login.html" class="btn gold">Student Login / Register</a>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos">
+  <h2>Educational Videos</h2>
+
+  <p>
+    गणित एवं विज्ञान के वीडियो देखने के लिए हमारे YouTube चैनल पर जाएँ।
+  </p>
+
+  <a class="btn" href="https://youtube.com/@exam93" target="_blank" rel="noopener">
+    YouTube चैनल @exam93 देखें
+  </a>
+</section>
+
+<!-- JOBS -->
+<section id="jobs">
+  <h2>Government Job Updates</h2>
+
+  <p>
+    सरकारी भर्ती, पात्रता, आवेदन तिथि, फीस और सिलेबस से संबंधित
+    जानकारी के लिए अपडेट देखते रहें।
+  </p>
+
+  <p class="muted">
+    हर भर्ती की जानकारी आधिकारिक नोटिफिकेशन से अवश्य जाँचें।
+  </p>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About PR Education Hub</h2>
+
+  <p>
+    PR Education Hub का उद्देश्य विद्यार्थियों को गणित,
+    विज्ञान और प्रतियोगी परीक्षाओं की तैयारी के लिए
+    सरल एवं उपयोगी सामग्री उपलब्ध कराना है।
+  </p>
+
+  <p><b>नाम:</b> PR Education Hub</p>
+
+  <p><b>YouTube:</b> <a href="https://youtube.com/@exam93" target="_blank" rel="noopener">@exam93</a></p>
+
+  <a class="btn" href="https://www.facebook.com/share/19cVNJKkEZ/"
+     target="_blank" rel="noopener">
+    Facebook Page
+  </a>
+
+  <a class="btn" href="https://youtube.com/@exam93?si=0KuWN7h50Dso4m_X"
+     target="_blank" rel="noopener">
+    YouTube
+  </a>
+</section>
+
+<section id="help">
+  <h2>Help & Support – सहायता केंद्र</h2>
+  <p class="muted">वेबसाइट, टेस्ट, लॉगिन या कंटेंट से संबंधित सहायता के लिए संपर्क करें।</p>
+  <div class="grid" style="margin-top:15px">
+    <article class="card"><div class="card-icon">📞</div><h3>कंटेंट सहायता</h3><p>कंटेंट और शैक्षणिक जानकारी के लिए कॉल करें।</p><a class="btn" href="tel:+919300660090">कॉल करें: 9300660090</a></article>
+    <article class="card"><div class="card-icon">▶️</div><h3>YouTube सहायता</h3><p>वीडियो और नई शैक्षणिक सामग्री के लिए चैनल देखें।</p><a class="btn" href="https://youtube.com/@exam93" target="_blank" rel="noopener">@exam93 खोलें</a></article>
+    <article class="card"><div class="card-icon">❓</div><h3>अक्सर पूछे जाने वाले सवाल</h3><details><summary>Free Demo Test कैसे दें?</summary><p>Demo Test सेक्शन में कक्षा और उपलब्ध विषय चुनें।</p></details><details><summary>Premium Test कैसे खोलें?</summary><p>Student Login करके सक्रिय Membership के अनुसार Premium Test खोलें।</p></details><details><summary>लॉगिन में समस्या हो तो?</summary><p>Student Login पेज पर उपलब्ध सहायता विकल्प देखें या कंटेंट सहायता नंबर पर संपर्क करें।</p></details></article>
+  </div>
+</section>
+
+<section id="feedback">
+  <h2>Feedback – अपना सुझाव भेजें</h2>
+  <p class="muted">आपके सुझाव PR Education Hub को बेहतर बनाने में मदद करते हैं। यह फॉर्म WhatsApp में आपका संदेश तैयार करेगा।</p>
+  <div class="card">
+    <div class="form-row"><label>आपका नाम (वैकल्पिक)<br><input id="feedbackName" type="text" placeholder="अपना नाम"></label><label>सुझाव का विषय<br><select id="feedbackTopic"><option>वेबसाइट डिजाइन</option><option>MCQ / टेस्ट</option><option>Study Material</option><option>Student Login</option><option>अन्य सुझाव</option></select></label></div>
+    <label style="display:block;margin-top:12px">आपका सुझाव<br><textarea id="feedbackMessage" rows="4" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px" placeholder="अपना सुझाव यहाँ लिखें..."></textarea></label>
+    <button class="btn green" id="sendFeedback" type="button">WhatsApp पर Feedback भेजें</button>
+    <p class="muted" style="margin-top:8px">WhatsApp संदेश भेजने से पहले आप उसे देख और स्वयं भेज सकते हैं।</p>
+  </div>
+</section>
+
+<section id="rating">
+  <h2>Rate PR Education Hub</h2>
+  <div class="card">
+    <p>आपको वेबसाइट कैसी लगी? 1 से 5 स्टार चुनें।</p>
+    <div class="rating-stars" id="ratingStars" role="group" aria-label="वेबसाइट की रेटिंग">
+      <button type="button" data-rating="1" aria-label="1 स्टार" aria-pressed="false">★</button><button type="button" data-rating="2" aria-label="2 स्टार" aria-pressed="false">★</button><button type="button" data-rating="3" aria-label="3 स्टार" aria-pressed="false">★</button><button type="button" data-rating="4" aria-label="4 स्टार" aria-pressed="false">★</button><button type="button" data-rating="5" aria-label="5 स्टार" aria-pressed="false">★</button>
+    </div>
+    <p id="ratingMessage" class="muted" aria-live="polite">अपनी रेटिंग चुनें।</p>
+    <p class="muted">नोट: अभी रेटिंग इसी डिवाइस के ब्राउज़र में सेव होती है। सभी विद्यार्थियों की रेटिंग एकत्र करने के लिए बाद में सुरक्षित Backend जोड़ना होगा।</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 PR Education Hub</p>
+  <p>संपर्क / कंटेंट संबंधी जानकारी: <a href="tel:+919300660090" style="color:#fff">9300660090</a></p>
+  <p>Learn Today • Lead Tomorrow</p>
+</footer>
+
+<script>
+/* FREE DEMO CLASS SELECTION */
+
+const el = id => document.getElementById(id);
+
+el("showClass10").addEventListener("click", () => {
+  el("class10Demo").hidden = false;
+  el("class12Demo").hidden = true;
+  el("class10Demo").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+el("showClass12").addEventListener("click", () => {
+  el("class12Demo").hidden = false;
+  el("class10Demo").hidden = true;
+  el("class12Demo").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+function showStream(selected) {
+  el("scienceDemo").hidden = selected !== "science";
+  el("commerceDemo").hidden = selected !== "commerce";
+  el("artsDemo").hidden = selected !== "arts";
+
+  const target = el(selected + "Demo");
+  target.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+el("showScience").addEventListener("click", () => showStream("science"));
+el("showCommerce").addEventListener("click", () => showStream("commerce"));
+el("showArts").addEventListener("click", () => showStream("arts"));
+
+/* CLASS 10 MATHS CHAPTERS AND VIDEOS */
+
+const chapters = [
+"वास्तविक संख्याएँ (Real Numbers)",
+"बहुपद (Polynomials)",
+"दो चर वाले रैखिक समीकरण युग्म (Pair of Linear Equations in Two Variables)",
+"द्विघात समीकरण (Quadratic Equations)",
+"समांतर श्रेढ़ियाँ (Arithmetic Progressions)",
+"त्रिभुज (Triangles)",
+"निर्देशांक ज्यामिति (Coordinate Geometry)",
+"त्रिकोणमिति का परिचय (Introduction to Trigonometry)",
+"त्रिकोणमिति के कुछ अनुप्रयोग (Some Applications of Trigonometry)",
+"वृत्त (Circles)",
+"वृत्तों से संबंधित क्षेत्रफल (Areas Related to Circles)",
+"पृष्ठीय क्षेत्रफल और आयतन (Surface Areas and Volumes)",
+"सांख्यिकी (Statistics)",
+"प्रायिकता (Probability)"
+];
+
+const unitVideoIds = [
+"EZmG2Gdgwso",
+"XzEUbelA5x8",
+"v9SPs9sWAuo",
+"itvWr46JhUU",
+"h3FrpGygt8A",
+"OEyfDZ0x0og",
+"m8lXDTo-mT8",
+"HVXOLM2I62A",
+"wuqMCtlIQ1o",
+"9AXq6nyl0oU",
+"GoTTYSlfEjA"
+];
+
+el("chapterList").innerHTML = chapters.map((name,i) => `
+  <article class="card unit-card">
+    <h3>Chapter ${i+1}</h3>
+    <p>${name}</p>
+
+    ${unitVideoIds[i] ? `
+      <iframe class="video-frame"
+        src="https://www.youtube.com/embed/${unitVideoIds[i]}"
+        title="Class 10 Maths Chapter ${i+1}"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+
+      <a class="btn green"
+        href="https://youtu.be/${unitVideoIds[i]}"
+        target="_blank" rel="noopener">
+        Watch Video
+      </a>
+    ` : `
+      <p class="muted">इस अध्याय का वीडियो जल्द जोड़ा जाएगा।</p>
+    `}
+
+    <p class="muted">30 Questions • 45 Minutes</p>
+
+    <button class="btn green premium-test-btn"
+      type="button" data-chapter="${i+1}">
+      Open Paid Test
+    </button>
+  </article>
+`).join("");
+
+/* CLASS 10 QUIZ */
+
+const Q = [
+["यदि 2x + 4 = 10, तो x का मान क्या है?","If 2x + 4 = 10, what is x?",["2","3","4","5"],1,"2x = 6, इसलिए x = 3।","2x = 6, so x = 3."],
+["sin 30° का मान है:","The value of sin 30° is:",["0","1/2","√3/2","1"],1,"sin 30° = 1/2।","sin 30° = 1/2."],
+["√169 का मान क्या है?","What is √169?",["11","12","13","14"],2,"13 × 13 = 169।","13 × 13 = 169."],
+["त्रिभुज के तीनों कोणों का योग कितना है?","What is the sum of the angles of a triangle?",["90°","180°","270°","360°"],1,"त्रिभुज के कोणों का योग 180° होता है।","The angles of a triangle add up to 180°."],
+["समांतर श्रेढ़ी 2, 5, 8, 11,... का सार्व अंतर है:","The common difference of 2, 5, 8, 11,... is:",["2","3","5","6"],1,"5 − 2 = 3।","5 − 2 = 3."],
+["त्रिज्या r वाले वृत्त का क्षेत्रफल है:","The area of a circle of radius r is:",["2πr","πr²","πd","r²"],1,"वृत्त का क्षेत्रफल πr² होता है।","The area of a circle is πr²."],
+["यदि x² = 49, तो x के मान हैं:","If x² = 49, the values of x are:",["केवल 7 / Only 7","केवल −7 / Only −7","±7","49"],2,"7 और −7 दोनों के वर्ग 49 हैं।","Both 7 and −7 have square 49."],
+["एक सिक्का उछालने पर चित आने की प्रायिकता है:","Probability of heads on a fair coin toss:",["0","1/4","1/2","1"],2,"दो समान संभावित परिणामों में एक चित है।","One of two equally likely outcomes is heads."],
+["बिंदुओं (0,0) और (3,4) के बीच दूरी है:","Distance between (0,0) and (3,4):",["3","4","5","7"],2,"दूरी = √(3² + 4²) = 5।","Distance = √(3² + 4²) = 5."],
+["बहुपद x² − 5x + 6 के शून्यक हैं:","The zeroes of x² − 5x + 6 are:",["1, 6","2, 3","−2, −3","5, 6"],1,"x² − 5x + 6 = (x − 2)(x − 3)।","x² − 5x + 6 = (x − 2)(x − 3)."]
+];
+
+let idx = 0;
+let answers = Array(10).fill(null);
+let remaining = 900;
+let clock = null;
+let lang = "hi";
+let done = false;
+
+function draw() {
+  let q = Q[idx];
+
+  el("progress").textContent =
+    (lang === "hi" ? "प्रश्न " : "Question ") + (idx+1) + " / 10";
+
+  el("questionBox").innerHTML =
+    `<h3>${q[lang === "hi" ? 0 : 1]}</h3>` +
+    q[2].map((v,i) => `
+      <label class="option">
+        <input type="radio" name="ans" value="${i}"
+          ${answers[idx] === i ? "checked" : ""}>
+        ${"ABCD"[i]}. ${v}
+      </label>
+    `).join("");
+
+  el("prevBtn").disabled = idx === 0;
+  el("nextBtn").disabled = idx === 9;
+}
+
+el("questionBox").addEventListener("change",e => {
+  if(e.target.name === "ans") answers[idx] = +e.target.value;
+});
+
+el("prevBtn").onclick = () => {
+  if(idx > 0){idx--;draw();}
+};
+
+el("nextBtn").onclick = () => {
+  if(idx < 9){idx++;draw();}
+};
+
+function tick() {
+  let m = Math.floor(remaining/60);
+  let s = remaining%60;
+
+  el("timer").textContent =
+    String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+
+  if(remaining-- <= 0) finish();
+}
+
+el("startBtn").onclick = () => {
+  lang = el("language").value;
+  idx = 0;
+  answers = Array(10).fill(null);
+  remaining = 900;
+  done = false;
+
+  el("resultArea").hidden = true;
+  el("quizArea").hidden = false;
+  el("startBtn").disabled = true;
+
+  draw();
+  tick();
+  clock = setInterval(tick,1000);
+};
+
+function finish() {
+  if(done) return;
+
+  done = true;
+  clearInterval(clock);
+
+  let score = answers.reduce(
+    (s,a,i) => s + (a === Q[i][3] ? 1 : 0),0
+  );
+
+  let out = `
+    <h3>${lang === "hi" ? "आपका परिणाम" : "Your Result"}: ${score}/10</h3>
+    <p>${
+      lang === "hi"
+      ? (score>=8 ? "बहुत अच्छा! नियमित अभ्यास जारी रखें।" :
+         score>=5 ? "अच्छा प्रयास! गलत प्रश्नों का अभ्यास करें।" :
+         "दोबारा अभ्यास करें। मेहनत जारी रखें।")
+      : (score>=8 ? "Excellent! Keep practising." :
+         score>=5 ? "Good effort! Review the incorrect answers." :
+         "Keep practising. You can improve!")
+    }</p>
+  `;
+
+  Q.forEach((q,i) => {
+    out += `
+      <div class="question">
+        <b>${i+1}. ${q[lang === "hi" ? 0 : 1]}</b>
+        <p>${lang === "hi" ? "आपका उत्तर" : "Your answer"}:
+          ${answers[i] === null
+            ? (lang === "hi" ? "नहीं दिया" : "Not answered")
+            : q[2][answers[i]]}
+        </p>
+        <p><b>${lang === "hi" ? "सही उत्तर" : "Correct answer"}:</b>
+          ${q[2][q[3]]}
+        </p>
+        <p class="muted">${q[lang === "hi" ? 4 : 5]}</p>
+      </div>
+    `;
+  });
+
+  el("resultArea").innerHTML = out +
+    `<button class="btn green" id="again" type="button">
+      ${lang === "hi" ? "फिर से टेस्ट दें" : "Try Again"}
+    </button>`;
+
+  el("resultArea").hidden = false;
+  el("quizArea").hidden = true;
+  el("startBtn").disabled = false;
+
+  el("again").onclick = () => el("startBtn").click();
+}
+
+el("submitBtn").onclick = finish;
+
+/* FIREBASE MEMBERSHIP CHECKING */
+
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
+  authDomain: "pr-education-hub.firebaseapp.com",
+  projectId: "pr-education-hub",
+  storageBucket: "pr-education-hub.firebasestorage.app",
+  messagingSenderId: "907993736868",
+  appId: "1:907993736868:web:b7c098a10914a61ceca831",
+  measurementId: "G-V61NSSNFRQ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+
+async function checkMembership() {
+  if (!currentUser) return false;
+
+  const studentRef = doc(db,"students",currentUser.uid);
+  const snapshot = await getDoc(studentRef);
+
+  if (!snapshot.exists()) return false;
+
+  const data = snapshot.data();
+  const expiry = data.expiryDate;
+
+  if (
+    data.membershipStatus !== "active" ||
+    !expiry ||
+    expiry.toDate() <= new Date()
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+window.getMembershipDetails = async function() {
+  if (!currentUser) return null;
+
+  const studentRef = doc(db,"students",currentUser.uid);
+  const snapshot = await getDoc(studentRef);
+
+  if (!snapshot.exists()) return null;
+
+  const data = snapshot.data();
+  const expiry = data.expiryDate;
+
+  if (
+    data.membershipStatus !== "active" ||
+    !expiry ||
+    expiry.toDate() <= new Date()
+  ) {
+    return {active:false,plan:"none"};
+  }
+
+  return {
+    active:true,
+    plan:data.membershipPlan || "none"
+  };
+};
+
+onAuthStateChanged(auth,async user => {
+  currentUser = user;
+  if (user) {
+    try {
+      await checkMembership();
+    } catch(error) {
+      console.error("Membership check:",error);
+    }
+  }
+});
+
+async function openPremiumPage(requiredPlan,page) {
+  if (!currentUser) {
+    alert("पहले Student Login करें।");
+    window.location.href = "student-login.html";
+    return;
+  }
+
+  try {
+    const membership = await window.getMembershipDetails();
+
+    if (!membership || !membership.active) {
+      alert("आपकी Premium Membership Active नहीं है। पहले Membership लें।");
+      window.location.href = "student-login.html";
+      return;
+    }
+
+    const plan = String(membership.plan).toLowerCase();
+
+    const allowed =
+      plan.includes("combo") ||
+      plan.includes(requiredPlan);
+
+    if (!allowed) {
+      alert("इस Test के लिए सही Premium Membership जरूरी है।");
+      return;
+    }
+
+    window.location.href = page;
+
+  } catch(error) {
+    console.error(error);
+    alert("Membership जाँचने में समस्या हुई।");
+  }
+}
+
+const class12Btn = document.getElementById("openClass12Btn");
+
+if(class12Btn) {
+  class12Btn.addEventListener("click",() => {
+    openPremiumPage("class 12","class12-premium-tests.html");
+  });
+}
+
+const chapterListEl = document.getElementById("chapterList");
+if (chapterListEl) chapterListEl.addEventListener("click",async e => {
+  const button = e.target.closest(".premium-test-btn");
+  if(!button) return;
+
+  button.disabled = true;
+
+  try {
+    if(!currentUser) {
+      alert("Paid Test के लिए पहले Student Login करें।");
+      window.location.href = "student-login.html";
+      return;
+    }
+
+    const membership = await window.getMembershipDetails();
+
+    if(!membership || !membership.active) {
+      alert("आपकी Premium Membership Active नहीं है।");
+      window.location.href = "student-login.html";
+      return;
+    }
+
+    const plan = String(membership.plan).toLowerCase();
+
+    if(!plan.includes("class 10") && !plan.includes("combo")) {
+      alert("इस Test के लिए Class 10 या Combo Membership जरूरी है।");
+      return;
+    }
+
+    alert("आपकी Class 10 Membership Active है। Paid Test जल्द उपलब्ध होगा।");
+
+  } catch(error) {
+    console.error(error);
+    alert("Membership जाँचने में समस्या हुई।");
+  } finally {
+    button.disabled = false;
+  }
+});
+
+// वेबसाइट खोज: उपलब्ध सेक्शन और पेजों के लिंक में खोजें।
+(function(){
+  const input=document.getElementById("siteSearch");
+  const button=document.getElementById("siteSearchBtn");
+  const results=document.getElementById("searchResults");
+  if(!input||!button||!results)return;
+  const items=[
+    ["CBSE Board","#boards"],["All in One Board / सभी State Boards","#boards"],
+    ["Class 10 Free Demo Mathematics","#online-test"],["Class 12 Science Demo Test","class12-mp-science-hindi-demo.html"],
+    ["Class 12 Commerce Demo Test","class12-commerce-demo.html"],["Class 12 Arts Demo Test","class12-arts-demo.html"],
+    ["Class 10 Premium – All Subjects","class10-premium-tests.html"],
+    ["Class 12 Science Premium Test","class12-premium-tests.html?board=mp&medium=Hindi&stream=Science"],
+    ["Student Login / Register","student-login.html"],["Study Material","#study"],
+    ["Educational Videos YouTube @exam93","https://youtube.com/@exam93"],
+    ["Help & Support","#help"],["Feedback","#feedback"],["Website Rating","#rating"]
+  ];
+  function search(){
+    const q=input.value.trim().toLowerCase();
+    if(!q){results.hidden=true;results.innerHTML="";return;}
+    const found=items.filter(x=>x[0].toLowerCase().includes(q));
+    results.innerHTML=found.length?found.map(x=>`<a href="${x[1]}">${x[0]} →</a>`).join(""):`<p style="padding:8px">कोई परिणाम नहीं मिला। कृपया दूसरा शब्द खोजें या Help सेक्शन देखें।</p>`;
+    results.hidden=false;
+  }
+  button.addEventListener("click",search);
+  input.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();search();}});
+  input.addEventListener("input",()=>{if(!input.value.trim())results.hidden=true;});
+  results.addEventListener("click",e=>{if(e.target.closest("a"))results.hidden=true;});
+})();
+
+// Feedback WhatsApp संदेश तैयार करें।
+document.getElementById("sendFeedback")?.addEventListener("click",()=>{
+  const name=document.getElementById("feedbackName").value.trim();
+  const topic=document.getElementById("feedbackTopic").value;
+  const message=document.getElementById("feedbackMessage").value.trim();
+  if(!message){alert("कृपया अपना सुझाव लिखें।");return;}
+  const text=`PR Education Hub Feedback\nनाम: ${name||"नहीं दिया"}\nविषय: ${topic}\nसुझाव: ${message}`;
+  window.open(`https://wa.me/919300660090?text=${encodeURIComponent(text)}`,"_blank","noopener");
+});
+
+// रेटिंग इस डिवाइस पर सेव होती है; इसे सार्वजनिक औसत न समझें।
+(function(){
+  const wrap=document.getElementById("ratingStars");
+  const msg=document.getElementById("ratingMessage");
+  if(!wrap||!msg)return;
+  let selected=0;
+  try{selected=Number(localStorage.getItem("prEducationHubRating")||0);}catch(e){}
+  function paint(value){wrap.querySelectorAll("button").forEach(btn=>{const active=Number(btn.dataset.rating)<=value;btn.setAttribute("aria-pressed",String(Number(btn.dataset.rating)===value));btn.style.color=active?"#e49a00":"#64748b";});}
+  if(selected){paint(selected);msg.textContent=`आपकी चुनी हुई रेटिंग: ${selected}/5 स्टार (इस डिवाइस पर सेव)`;}
+  wrap.addEventListener("click",e=>{const btn=e.target.closest("button[data-rating]");if(!btn)return;selected=Number(btn.dataset.rating);paint(selected);try{localStorage.setItem("prEducationHubRating",String(selected));}catch(err){}msg.textContent=`धन्यवाद! आपकी ${selected}/5 स्टार रेटिंग इस डिवाइस पर सेव हुई।`;});
+})();
+
+</script>
+
+<script src="chemistry-mcq.js"></script>
+
+</body>
+</html>
