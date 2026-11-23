@@ -758,7 +758,8 @@ async function loadDashboard(){
   courseFound=true;
 
   const course=courseDoc.data();
-  console.log("COURSE ID:",courseDoc.id);
+  $("dashboardMessage").textContent=
+ "Course ID: "+courseDoc.id;
   const active=course.membershipStatus==="active";
 
   const card=document.createElement("div");
