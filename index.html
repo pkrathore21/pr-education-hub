@@ -83,8 +83,10 @@ footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align
 .board-card .card-icon{font-size:48px}
 .feature-card{text-align:center}
 .feature-card .card-icon{font-size:38px}
+.video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.video-card{min-width:0;overflow:hidden}.video-thumb{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;overflow:hidden;background:#0b1f45;cursor:pointer;padding:0}.video-thumb img{width:100%;height:100%;object-fit:cover;display:block}.video-thumb:after{content:"▶";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#e11d48;color:white;font-size:25px;box-shadow:0 5px 18px #0008}.video-thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-card[hidden]{display:none}.more-videos-wrap{text-align:center;margin-top:18px}
 @media(max-width:900px){header.site-header{flex-wrap:wrap}.brand{flex:1}nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}.header-actions{margin-left:auto}}
-@media(max-width:650px){main{padding:12px}.hero{grid-template-columns:1fr;text-align:center;padding:25px 18px}.hero-actions{justify-content:center}.hero-art{min-height:220px}.virtual-orb{width:210px}.virtual-book{font-size:85px}.float-chip{font-size:12px}.grid{grid-template-columns:1fr}.brand{min-width:0}.header-actions .btn{padding:9px 11px;font-size:13px}}
+@media(max-width:650px){main{padding:12px}.hero{grid-template-columns:1fr;text-align:center;padding:25px 18px}.hero-actions{justify-content:center}.hero-art{min-height:205px;width:100%;overflow:hidden}.virtual-orb{width:190px}.virtual-book{font-size:78px}.float-chip{font-size:11px;max-width:46%;white-space:normal}.chip-one{left:0}.chip-two{right:0}.grid{grid-template-columns:1fr}.video-grid{grid-template-columns:1fr}.brand{min-width:0}.header-actions .btn{padding:9px 11px;font-size:13px}nav{gap:2px;padding-bottom:4px}nav a{white-space:nowrap;padding:8px 9px;font-size:13px}header.site-header{gap:10px}.hero h2{font-size:clamp(29px,8vw,42px)}.hero p{font-size:16px}}
 </style>
 </head>
 
@@ -154,6 +156,13 @@ footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align
   </div>
 </section>
 
+<!-- FEATURED CHAPTER VIDEOS: 8 visible, remaining on demand -->
+<section id="chapter-videos">
+  <h2>🎬 Class 10 Maths – Demo Chapter Videos</h2>
+  <p class="muted">पहले 8 अध्यायों के वीडियो यहाँ सीधे देखें। बाकी उपलब्ध अध्याय देखने के लिए “और अध्याय देखें” दबाएँ। वीडियो चलाने के लिए Play बटन दबाएँ।</p>
+  <div id="chapterList" class="video-grid"></div>
+  <div class="more-videos-wrap"><button class="btn purple" id="moreVideosBtn" type="button" aria-expanded="false">और अध्याय देखें ↓</button></div>
+</section>
 
 <!-- FREE DEMO TESTS -->
 <section id="tests">
@@ -298,12 +307,6 @@ footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align
       <p>बोर्ड परीक्षा के पुराने प्रश्नपत्र एवं हल।</p>
     </div>
   </div>
-</section>
-
-<section id="chapter-videos">
-  <h2>Class 10 Maths – Chapter-wise Learning</h2>
-  <p class="muted">अध्याय के अनुसार वीडियो देखें और उपलब्ध प्रीमियम अभ्यास टेस्ट खोलें।</p>
-  <div id="chapterList" class="grid" style="margin-top:16px"></div>
 </section>
 
 <!-- CLASS 10 MATHS FREE QUIZ -->
@@ -512,36 +515,45 @@ const unitVideoIds = [
 "GoTTYSlfEjA"
 ];
 
-el("chapterList").innerHTML = chapters.map((name,i) => `
-  <article class="card unit-card">
-    <h3>Chapter ${i+1}</h3>
-    <p>${name}</p>
+const chapterList = el("chapterList");
+const moreVideosBtn = el("moreVideosBtn");
+let showAllVideos = false;
 
-    ${unitVideoIds[i] ? `
-      <iframe class="video-frame"
-        src="https://www.youtube.com/embed/${unitVideoIds[i]}"
-        title="Class 10 Maths Chapter ${i+1}"
-        loading="lazy"
-        allowfullscreen>
-      </iframe>
+function renderChapterVideos() {
+  const available = chapters.map((name,i) => ({name,i,id:unitVideoIds[i]})).filter(x => x.id);
+  chapterList.innerHTML = available.map((item,position) => `
+    <article class="card video-card" ${!showAllVideos && position >= 8 ? "hidden" : ""}>
+      <h3>Chapter ${item.i+1}</h3>
+      <p>${item.name}</p>
+      <button class="video-thumb" type="button" data-video="${item.id}" aria-label="Chapter ${item.i+1} वीडियो चलाएँ">
+        <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" alt="Class 10 Maths Chapter ${item.i+1} वीडियो थंबनेल" loading="lazy">
+      </button>
+      <a class="btn" href="https://youtu.be/${item.id}" target="_blank" rel="noopener">YouTube पर खोलें ↗</a>
+      <p class="muted">Chapter ${item.i+1} • Demo Learning Video</p>
+    </article>
+  `).join("");
+  moreVideosBtn.hidden = available.length <= 8;
+  moreVideosBtn.textContent = showAllVideos ? "कम अध्याय दिखाएँ ↑" : "और अध्याय देखें ↓";
+  moreVideosBtn.setAttribute("aria-expanded", String(showAllVideos));
+}
 
-      <a class="btn green"
-        href="https://youtu.be/${unitVideoIds[i]}"
-        target="_blank" rel="noopener">
-        Watch Video
-      </a>
-    ` : `
-      <p class="muted">इस अध्याय का वीडियो जल्द जोड़ा जाएगा।</p>
-    `}
+renderChapterVideos();
+moreVideosBtn.addEventListener("click", () => {
+  showAllVideos = !showAllVideos;
+  renderChapterVideos();
+});
 
-    <p class="muted">30 Questions • 45 Minutes</p>
-
-    <button class="btn green premium-test-btn"
-      type="button" data-chapter="${i+1}">
-      Open Paid Test
-    </button>
-  </article>
-`).join("");
+chapterList.addEventListener("click", event => {
+  const button = event.target.closest(".video-thumb");
+  if (!button || button.querySelector("iframe")) return;
+  const videoId = button.dataset.video;
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+  iframe.title = "शैक्षणिक अध्याय वीडियो";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.allowFullscreen = true;
+  button.replaceChildren(iframe);
+});
 
 /* CLASS 10 QUIZ */
 
