@@ -725,7 +725,8 @@ async function loadDashboard(){
  const studentSnap=await getDoc(studentRef);
 
  if(!studentSnap.exists()){
-
+console.log("STUDENT RECORD MISSING:", currentUser.uid);
+  
   $("dashboardMessage").textContent=
    "Student Record नहीं मिला। Admin से संपर्क करें।";
 
