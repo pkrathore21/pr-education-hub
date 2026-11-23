@@ -890,8 +890,9 @@ const stream=course.selectedStream ||
       order_id:order.orderId,
 
       prefill:{
-       email:currentUser.email || ""
-      },
+ email:currentUser.email || "",
+ contact:student.phoneNumber || ""
+},
 
       handler:async function(response){
 
