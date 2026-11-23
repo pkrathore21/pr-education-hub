@@ -793,13 +793,20 @@ button.addEventListener("click",()=>{
 
  if(testPage){
 
-  const board=course.selectedBoard ||
-   (courseDoc.id.includes("_cbse_") ? "cbse" : "mp");
+  const courseId=courseDoc.id;
 
-  const medium=course.selectedMedium || "";
-  const cls=course.selectedClass || "10";
-  const stream=course.selectedStream || "";
+const board=course.selectedBoard ||
+ (courseId.includes("_cbse_") ? "cbse" : "mp");
 
+const medium=course.selectedMedium ||
+ (courseId.endsWith("_hindi") || courseId==="class10-hindi"
+  ? "Hindi" : "English");
+
+const cls=course.selectedClass ||
+ (courseId.startsWith("class12") ? "12" : "10");
+
+const stream=course.selectedStream ||
+ (courseId.includes("science") ? "Science" : "");
   const params=new URLSearchParams({
    board:board,
    medium:medium,
