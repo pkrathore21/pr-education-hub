@@ -4262,17 +4262,28 @@ function renderQuestions(){
  nav.id = "questionNavigation";
  nav.style.cssText = "display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0;";
 
- nav.innerHTML = `
-  <button type="button" id="previousQuestion"
-   onclick="changeQuestion(-1)">⬅ Previous</button>
-  <b id="questionNumber">1 / ${currentQuestions.length}</b>
-  <button type="button" id="nextQuestion"
-   onclick="changeQuestion(1)">Next ➡</button>
- `;
+ 
+nav.innerHTML = `
+  <div class="question-navigation">
+    <button type="button" id="previousQuestion"
+      onclick="changeQuestion(-1)">
+      ⬅ Previous
+    </button>
 
- area.appendChild(nav);
- showQuestion(0);
-}
+    <b id="questionNumber">
+      1 / ${currentQuestions.length}
+    </b>
+
+    <button type="button" id="nextQuestion"
+      onclick="changeQuestion(1)">
+      Next ➡
+    </button>
+  </div>
+`;
+
+area.appendChild(nav);
+showQuestion(0);
+
 
 function showQuestion(index){
  const total = currentQuestions.length;
