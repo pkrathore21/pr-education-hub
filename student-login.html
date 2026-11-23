@@ -436,10 +436,25 @@ $("classSelect").addEventListener("change",()=>{
 
  const cls=$("classSelect").value;
 
- $("streamBox").classList.toggle("hidden",cls!=="12");
- $("mediumBox").classList.toggle("hidden",!cls);
-$("boardBox").classList.toggle("hidden",!cls);
-$("boardSelect").value="";
+ const isCompetitive=cls==="competitive";
+ const isClass12=cls==="12";
+
+ $("boardBox").classList.toggle(
+  "hidden",
+  !cls || isCompetitive
+ );
+
+ $("mediumBox").classList.toggle(
+  "hidden",
+  !cls
+ );
+
+ $("streamBox").classList.toggle(
+  "hidden",
+  !isClass12
+ );
+
+ $("boardSelect").value="";
  $("streamSelect").value="";
  $("mediumSelect").value="";
 
@@ -447,7 +462,6 @@ $("boardSelect").value="";
  selectedCourse=null;
 
 });
-
 
 $("streamSelect").addEventListener("change",()=>{
  selectedCourse=null;
