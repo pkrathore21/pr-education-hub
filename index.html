@@ -84,6 +84,12 @@ footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align
 .feature-card{text-align:center}
 .feature-card .card-icon{font-size:38px}
 .video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.demo-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.learning-banner{background:linear-gradient(135deg,#eff6ff,#ffffff);border:1px solid #cfe0ff;border-radius:22px;padding:clamp(18px,3vw,28px);box-shadow:0 12px 28px #123b7810}
+.learning-features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.learning-feature{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px;font-weight:800}
+.learning-feature span{display:block;color:var(--muted);font-size:13px;font-weight:500}
+@media(max-width:650px){.demo-choice-grid{grid-template-columns:1fr}.learning-features{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .video-card{min-width:0;overflow:hidden}.video-thumb{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;overflow:hidden;background:#0b1f45;cursor:pointer;padding:0}.video-thumb img{width:100%;height:100%;object-fit:cover;display:block}.video-thumb:after{content:"▶";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#e11d48;color:white;font-size:25px;box-shadow:0 5px 18px #0008}.video-thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.video-card[hidden]{display:none}.more-videos-wrap{text-align:center;margin-top:18px}
 @media(max-width:900px){header.site-header{flex-wrap:wrap}.brand{flex:1}nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}.header-actions{margin-left:auto}}
 @media(max-width:650px){main{padding:12px}.hero{grid-template-columns:1fr;text-align:center;padding:25px 18px}.hero-actions{justify-content:center}.hero-art{min-height:205px;width:100%;overflow:hidden}.virtual-orb{width:190px}.virtual-book{font-size:78px}.float-chip{font-size:11px;max-width:46%;white-space:normal}.chip-one{left:0}.chip-two{right:0}.grid{grid-template-columns:1fr}.video-grid{grid-template-columns:1fr}.brand{min-width:0}.header-actions .btn{padding:9px 11px;font-size:13px}nav{gap:2px;padding-bottom:4px}nav a{white-space:nowrap;padding:8px 9px;font-size:13px}header.site-header{gap:10px}.hero h2{font-size:clamp(29px,8vw,42px)}.hero p{font-size:16px}}
@@ -100,7 +106,7 @@ footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align
   </div>
   <nav aria-label="मुख्य मेन्यू">
     <a href="#home">होम</a><a href="#boards">बोर्ड</a><a href="#tests">डेमो टेस्ट</a>
-    <a href="#premium">प्रीमियम टेस्ट</a><a href="#study">स्टडी मटेरियल</a><a href="#videos">वीडियो</a><a href="#help">मदद</a><a href="#feedback">Feedback</a><a href="#rating">Rating</a>
+    <a href="#learning">Learning & Progress</a><a href="#premium">प्रीमियम टेस्ट</a><a href="#study">स्टडी मटेरियल</a><a href="#videos">वीडियो</a><a href="#help">मदद</a><a href="#feedback">Feedback</a><a href="#rating">Rating</a>
   </nav>
   <div class="header-actions">
     <a class="btn" href="student-login.html">Student Login</a>
@@ -164,126 +170,36 @@ footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align
   <div class="more-videos-wrap"><button class="btn purple" id="moreVideosBtn" type="button" aria-expanded="false">और अध्याय देखें ↓</button></div>
 </section>
 
-<!-- FREE DEMO TESTS -->
+<!-- FREE DEMO TESTS: CLASS 10 AND CLASS 12 SIDE BY SIDE -->
 <section id="tests">
-  <h2>Free Demo Tests</h2>
-
-  <div class="card">
-    <h3>अपनी कक्षा चुनें</h3>
-    <p class="muted">
-      कक्षा चुनकर उपलब्ध Free MCQ Demo Test शुरू करें।
-      सभी Free Demo Tests मुफ्त हैं।
-    </p>
-
-    <div class="choice-buttons">
-      <button class="btn green" id="showClass10" type="button">
-        Class 10
-      </button>
-
-      <button class="btn green" id="showClass12" type="button">
-        Class 12
-      </button>
-    </div>
+  <h2>Free Demo Tests – अपनी तैयारी आज़माएँ</h2>
+  <p class="muted">कक्षा 10 और कक्षा 12 के उपलब्ध Free Demo Tests चुनें। सभी Demo Tests मुफ्त हैं।</p>
+  <div class="demo-choice-grid">
+    <article class="card"><div class="card-icon">📘</div><h3>Class 10 – Free Demo</h3><p>उपलब्ध Mathematics Demo Test से अपनी तैयारी जाँचें।</p><button class="btn green" id="showClass10" type="button">Class 10 Demo चुनें</button></article>
+    <article class="card"><div class="card-icon">🎓</div><h3>Class 12 – Free Demo</h3><p>अपनी Stream चुनें: Science, Commerce या Arts।</p><button class="btn green" id="showClass12" type="button">Class 12 Demo चुनें</button></article>
   </div>
-
-  <!-- CLASS 10 OPTIONS -->
-  <div id="class10Demo" class="demo-panel" hidden>
-    <h3>Class 10 – Subjects</h3>
-    <p>अपना विषय चुनें।</p>
-
-    <a class="btn green" href="#online-test">
-      Mathematics – Free Demo Test
-    </a>
-
-    <p class="muted">अभी इस पेज पर Class 10 Mathematics का Free Demo Test उपलब्ध है। अन्य विषयों के Demo Tests सामग्री जुड़ने पर दिखेंगे।</p>
-  </div>
-
-  <!-- CLASS 12 OPTIONS -->
+  <div id="class10Demo" class="demo-panel" hidden><h3>Class 10 – Subjects</h3><p>अभी इस पेज पर Mathematics का Free Demo Test उपलब्ध है।</p><a class="btn green" href="#online-test">Mathematics – Free Demo Test शुरू करें</a><p class="muted">अन्य विषयों के Demo Tests सामग्री जुड़ने पर उपलब्ध होंगे।</p></div>
   <div id="class12Demo" class="demo-panel" hidden>
-    <h3>Class 12 – Select Your Stream</h3>
-    <p>अपनी Stream चुनें।</p>
-
-    <div class="choice-buttons">
-      <button class="btn green" id="showScience" type="button">
-        Science
-      </button>
-
-      <button class="btn green" id="showCommerce" type="button">
-        Commerce
-      </button>
-
-      <button class="btn green" id="showArts" type="button">
-        Arts
-      </button>
-    </div>
-
-    <!-- SCIENCE -->
-    <div id="scienceDemo" class="demo-panel" hidden>
-      <h3>Class 12 Science – Select Medium</h3>
-
-      <p><b>Hindi Medium</b></p>
-      <a class="btn green" href="class12-mp-science-hindi-demo.html">
-        Hindi Demo Test शुरू करें
-      </a>
-
-      <p style="margin-top:12px"><b>English Medium</b></p>
-      <p class="muted">
-        English Medium Demo Test का link जल्द जोड़ा जाएगा।
-      </p>
-    </div>
-
-    <!-- COMMERCE -->
-    <div id="commerceDemo" class="demo-panel" hidden>
-      <h3>Class 12 Commerce</h3>
-      <p>Commerce Demo Test:</p>
-
-      <a class="btn green" href="class12-commerce-demo.html">
-        Commerce Demo Test शुरू करें
-      </a>
-    </div>
-
-    <!-- ARTS -->
-    <div id="artsDemo" class="demo-panel" hidden>
-      <h3>Class 12 Arts</h3>
-      <p>Arts Demo Test:</p>
-
-      <a class="btn green" href="class12-arts-demo.html">
-        Arts Demo Test शुरू करें
-      </a>
-    </div>
+    <h3>Class 12 – Select Your Stream</h3><p>अपनी Stream चुनें।</p>
+    <div class="choice-buttons"><button class="btn green" id="showScience" type="button">Science</button><button class="btn green" id="showCommerce" type="button">Commerce</button><button class="btn green" id="showArts" type="button">Arts</button></div>
+    <div id="scienceDemo" class="demo-panel" hidden><h3>Class 12 Science – Select Medium</h3><p><b>Hindi Medium</b></p><a class="btn green" href="class12-mp-science-hindi-demo.html">Hindi Demo Test शुरू करें</a><p style="margin-top:12px"><b>English Medium</b></p><p class="muted">English Medium Demo Test का लिंक अभी उपलब्ध नहीं है।</p></div>
+    <div id="commerceDemo" class="demo-panel" hidden><h3>Class 12 Commerce</h3><a class="btn green" href="class12-commerce-demo.html">Commerce Demo Test शुरू करें</a></div>
+    <div id="artsDemo" class="demo-panel" hidden><h3>Class 12 Arts</h3><a class="btn green" href="class12-arts-demo.html">Arts Demo Test शुरू करें</a></div>
   </div>
 </section>
 
-<!-- CLASSES -->
-<section id="classes">
-  <h2>Classes & Subjects</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Class 9</h3>
-      <p>Mathematics • Science</p>
-      <span class="pill">MP Board</span>
-      <span class="pill">CBSE</span>
+<!-- LEARNING AND PERFORMANCE INTRO: PERSONAL DETAILS ARE LOGIN-ONLY -->
+<section id="learning">
+  <div class="learning-banner">
+    <h2>अपनी पढ़ाई को बेहतर बनाएँ</h2>
+    <p class="muted" style="font-size:1.05rem">हर विषय और हर अध्याय का अभ्यास करें। अपना स्कोर देखें और कमजोर अध्यायों और विषयों पर विशेष ध्यान दें।</p>
+    <div class="learning-features">
+      <div class="learning-feature">📚 All Subjects<span>सभी विषयों का अभ्यास</span></div>
+      <div class="learning-feature">📝 All Chapters<span>हर उपलब्ध अध्याय के MCQ</span></div>
+      <div class="learning-feature">📊 Subject-wise Score<span>विषयवार प्रदर्शन</span></div>
+      <div class="learning-feature">🎯 Chapter-wise Score<span>अध्यायवार प्रदर्शन</span></div>
     </div>
-
-    <div class="card">
-      <h3>Class 10</h3>
-      <p>Mathematics • Science</p>
-      <span class="pill">MP Board</span>
-      <span class="pill">CBSE</span>
-    </div>
-
-    <div class="card">
-      <h3>Class 12</h3>
-      <p>Science • Commerce • Arts</p>
-      <span class="pill">MP Board</span>
-      <span class="pill">CBSE</span>
-    </div>
-
-    <div class="card">
-      <h3>Competitive Exams</h3>
-      <p>गणित, रीजनिंग एवं सामान्य अध्ययन का अभ्यास।</p>
-    </div>
+    <div class="notice"><b>अपनी पढ़ाई की Progress देखने के लिए Student Login करें।</b><p>Login के बाद अपने Student Dashboard में उपलब्ध Performance और Progress विकल्प देखें। व्यक्तिगत स्कोर केवल Login के बाद दिखेगा।</p><a class="btn" href="student-login.html">Student Login / View My Progress →</a></div>
   </div>
 </section>
 
@@ -346,16 +262,21 @@ footer{background:linear-gradient(120deg,#081f55,#124ba8);color:white;text-align
 
 
 <section id="premium">
-  <h2>Premium Tests – अपनी तैयारी को अगले स्तर पर ले जाएँ</h2>
-  <p class="muted">Premium Membership और भुगतान के लिए Student Login करें। मौजूदा लॉगिन एवं भुगतान प्रक्रिया यथावत रखी गई है।</p>
-  <div class="grid" style="margin-top:16px">
-    <article class="card"><div class="card-icon">📘</div><h3>Class 10 – All Subjects</h3><p>सभी उपलब्ध विषयों के अध्यायवार और पूर्ण विषय टेस्ट।</p><a class="btn green" href="student-login.html">Membership / Login →</a></article>
-    <article class="card"><div class="card-icon">🔬</div><h3>Class 12 – Science Stream</h3><p>Physics, Chemistry, Biology और Mathematics के अनुसार टेस्ट।</p><a class="btn green" href="student-login.html">Membership / Login →</a></article>
+  <h2>Premium Complete Course – अपनी परीक्षा की पूरी तैयारी करें</h2>
+  <p class="muted">सभी उपलब्ध विषयों और अध्यायों के MCQ, Chapter-wise Practice Tests, Subject-wise Tests और Full Course Mock Tests के साथ अपनी तैयारी बेहतर बनाएँ। Premium सामग्री के लिए Student Login और सक्रिय Membership आवश्यक है।</p>
+  <h3 style="margin-top:18px">Class-wise Premium Tests</h3>
+  <div class="grid" style="margin-top:12px">
+    <article class="card"><div class="card-icon">📗</div><h3>Class 9</h3><p>सभी उपलब्ध विषयों और अध्यायों की तैयारी।</p><span class="pill">All Subjects</span><a class="btn green" href="student-login.html">Membership / Login →</a></article>
+    <article class="card"><div class="card-icon">📘</div><h3>Class 10</h3><p>सभी उपलब्ध विषयों के अध्यायवार MCQ और विषय टेस्ट।</p><span class="pill">All Subjects</span><a class="btn green" href="student-login.html">Membership / Login →</a></article>
+    <article class="card"><div class="card-icon">📙</div><h3>Class 11</h3><p>Science, Commerce और Arts के अनुसार उपलब्ध पाठ्यक्रम।</p><span class="pill">Science • Commerce • Arts</span><a class="btn green" href="student-login.html">Membership / Login →</a></article>
+    <article class="card"><div class="card-icon">🎓</div><h3>Class 12</h3><p>Science, Commerce और Arts के अनुसार उपलब्ध पाठ्यक्रम।</p><span class="pill">Science • Commerce • Arts</span><a class="btn green" href="student-login.html">Membership / Login →</a></article>
   </div>
-  <div class="notice">
-    <b>Premium Membership – जरूरी जानकारी</b>
-    <p>Membership और भुगतान की मौजूदा प्रक्रिया Student Login के माध्यम से ही उपयोग करें। Free Demo Tests के लिए Membership आवश्यक नहीं है। Premium Test का उपयोग अपने सक्रिय Membership के अनुसार करें।</p>
+  <h3 style="margin-top:24px">Foundation & Competitive Preparation</h3>
+  <div class="grid" style="margin-top:12px">
+    <article class="card"><div class="card-icon">🌱</div><h3>Class 6–8 Foundation</h3><p>बुनियादी अवधारणाएँ, विषयवार अभ्यास और उपलब्ध MCQ सामग्री।</p><a class="btn" href="student-login.html">Student Login →</a></article>
+    <article class="card"><div class="card-icon">🏆</div><h3>Competitive Exams</h3><p>गणित, रीजनिंग और सामान्य अध्ययन की परीक्षा-उन्मुख तैयारी।</p><a class="btn" href="student-login.html">Student Login →</a></article>
   </div>
+  <div class="notice"><b>Premium Membership – जरूरी जानकारी</b><p>Membership और भुगतान की मौजूदा प्रक्रिया Student Login के माध्यम से ही उपयोग करें। Free Demo Tests के लिए Membership आवश्यक नहीं है। Premium Test का उपयोग अपनी सक्रिय Membership और उपलब्ध कोर्स के अनुसार करें।</p></div>
   <a href="student-login.html" class="btn gold">Student Login / Register</a>
 </section>
 
@@ -873,8 +794,11 @@ if (chapterListEl) chapterListEl.addEventListener("click",async e => {
     ["CBSE Board","#boards"],["All in One Board / सभी State Boards","#boards"],
     ["Class 10 Free Demo Mathematics","#online-test"],["Class 12 Science Demo Test","class12-mp-science-hindi-demo.html"],
     ["Class 12 Commerce Demo Test","class12-commerce-demo.html"],["Class 12 Arts Demo Test","class12-arts-demo.html"],
-    ["Class 10 Premium – All Subjects","class10-premium-tests.html"],
-    ["Class 12 Science Premium Test","class12-premium-tests.html?board=mp&medium=Hindi&stream=Science"],
+    ["Learning Progress / Subject-wise Score / Chapter-wise Score","#learning"],
+    ["Class 9 Premium – All Subjects","#premium"],["Class 10 Premium – All Subjects","student-login.html"],
+    ["Class 11 Premium – Science Commerce Arts","#premium"],["Class 12 Premium – Science Commerce Arts","student-login.html"],
+    ["Class 6 to 8 Foundation","#premium"],["Competitive Exams","#premium"],
+    ["Class 12 Science Premium Test","student-login.html"],
     ["Student Login / Register","student-login.html"],["Study Material","#study"],
     ["Educational Videos YouTube @exam93","https://youtube.com/@exam93"],
     ["Help & Support","#help"],["Feedback","#feedback"],["Website Rating","#rating"]
