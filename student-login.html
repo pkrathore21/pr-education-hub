@@ -831,11 +831,11 @@ const stream=course.selectedStream ||
   } else {
 
    const price=document.createElement("p");
-   price.textContent="Membership: ₹"+(course.amount || 99);
+   price.textContent="Membership: ₹"+(course.amount || 149);
 
    const button=document.createElement("button");
    button.className="action green";
-   button.textContent="Pay ₹"+(course.amount || 99);
+   button.textContent="Pay ₹"+(course.amount || 149);
 
    button.addEventListener("click", async () => {
 
@@ -945,7 +945,7 @@ const stream=course.selectedStream ||
      alert(error.message);
     }finally{
      button.disabled=false;
-     button.textContent="Pay ₹"+(course.amount || 99);
+     button.textContent="Pay ₹"+(course.amount || 149);
     }
    });
 
