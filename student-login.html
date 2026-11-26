@@ -757,7 +757,28 @@ const active =
 
   card.appendChild(title);
   card.appendChild(status);
+if (active) {
+  const expiryInfo = document.createElement("p");
+  expiryInfo.className = "status";
 
+  const expiry = course.expiresAt;
+
+  if (expiry) {
+    const expiryDate = expiry.toDate
+      ? expiry.toDate()
+      : new Date(expiry);
+
+    expiryInfo.textContent =
+      "Membership Expiry: " +
+      expiryDate.toLocaleDateString("en-IN");
+
+  } else {
+    expiryInfo.textContent =
+      "Expiry Date रिकॉर्ड उपलब्ध नहीं है।";
+  }
+
+  card.appendChild(expiryInfo);
+}
   if(active){
 
    const button=document.createElement("button");
