@@ -736,7 +736,15 @@ console.log("STUDENT RECORD MISSING:", currentUser.uid);
   courseFound=true;
 
   const course=courseDoc.data();
-const active=course.membershipStatus==="active";
+
+const expiryDate = course.expiresAt
+  ? new Date(course.expiresAt)
+  : null;
+
+const active =
+  course.membershipStatus === "active" &&
+  (!expiryDate || expiryDate.getTime() > Date.now());
+
   const card=document.createElement("div");
   card.className="course-card";
 
