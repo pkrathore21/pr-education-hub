@@ -19742,8 +19742,17 @@ let testTimer = null;
 let timeLeft = 45 * 60;
 
 function startTest(testType, subjectKey, chapterIndex) {
-  const subjectData = questionBank[board.value][subjectKey.includes("Physics") ? "Physics" : subjectKey.includes("Chemistry") ? "Chemistry" : subjectKey.includes("Mathematics") ? "Mathematics" : subjectKey.includes("Biology") ? "Biology" : subjectKey];
+  const questionBankKey =
+  medium.value === "en" ? "cbse" : board.value;
 
+const subjectName =
+  subjectKey.includes("Physics") ? "Physics" :
+  subjectKey.includes("Chemistry") ? "Chemistry" :
+  subjectKey.includes("Mathematics") ? "Mathematics" :
+  subjectKey.includes("Biology") ? "Biology" :
+  subjectKey;
+
+const subjectData = questionBank[questionBankKey][subjectName];
   if (!subjectData) {
   alert(
     "Subject: " + subjectKey +
@@ -19753,9 +19762,10 @@ function startTest(testType, subjectKey, chapterIndex) {
   return;
 }
 if (testType === "chapter") {
-  const chapterNames = board.value === "mp"
-  ? (chapterDataHindi[subjectKey] || chapterData[subjectKey] || [])
-  : (chapterData[subjectKey] || []);
+  const chapterNames =
+  medium.value === "hi"
+    ? (chapterDataHindi[subjectKey] || chapterData[subjectKey] || [])
+    : (chapterData[subjectKey] || []);
   currentTestTitle = chapterNames[chapterIndex] || 
     "Chapter " + (chapterIndex + 1);
 } else if (testType === "full") {
