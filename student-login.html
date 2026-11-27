@@ -738,12 +738,22 @@ console.log("STUDENT RECORD MISSING:", currentUser.uid);
   const course=courseDoc.data();
 
 const expiryDate = course.expiresAt
-  ? new Date(course.expiresAt)
+  ? (
+      typeof course.expiresAt.toDate === "function"
+        ? course.expiresAt.toDate()
+        : new Date(course.expiresAt)
+    )
   : null;
 
 const active =
   course.membershipStatus === "active" &&
-  (!expiryDate || expiryDate.getTime() > Date.now());
+  (
+    !expiryDate ||
+    (
+      !Number.isNaN(expiryDate.getTime()) &&
+      expiryDate.getTime() > Date.now()
+    )
+  );
 
   const card=document.createElement("div");
   card.className="course-card";
