@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class 12 Arts Premium Tests | PR Education Hub</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172554}
+header{background:#123b70;color:#fff;text-align:center;padding:20px 12px}header h1{margin:0;font-size:25px}
+.container{width:min(100% - 22px,900px);margin:18px auto}.card{background:#fff;padding:18px;border-radius:14px;box-shadow:0 4px 18px #00000010;margin:14px 0}
+label{display:block;font-weight:bold;margin:12px 0 6px}select,button{width:100%;padding:13px;border-radius:9px;font-size:16px}
+select{border:1px solid #cbd5e1;background:white}button{border:0;background:#123b70;color:white;font-weight:bold;margin-top:10px;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}.green{background:#15803d}.gold{background:#a16207}.muted{color:#64748b;font-size:14px;line-height:1.5}
+.hidden{display:none!important}.subject-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.subject{border:1px solid #dbeafe;border-radius:10px;padding:13px;background:#f8fafc}.subject h3{margin:0 0 7px}
+.chapter{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #e2e8f0}
+.chapter button{width:auto;min-width:120px;margin:0;padding:10px;font-size:14px}
+.question{padding:14px 0;border-bottom:1px solid #e2e8f0}.option{display:block;padding:9px;margin:7px 0;border:1px solid #cbd5e1;border-radius:8px;font-weight:normal}
+.option input{margin-right:8px}.notice{background:#fff7ed;color:#9a3412;padding:12px;border-radius:9px;line-height:1.5}
+.status{padding:12px;border-radius:9px;background:#eff6ff;margin:10px 0}
+@media(max-width:520px){header h1{font-size:21px}.card{padding:14px}.chapter{align-items:flex-start;flex-direction:column}.chapter button{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>PR Education Hub</h1><p>Class 12 Arts Premium Tests</p><p>Learn Today • Lead Tomorrow</p></header>
+<main class="container">
+<section class="card">
+<h2>Arts Premium Membership</h2>
+<p>History • Political Science • Geography • Economics • Sociology • Psychology • English • Hindi • Sanskrit • Home Science</p>
+<p><b>Membership: ₹149 | Validity: 6 Months</b></p>
+<p class="muted">पहले Student Dashboard में Arts course चुनकर भुगतान करें। भुगतान सफल होने और membership active होने के बाद इसी पेज पर tests खुलेंगे।</p>
+<div id="membershipStatus" class="status">Checking student login and membership...</div>
+<div class="muted">Tests are available only after the selected Arts membership is active. Payment is completed from the Student Dashboard.</div>
+</section>
+
+<section class="card">
+<h2>Board and Medium</h2>
+<label for="board">Board</label><select id="board"><option value="mp">MP Board</option><option value="cbse">CBSE</option></select>
+<label for="medium">Medium</label><select id="medium"><option value="Hindi">Hindi Medium</option><option value="English">English Medium</option></select>
+<div class="notice">MP Board Hindi, MP Board English और CBSE English के प्रश्न बैंक अलग-अलग रहेंगे। CBSE के लिए English Medium ही उपलब्ध है। विषयों की उपलब्धता स्कूल और बोर्ड के subject combination के अनुसार अलग हो सकती है। MCQ प्रश्न बैंक अध्यायवार जोड़े जाएँगे।</div>
+</section>
+
+<section class="card">
+<h2>Select Subject</h2>
+<div id="subjects" class="subject-grid"></div>
+</section>
+
+<section class="card hidden" id="chaptersCard">
+<h2 id="subjectTitle">Chapters</h2>
+<div id="chapterList"></div>
+</section>
+
+<section class="card hidden" id="testCard">
+<h2 id="testTitle">Chapter Test</h2>
+<div id="testInfo" class="muted"></div>
+<form id="quizForm"></form>
+<div id="result"></div>
+</section>
+
+<a href="index.html">← Back to Home</a>
+</main>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
+ authDomain:"pr-education-hub.firebaseapp.com",
+ projectId:"pr-education-hub",
+ storageBucket:"pr-education-hub.firebasestorage.app",
+ messagingSenderId:"907993736868",
+ appId:"1:907993736868:web:b7c098a10914a61ceca831",
+ measurementId:"G-V61NSSNFRQ"
+};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const getCourseId=()=>"class12_arts_"+($("board").value==="cbse"?"cbse":"mp")+"_"+($("medium").value==="Hindi"?"hindi":"english");
+let courseId=getCourseId();
+let currentUser=null, membershipActive=false, selectedSubject="", selectedChapter="";
+const boardParam=params.get("board"), mediumParam=params.get("medium");
+if(boardParam==="mp"||boardParam==="cbse")$("board").value=boardParam;
+if(mediumParam==="Hindi"||mediumParam==="English")$("medium").value=mediumParam;
+if($("board").value==="cbse")$("medium").value="English";
+courseId=getCourseId();
+$("board").addEventListener("change",()=>{if($("board").value==="cbse")$("medium").value="English";courseId=getCourseId();verifyMembership(currentUser);});
+$("medium").addEventListener("change",()=>{if($("board").value==="cbse")$("medium").value="English";courseId=getCourseId();verifyMembership(currentUser);});
+
+const chapters={
+ History:[
+  "The Story of the First Cities: Harappan Archaeology","Political and Economic History: How Inscriptions Tell a Story","Social Histories: The Mahabharata","A History of Buddhism: Sanchi Stupa",
+  "Medieval Society Through Travellers' Accounts","Bhakti-Sufi Traditions","An Imperial Capital: Vijayanagara","Peasants, Zamindars and the State",
+  "Kings and Chronicles: The Mughal Courts","Colonialism and the Countryside","Rebels and the Raj: The Revolt of 1857","Colonial Cities",
+  "Mahatma Gandhi and the Nationalist Movement","Understanding Partition","Framing the Constitution"
+ ],
+ "Political Science":[
+  "The End of Bipolarity","Contemporary Centres of Power","Contemporary South Asia","International Organisations","Security in the Contemporary World","Environment and Natural Resources","Globalisation",
+  "Challenges of Nation-Building","Era of One-Party Dominance","Politics of Planned Development","India's External Relations","Challenges to and Restoration of the Congress System","The Crisis of Democratic Order","Regional Aspirations","Recent Developments in Indian Politics"
+ ],
+ Geography:[
+  "Human Geography: Nature and Scope","The World Population: Distribution, Density and Growth","Population Composition","Human Development","Primary Activities","Secondary Activities","Tertiary and Quaternary Activities","Transport and Communication","International Trade",
+  "Human Settlements","Resources and Development","Transport, Communication and International Trade","Geographical Perspective on Selected Issues and Problems"
+ ],
+ Economics:[
+  "Introduction to Macroeconomics","National Income Accounting","Money and Banking","Determination of Income and Employment","Government Budget and the Economy","Open Economy Macroeconomics",
+  "Indian Economy on the Eve of Independence","Indian Economy 1950–1990","Liberalisation, Privatisation and Globalisation","Human Capital Formation","Rural Development","Employment: Growth, Informalisation and Other Issues","Environment and Sustainable Development","Comparative Development Experiences"
+ ],
+ Sociology:[
+  "Introducing Indian Society","The Demographic Structure of Indian Society","Social Institutions: Continuity and Change","The Market as a Social Institution","Patterns of Social Inequality and Exclusion","The Challenges of Cultural Diversity","Suggestions for Project Work",
+  "Structural Change","Cultural Change","The Story of Indian Democracy","Change and Development in Rural Society","Change and Development in Industrial Society","Globalisation and Social Change","Mass Media and Communications","Social Movements"
+ ],
+ Psychology:[
+  "Variations in Psychological Attributes","Self and Personality","Meeting Life Challenges","Psychological Disorders","Therapeutic Approaches","Attitude and Social Cognition","Social Influence and Group Processes","Psychology and Life","Developing Psychological Skills"
+ ],
+ English:["Reading Comprehension","Writing Skills","Flamingo: Prose","Flamingo: Poetry","Vistas: Supplementary Reader"],
+ Hindi:["अपठित बोध","अभिव्यक्ति और माध्यम","आरोह: गद्य खंड","आरोह: काव्य खंड","वितान: पूरक पाठ्यपुस्तक"],
+ Sanskrit:["गद्य एवं पद्य","व्याकरण","अनुवाद एवं रचना","अपठित अवबोधन","संस्कृत साहित्य"],
+ "Home Science":["Work, Livelihood and Career","Nutrition, Food Science and Technology","Human Development and Family Studies","Fabric and Apparel","Resource Management","Communication and Extension"]
+};
+// Arts question banks are separate for MP Hindi, MP English and CBSE English.
+// Chapter tests become available as verified MCQs are added to the matching bank.
+const questionBank={
+ "mp-Hindi":{},
+ "mp-English":{},
+ "cbse-English":{}
+};
+
+function renderSubjects(){
+ const names=Object.keys(chapters);
+ $("subjects").innerHTML="";
+ names.forEach(name=>{
+  const div=document.createElement("div");div.className="subject";
+  const h=document.createElement("h3");h.textContent=name;div.append(h);
+  const p=document.createElement("p");p.className="muted";const available=chapters[name].filter((_,i)=>!!questionBank[$("board").value+"-"+$("medium").value]?.[name+"|"+i]).length;p.textContent=chapters[name].length+" chapters • "+available+" tests available";div.append(p);
+  const b=document.createElement("button");b.textContent="Open Chapters";b.className="green";b.onclick=()=>openSubject(name);div.append(b);
+  $("subjects").append(div);
+ });
+}
+function openSubject(name){
+ if(!membershipActive){alert("इस Arts course की active membership आवश्यक है।");return;}
+ selectedSubject=name;$("subjectTitle").textContent=name+" – Chapter-wise Tests";
+ $("chaptersCard").classList.remove("hidden");$("testCard").classList.add("hidden");
+ $("chapterList").innerHTML="";
+ chapters[name].forEach((chapter,i)=>{
+  const row=document.createElement("div");row.className="chapter";
+  const span=document.createElement("span");span.textContent=(i+1)+". "+chapter;row.append(span);
+  const btn=document.createElement("button");btn.textContent="Start Chapter Test";btn.onclick=()=>startTest(name,i,chapter);row.append(btn);
+  $("chapterList").append(row);
+ });
+}
+function startTest(subject,index,chapter){
+ const key=$("board").value+"-"+$("medium").value;
+ const questions=questionBank[key]?.[subject+"|"+index]||[];
+ $("testCard").classList.remove("hidden");$("testTitle").textContent=chapter;
+ $("testInfo").textContent=questions.length?questions.length+" MCQs • Answer explanations":"इस Board/Medium के इस अध्याय का प्रश्न-बैंक अभी इस फाइल में जोड़ा जाना बाकी है।";
+ const form=$("quizForm");form.innerHTML="";$("result").innerHTML="";
+ if(!questions.length){form.innerHTML='<div class="notice">इस chapter के लिए verified MCQs अभी उपलब्ध नहीं हैं। गलत या दूसरे Board के प्रश्न दिखाने के बजाय इस अध्याय को अभी बंद रखा गया है।</div>';return;}
+ questions.forEach((q,i)=>{
+  const box=document.createElement("div");box.className="question";
+  const title=document.createElement("b");title.textContent=(i+1)+". "+q[0];box.append(title);
+  q[1].forEach((opt,j)=>{
+   const label=document.createElement("label");label.className="option";
+   const input=document.createElement("input");input.type="radio";input.name="q"+i;input.value=j;label.append(input,document.createTextNode(String.fromCharCode(65+j)+". "+opt));box.append(label);
+  });
+  form.append(box);
+ });
+ const submit=document.createElement("button");submit.type="button";submit.textContent="Submit Test";submit.onclick=()=>{
+  let score=0,review="";
+  questions.forEach((q,i)=>{
+   const chosen=form.querySelector('input[name="q'+i+'"]:checked');
+   const correct=chosen&&Number(chosen.value)===q[2];if(correct)score++;
+   review+='<p><b>'+(i+1)+'. '+(correct?'Correct':'Correct answer: '+q[1][q[2]])+'</b><br>'+q[3]+'</p>';
+  });
+  $("result").innerHTML="<h3>Score: "+score+"/"+questions.length+"</h3>"+review;
+  submit.disabled=true;
+ };
+ form.append(submit);
+}
+async function verifyMembership(user){
+ currentUser=user;
+ if(!user){$("membershipStatus").textContent="पहले Student Login करें।";return;}
+ try{
+  const ref=doc(db,"students",user.uid,"courses",courseId);
+  const snap=await getDoc(ref);
+  if(!snap.exists()){membershipActive=false;$("subjects").innerHTML="";$("chaptersCard").classList.add("hidden");$("testCard").classList.add("hidden");$("membershipStatus").textContent="Arts membership record नहीं मिला। Student Login में सही course चुनें।";return;}
+  const c=snap.data(),expiry=c.expiresAt?(typeof c.expiresAt.toDate==="function"?c.expiresAt.toDate():new Date(c.expiresAt)):null;
+  membershipActive=c.membershipStatus==="active"&&(!expiry||(!Number.isNaN(expiry.getTime())&&expiry.getTime()>Date.now()));
+  $("membershipStatus").textContent=membershipActive?"Membership Active ✓ — "+(c.courseName||courseId):"Membership Active नहीं है। Student Dashboard में payment status जाँचें।";
+  if(membershipActive)renderSubjects();
+ }catch(e){console.error(e);$("membershipStatus").textContent="Membership जाँचने में समस्या: "+e.message;}
+}
+onAuthStateChanged(auth,user=>verifyMembership(user));
+if($("board").value==="cbse")$("medium").value="English";
+courseId=getCourseId();
+</script>
+</body>
+</html>
