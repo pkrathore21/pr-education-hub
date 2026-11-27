@@ -839,7 +839,9 @@ const cls=course.selectedClass ||
  (courseId.startsWith("class12") ? "12" : "10");
 
 const stream=course.selectedStream ||
- (courseId.includes("science") ? "Science" : "");
+ (courseId.includes("science") ? "Science" :
+  courseId.includes("commerce") ? "Commerce" :
+  courseId.includes("arts") ? "Arts" : "");
   const params=new URLSearchParams({
    board:board,
    medium:medium,
