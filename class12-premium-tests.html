@@ -19999,10 +19999,9 @@ const selectedSubject = subject.value.includes("Physics") ? "Physics" :
   subject.value.includes("Psychology") || subject.value.includes("मनोविज्ञान") ? "Psychology" :
   subject.value.includes("अकाउंटेंसी") || subject.value.includes("Accountancy") ? "Accountancy" :
  subject.value;
- const chapters = board.value === "mp"
+ const chapters = medium.value === "hi"
  ? (chapterDataHindi[selectedSubject] || chapterData[selectedSubject] || [])
  : (chapterData[selectedSubject] || []);
-
  if(chapters.length === 0){
   chapterList.innerHTML =
    "<p>इस विषय के अध्याय जल्द जोड़े जाएँगे।</p>";
