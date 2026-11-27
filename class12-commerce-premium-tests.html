@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class 12 Commerce Premium Tests | PR Education Hub</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172554}
+header{background:#123b70;color:#fff;text-align:center;padding:20px 12px}header h1{margin:0;font-size:25px}
+.container{width:min(100% - 22px,900px);margin:18px auto}.card{background:#fff;padding:18px;border-radius:14px;box-shadow:0 4px 18px #00000010;margin:14px 0}
+label{display:block;font-weight:bold;margin:12px 0 6px}select,button{width:100%;padding:13px;border-radius:9px;font-size:16px}
+select{border:1px solid #cbd5e1;background:white}button{border:0;background:#123b70;color:white;font-weight:bold;margin-top:10px;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}.green{background:#15803d}.gold{background:#a16207}.muted{color:#64748b;font-size:14px;line-height:1.5}
+.hidden{display:none!important}.subject-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.subject{border:1px solid #dbeafe;border-radius:10px;padding:13px;background:#f8fafc}.subject h3{margin:0 0 7px}
+.chapter{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #e2e8f0}
+.chapter button{width:auto;min-width:120px;margin:0;padding:10px;font-size:14px}
+.question{padding:14px 0;border-bottom:1px solid #e2e8f0}.option{display:block;padding:9px;margin:7px 0;border:1px solid #cbd5e1;border-radius:8px;font-weight:normal}
+.option input{margin-right:8px}.notice{background:#fff7ed;color:#9a3412;padding:12px;border-radius:9px;line-height:1.5}
+.status{padding:12px;border-radius:9px;background:#eff6ff;margin:10px 0}
+@media(max-width:520px){header h1{font-size:21px}.card{padding:14px}.chapter{align-items:flex-start;flex-direction:column}.chapter button{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>PR Education Hub</h1><p>Class 12 Commerce Premium Tests</p><p>Learn Today • Lead Tomorrow</p></header>
+<main class="container">
+<section class="card">
+<h2>Commerce Premium Membership</h2>
+<p>Accountancy • Business Studies • Economics • English • Hindi • Mathematics (Optional)</p>
+<p><b>Membership: ₹149 | Validity: 6 Months</b></p>
+<div id="membershipStatus" class="status">Checking student login and membership...</div>
+<div class="muted">Tests are available only for the selected active Commerce membership.</div>
+</section>
+
+<section class="card">
+<h2>Board and Medium</h2>
+<label for="board">Board</label><select id="board"><option value="mp">MP Board</option><option value="cbse">CBSE</option></select>
+<label for="medium">Medium</label><select id="medium"><option value="Hindi">Hindi Medium</option><option value="English">English Medium</option></select>
+<div class="notice">MP Board Hindi, MP Board English और CBSE English के प्रश्न बैंक अलग-अलग रखे गए हैं। CBSE के लिए English Medium ही उपलब्ध है।</div>
+</section>
+
+<section class="card">
+<h2>Select Subject</h2>
+<div id="subjects" class="subject-grid"></div>
+</section>
+
+<section class="card hidden" id="chaptersCard">
+<h2 id="subjectTitle">Chapters</h2>
+<div id="chapterList"></div>
+</section>
+
+<section class="card hidden" id="testCard">
+<h2 id="testTitle">Chapter Test</h2>
+<div id="testInfo" class="muted"></div>
+<form id="quizForm"></form>
+<div id="result"></div>
+</section>
+
+<a href="index.html">← Back to Home</a>
+</main>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCM9nXyDrp6mLzTJALkpJyIq4ebm_lD1f8",
+ authDomain:"pr-education-hub.firebaseapp.com",
+ projectId:"pr-education-hub",
+ storageBucket:"pr-education-hub.firebasestorage.app",
+ messagingSenderId:"907993736868",
+ appId:"1:907993736868:web:b7c098a10914a61ceca831",
+ measurementId:"G-V61NSSNFRQ"
+};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const courseId="class12_commerce_"+(params.get("board")==="cbse"?"cbse":"mp")+"_"+(params.get("medium")==="Hindi"?"hindi":"english");
+let currentUser=null, membershipActive=false, selectedSubject="", selectedChapter="";
+const boardParam=params.get("board"), mediumParam=params.get("medium");
+if(boardParam==="mp"||boardParam==="cbse")$("board").value=boardParam;
+if(mediumParam==="Hindi"||mediumParam==="English")$("medium").value=mediumParam;
+if($("board").value==="cbse")$("medium").value="English";
+$("board").addEventListener("change",()=>{if($("board").value==="cbse")$("medium").value="English";});
+$("medium").addEventListener("change",()=>{if($("board").value==="cbse")$("medium").value="English";});
+
+const chapters={
+ Accountancy:[
+ "Accounting for Partnership Firms – Fundamentals","Goodwill: Nature and Valuation","Change in Profit Sharing Ratio","Admission of a Partner","Retirement and Death of a Partner","Dissolution of Partnership Firm","Accounting for Share Capital","Issue and Redemption of Debentures","Financial Statements of a Company","Financial Statement Analysis","Accounting Ratios","Cash Flow Statement"
+ ],
+ "Business Studies":[
+ "Nature and Significance of Management","Principles of Management","Business Environment","Planning","Organising","Staffing","Directing","Controlling","Financial Management","Financial Markets","Marketing Management","Consumer Protection"
+ ],
+ Economics:[
+ "National Income and Related Aggregates","Money and Banking","Determination of Income and Employment","Government Budget and the Economy","Balance of Payments","Indian Economy on the Eve of Independence","Indian Economy 1950–1990","Liberalisation, Privatisation and Globalisation","Human Capital Formation","Rural Development","Employment: Growth, Informalisation and Other Issues","Environment and Sustainable Development","Comparative Development Experiences"
+ ],
+ English:["Reading Skills","Writing Skills","Flamingo: Prose","Flamingo: Poetry","Vistas: Supplementary Reader"],
+ Hindi:["अपठित बोध","अभिव्यक्ति और माध्यम","आरोह: गद्य खंड","आरोह: काव्य खंड","वितान: पूरक पाठ्यपुस्तक"],
+ Mathematics:["Relations and Functions","Inverse Trigonometric Functions","Matrices","Determinants","Continuity and Differentiability","Applications of Derivatives","Integrals","Applications of Integrals","Differential Equations","Vector Algebra","Three Dimensional Geometry","Linear Programming","Probability"]
+};
+// Question banks are kept separate by board/medium. Add verified chapter MCQs to these arrays.
+const questionBank={
+ "mp-Hindi":{},
+ "mp-English":{},
+ "cbse-English":{}
+};
+// Initial working sample bank: Accountancy Chapter 1 – MP Board Hindi.
+questionBank["mp-Hindi"]["Accountancy|0"]=[
+["साझेदारी का मुख्य उद्देश्य क्या है?",["सामाजिक सेवा करना","लाभ कमाना और बाँटना","केवल पूँजी जमा करना","सरकारी सहायता प्राप्त करना"],1,"साझेदारी में व्यक्ति व्यवसाय चलाकर लाभ कमाने और बाँटने के लिए सहमत होते हैं।"],
+["भारतीय साझेदारी अधिनियम किस वर्ष लागू हुआ?",["1930","1932","1947","1956"],1,"भारतीय साझेदारी अधिनियम, 1932 साझेदारी व्यवसाय को नियंत्रित करता है।"],
+["साझेदारी के लिए न्यूनतम कितने व्यक्ति आवश्यक हैं?",["एक","दो","तीन","चार"],1,"साझेदारी के लिए कम-से-कम दो व्यक्ति आवश्यक हैं।"],
+["साझेदारी के सदस्यों को क्या कहा जाता है?",["शेयरधारक","संचालक","साझेदार","लेनदार"],2,"साझेदारी फर्म में व्यवसाय करने वाले व्यक्तियों को साझेदार कहते हैं।"],
+["साझेदारी का आधार क्या है?",["समझौता","सरकारी आदेश","केवल पूँजी","न्यायालय का निर्णय"],0,"साझेदारी दो या अधिक व्यक्तियों के बीच हुए समझौते से बनती है।"],
+["साझेदारी विलेख को अंग्रेजी में क्या कहते हैं?",["Balance Sheet","Partnership Deed","Cash Book","Journal"],1,"साझेदारों के लिखित समझौते को Partnership Deed कहते हैं।"],
+["लाभ-विभाजन अनुपात न दिया हो तो लाभ कैसे बाँटा जाता है?",["पूँजी के अनुपात में","बराबर-बराबर","समय के अनुपात में","इच्छानुसार"],1,"समझौते में अनुपात न होने पर लाभ और हानि बराबर बाँटे जाते हैं।"],
+["पूँजी पर ब्याज का प्रावधान न हो तो कितना ब्याज दिया जाता है?",["6%","12%","कोई ब्याज नहीं","10%"],2,"समझौते के अभाव में पूँजी पर ब्याज नहीं मिलता।"],
+["निजी उपयोग के लिए फर्म से निकाली गई राशि क्या कहलाती है?",["पूँजी","आहरण","ऋण","आय"],1,"व्यक्तिगत उपयोग के लिए निकाली गई राशि आहरण कहलाती है।"],
+["लाभ-हानि विनियोग खाता किसलिए बनाया जाता है?",["बिक्री ज्ञात करने","लाभ का विनियोग करने","पूँजी ज्ञात करने","संपत्ति बेचने"],1,"इस खाते से शुद्ध लाभ का साझेदारों में विनियोग किया जाता है।"],
+["साझेदार का वेतन किस खाते में डेबिट होता है?",["लाभ-हानि खाता","लाभ-हानि विनियोग खाता","बैंक खाता","पूँजी खाता"],1,"साझेदार का वेतन लाभ का विनियोग है।"],
+["स्थिर पूँजी पद्धति में कौन-से खाते रखे जाते हैं?",["केवल एक","पूँजी और चालू खाते","केवल बैंक खाता","केवल आहरण खाता"],1,"स्थिर पूँजी पद्धति में पूँजी और चालू खाते रखे जाते हैं।"],
+["स्थिर पूँजी पद्धति में आहरण कहाँ दर्ज होता है?",["पूँजी खाते में","चालू खाते में","बैंक खाते में","लाभ-हानि खाते में"],1,"स्थिर पूँजी पद्धति में आहरण चालू खाते में दर्ज होता है।"],
+["फर्म द्वारा साझेदार से लिया गया ऋण क्या है?",["संपत्ति","दायित्व","आय","आहरण"],1,"साझेदार से प्राप्त ऋण फर्म का दायित्व है।"],
+["साझेदार के ऋण पर समझौते के अभाव में ब्याज की दर क्या है?",["6% वार्षिक","8% वार्षिक","10% वार्षिक","12% वार्षिक"],0,"भारतीय साझेदारी अधिनियम के अनुसार सामान्यतः 6% वार्षिक ब्याज देय होता है।"],
+["गारंटीकृत न्यूनतम लाभ का अर्थ क्या है?",["निश्चित न्यूनतम लाभ","निश्चित वेतन","निश्चित पूँजी","निश्चित ब्याज"],0,"किसी साझेदार को कम-से-कम निश्चित लाभ देने का आश्वासन होता है।"],
+["हानि का बँटवारा सामान्यतः किस आधार पर होता है?",["लाभ-विभाजन अनुपात","आयु","कार्य के घंटे","मनमाने ढंग से"],0,"समझौते में अलग प्रावधान न हो तो हानि लाभ-विभाजन अनुपात में बाँटी जाती है।"],
+["साझेदार द्वारा व्यवसाय में लगाई गई राशि क्या कहलाती है?",["आहरण","पूँजी","व्यय","कमीशन"],1,"व्यवसाय में लगाई गई राशि पूँजी कहलाती है।"],
+["लाभ-हानि खाते से क्या ज्ञात होता है?",["शुद्ध लाभ या हानि","केवल पूँजी","केवल नकद","केवल बिक्री"],0,"लाभ-हानि खाते से अवधि का शुद्ध लाभ या शुद्ध हानि ज्ञात होती है।"],
+["साझेदारी समझौता किस रूप में हो सकता है?",["केवल लिखित","केवल मौखिक","लिखित या मौखिक","किसी रूप में नहीं"],2,"साझेदारी समझौता लिखित या मौखिक हो सकता है।"]
+];
+
+function renderSubjects(){
+ const names=Object.keys(chapters);
+ $("subjects").innerHTML="";
+ names.forEach(name=>{
+  const div=document.createElement("div");div.className="subject";
+  const h=document.createElement("h3");h.textContent=name;div.append(h);
+  const p=document.createElement("p");p.className="muted";p.textContent=chapters[name].length+" chapter groups";div.append(p);
+  const b=document.createElement("button");b.textContent="Open Chapters";b.className="green";b.onclick=()=>openSubject(name);div.append(b);
+  $("subjects").append(div);
+ });
+}
+function openSubject(name){
+ if(!membershipActive){alert("इस Commerce course की active membership आवश्यक है।");return;}
+ selectedSubject=name;$("subjectTitle").textContent=name+" – Chapter-wise Tests";
+ $("chaptersCard").classList.remove("hidden");$("testCard").classList.add("hidden");
+ $("chapterList").innerHTML="";
+ chapters[name].forEach((chapter,i)=>{
+  const row=document.createElement("div");row.className="chapter";
+  const span=document.createElement("span");span.textContent=(i+1)+". "+chapter;row.append(span);
+  const btn=document.createElement("button");btn.textContent="Start Chapter Test";btn.onclick=()=>startTest(name,i,chapter);row.append(btn);
+  $("chapterList").append(row);
+ });
+}
+function startTest(subject,index,chapter){
+ const key=$("board").value+"-"+$("medium").value;
+ const questions=questionBank[key]?.[subject+"|"+index]||[];
+ $("testCard").classList.remove("hidden");$("testTitle").textContent=chapter;
+ $("testInfo").textContent=questions.length?questions.length+" MCQs • Answer explanations":"इस Board/Medium के इस अध्याय का प्रश्न-बैंक अभी इस फाइल में जोड़ा जाना बाकी है।";
+ const form=$("quizForm");form.innerHTML="";$("result").innerHTML="";
+ if(!questions.length){form.innerHTML='<div class="notice">इस chapter के लिए verified MCQs अभी उपलब्ध नहीं हैं। गलत या दूसरे Board के प्रश्न दिखाने के बजाय इस अध्याय को अभी बंद रखा गया है।</div>';return;}
+ questions.forEach((q,i)=>{
+  const box=document.createElement("div");box.className="question";
+  const title=document.createElement("b");title.textContent=(i+1)+". "+q[0];box.append(title);
+  q[1].forEach((opt,j)=>{
+   const label=document.createElement("label");label.className="option";
+   const input=document.createElement("input");input.type="radio";input.name="q"+i;input.value=j;label.append(input,document.createTextNode(String.fromCharCode(65+j)+". "+opt));box.append(label);
+  });
+  form.append(box);
+ });
+ const submit=document.createElement("button");submit.type="button";submit.textContent="Submit Test";submit.onclick=()=>{
+  let score=0,review="";
+  questions.forEach((q,i)=>{
+   const chosen=form.querySelector('input[name="q'+i+'"]:checked');
+   const correct=chosen&&Number(chosen.value)===q[2];if(correct)score++;
+   review+='<p><b>'+(i+1)+'. '+(correct?'Correct':'Correct answer: '+q[1][q[2]])+'</b><br>'+q[3]+'</p>';
+  });
+  $("result").innerHTML="<h3>Score: "+score+"/"+questions.length+"</h3>"+review;
+  submit.disabled=true;
+ };
+ form.append(submit);
+}
+async function verifyMembership(user){
+ currentUser=user;
+ if(!user){$("membershipStatus").textContent="पहले Student Login करें।";return;}
+ try{
+  const ref=doc(db,"students",user.uid,"courses",courseId);
+  const snap=await getDoc(ref);
+  if(!snap.exists()){membershipActive=false;$("membershipStatus").textContent="Commerce membership record नहीं मिला। Student Login में सही course चुनें।";return;}
+  const c=snap.data(),expiry=c.expiresAt?(typeof c.expiresAt.toDate==="function"?c.expiresAt.toDate():new Date(c.expiresAt)):null;
+  membershipActive=c.membershipStatus==="active"&&(!expiry||(!Number.isNaN(expiry.getTime())&&expiry.getTime()>Date.now()));
+  $("membershipStatus").textContent=membershipActive?"Membership Active ✓ — "+(c.courseName||courseId):"Membership Active नहीं है। Student Dashboard में payment status जाँचें।";
+  if(membershipActive)renderSubjects();
+ }catch(e){console.error(e);$("membershipStatus").textContent="Membership जाँचने में समस्या: "+e.message;}
+}
+onAuthStateChanged(auth,user=>verifyMembership(user));
+if($("board").value==="cbse")$("medium").value="English";
+</script>
+</body>
+</html>
