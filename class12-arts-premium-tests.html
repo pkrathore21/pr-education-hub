@@ -15,6 +15,7 @@ button:disabled{opacity:.5;cursor:not-allowed}.green{background:#15803d}.gold{ba
 .subject{border:1px solid #dbeafe;border-radius:10px;padding:13px;background:#f8fafc}.subject h3{margin:0 0 7px}
 .chapter{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #e2e8f0}
 .chapter button{width:auto;min-width:120px;margin:0;padding:10px;font-size:14px}
+.test-navigation{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}.test-navigation button{margin:0;background:#475569}.test-navigation button:first-child{background:#15803d}
 .question{padding:14px 0;border-bottom:1px solid #e2e8f0}.option{display:block;padding:9px;margin:7px 0;border:1px solid #cbd5e1;border-radius:8px;font-weight:normal}
 .option input{margin-right:8px}.notice{background:#fff7ed;color:#9a3412;padding:12px;border-radius:9px;line-height:1.5}
 .status{padding:12px;border-radius:9px;background:#eff6ff;margin:10px 0}
@@ -40,7 +41,7 @@ button:disabled{opacity:.5;cursor:not-allowed}.green{background:#15803d}.gold{ba
 <div class="notice">MP Board Hindi, MP Board English और CBSE English के प्रश्न बैंक अलग-अलग रहेंगे। CBSE के लिए English Medium ही उपलब्ध है। विषयों की उपलब्धता स्कूल और बोर्ड के subject combination के अनुसार अलग हो सकती है। MCQ प्रश्न बैंक अध्यायवार जोड़े जाएँगे।</div>
 </section>
 
-<section class="card">
+<section class="card" id="subjectsCard">
 <h2>Select Subject</h2>
 <div id="subjects" class="subject-grid"></div>
 </section>
@@ -51,6 +52,7 @@ button:disabled{opacity:.5;cursor:not-allowed}.green{background:#15803d}.gold{ba
 </section>
 
 <section class="card hidden" id="testCard">
+<div id="testNavigation" class="test-navigation"></div>
 <h2 id="testTitle">Chapter Test</h2>
 <div id="testInfo" class="muted"></div>
 <form id="quizForm"></form>
@@ -274,7 +276,7 @@ function renderSubjects(){
   if(pool.length>=30){
    const examLabels=["Full Subject Test","Mock Test 1","Mock Test 2","Mock Test 3"];
    examLabels.forEach((label,index)=>{
-    const testButton=document.createElement("button");testButton.className="gold";testButton.textContent=examLabel(label)+" (30 MCQ)";testButton.onclick=()=>{if(!membershipActive){alert("इस Arts course की active membership आवश्यक है।");return;}startSubjectExam(name,index,examLabel(label),pool);};div.append(testButton);
+    const testButton=document.createElement("button");testButton.className="gold";testButton.textContent=examLabel(label)+" (30 MCQ)";testButton.onclick=()=>{if(!membershipActive){alert("इस Arts course की active membership आवश्यक है।");return;}openSubject(name);startSubjectExam(name,index,examLabel(label),pool);};div.append(testButton);
    });
   }
   $("subjects").append(div);
@@ -343,7 +345,17 @@ function startTest(subject,index,chapter){
  renderQuiz(questions,chapterLabel(subject,index));
 }
 function renderQuiz(questions,title){
- $("testCard").classList.remove("hidden");$("testTitle").textContent=title;
+ // Keep the quiz in a focused view so it never sits below the subject/chapter lists.
+ $("subjectsCard").classList.add("hidden");
+ $("chaptersCard").classList.add("hidden");
+ $("testCard").classList.remove("hidden");
+ const nav=$("testNavigation");nav.innerHTML="";
+ const backChapters=document.createElement("button");backChapters.type="button";backChapters.textContent=showHindi()?"← अध्याय सूची में वापस":"← Back to Chapter List";
+ backChapters.onclick=()=>{ $("testCard").classList.add("hidden");$("subjectsCard").classList.add("hidden");$("chaptersCard").classList.remove("hidden");window.scrollTo({top:$("chaptersCard").offsetTop-12,behavior:"smooth"}); };
+ const backSubjects=document.createElement("button");backSubjects.type="button";backSubjects.textContent=showHindi()?"← सभी विषयों में वापस":"← Back to Subjects";
+ backSubjects.onclick=()=>{ $("testCard").classList.add("hidden");$("chaptersCard").classList.add("hidden");$("subjectsCard").classList.remove("hidden");window.scrollTo({top:$("subjectsCard").offsetTop-12,behavior:"smooth"}); };
+ nav.append(backChapters,backSubjects);
+ $("testTitle").textContent=title;
  $("testInfo").textContent=questions.length?questions.length+" MCQs • Answer explanations":"इस Board/Medium के इस अध्याय का प्रश्न-बैंक अभी इस फाइल में जोड़ा जाना बाकी है।";
  const form=$("quizForm");form.innerHTML="";$("result").innerHTML="";
  if(!questions.length){form.innerHTML='<div class="notice">इस chapter के लिए MCQs अभी उपलब्ध नहीं हैं।</div>';return;}
@@ -374,7 +386,7 @@ async function verifyMembership(user){
  try{
   const ref=doc(db,"students",user.uid,"courses",courseId);
   const snap=await getDoc(ref);
-  if(!snap.exists()){membershipActive=false;$("subjects").innerHTML="";$("chaptersCard").classList.add("hidden");$("testCard").classList.add("hidden");$("membershipStatus").textContent="Arts membership record नहीं मिला। Student Login में सही course चुनें।";return;}
+  if(!snap.exists()){membershipActive=false;$("subjects").innerHTML="";$("subjectsCard").classList.remove("hidden");$("chaptersCard").classList.add("hidden");$("testCard").classList.add("hidden");$("membershipStatus").textContent="Arts membership record नहीं मिला। Student Login में सही course चुनें।";return;}
   const c=snap.data(),expiry=c.expiresAt?(typeof c.expiresAt.toDate==="function"?c.expiresAt.toDate():new Date(c.expiresAt)):null;
   membershipActive=c.membershipStatus==="active"&&(!expiry||(!Number.isNaN(expiry.getTime())&&expiry.getTime()>Date.now()));
   $("membershipStatus").textContent=membershipActive?"Membership Active ✓ — "+(c.courseName||courseId):"Membership Active नहीं है। Student Dashboard में payment status जाँचें।";
