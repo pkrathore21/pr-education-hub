@@ -294,6 +294,13 @@ function openSubject(name){
  selectedSubject=name;$ ("subjectTitle").textContent=subjectLabel(name)+(showHindi()?" – टेस्ट":" – Tests");
  $ ("chaptersCard").classList.remove("hidden");$ ("testCard").classList.add("hidden");
  const list=$("chapterList");list.innerHTML="";
+ // Navigation from chapter list back to all subjects (mobile-friendly, always visible).
+ const chapterNav=document.createElement("div");chapterNav.className="test-navigation";
+ chapterNav.style.display="flex";chapterNav.style.flexWrap="wrap";chapterNav.style.gap="8px";chapterNav.style.margin="0 0 14px";
+ const backToSubjects=document.createElement("button");backToSubjects.type="button";backToSubjects.className="secondary";
+ backToSubjects.textContent=showHindi()?"← सभी विषयों में वापस":"← Back to Subjects";
+ backToSubjects.onclick=()=>{ $("chaptersCard").classList.add("hidden");$("testCard").classList.add("hidden");$("subjectsCard").classList.remove("hidden");window.scrollTo({top:$("subjectsCard").offsetTop-12,behavior:"smooth"}); };
+ chapterNav.append(backToSubjects);list.append(chapterNav);
  const pool=getCurrentQuestionPool(name);
  const examBankKey=$("board").value+"-"+$ ("medium").value;
  const hasSubjectBank=!!questionBank[examBankKey]?.[name+"|all"];
